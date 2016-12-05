@@ -6,16 +6,17 @@ import { renderToString } from 'react-dom/server';
 import { match, RouterContext } from 'react-router';
 import Session from 'express-session';
 import Passport from 'passport';
-import Strategy from 'passport-twitter';
+import PassportTwitter from '../auth/twitter';
 import CookieParser from 'cookie-parser';
 import BodyParser from 'body-parser';
 import routes from './routes';
 import NotFoundPage from './components/NotFoundPage';
+import Mongoose from 'mongoose';
 
-//initialize app and server
+//initialize app, server and db
 const app = new Express();
 const server = new Server(app);
-
+Mongoose.connect('mongodb://localhost/twitter-scout');
 //configure support for ejs templates
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -29,27 +30,20 @@ app.use(Session({
   resave: true,
   saveUninitialized: true
 }));
+
 // Initialize Passport and restore authentication state
 app.use(Passport.initialize());
 app.use(Passport.session());
-Passport.serializeUser((user, cb) => {
-cb(null, user);
-});
-Passport.deserializeUser((obj, cb) => {
-cb(null, obj);
-});
 
-//Configure twitter passport
-Passport.use(new Strategy({
-    consumerKey: process.env.CONSUMER_KEY,
-    consumerSecret: process.env.CONSUMER_SECRET,
-    callbackURL: 'http://127.0.0.1:3000/auth/twitter/callback'
-  },
-  (token, tokenSecret, profile, cb) => {
-    // Using Twitter profile
-    //TODO should associate with user from db
-    return cb(null, profile);
-  }));
+//route twitter authentication
+app.get('/auth/twitter', PassportTwitter.authenticate('twitter'));
+app.get('/auth/twitter/callback',
+  PassportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication
+    console.log(req.user.token);
+    res.redirect('/user/'+req.user.id);
+  });
 
 // universal routing and rendering
 app.get('*', (req, res) => {
