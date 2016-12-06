@@ -41,9 +41,13 @@ app.get('/auth/twitter/callback',
   PassportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
-    console.log(req.user.token);
     res.redirect('/user/'+req.user.id);
   });
+  app.get('/logout', function (req, res){
+  req.session.destroy(function (err) {
+    res.redirect('/');
+  });
+});
 
 // universal routing and rendering
 app.get('*', (req, res) => {
