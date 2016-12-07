@@ -41,13 +41,29 @@ app.get('/auth/twitter/callback',
   PassportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
+    //TODO get user info to pass
+    //TODO pass prop to set NavBar 
     res.redirect('/user/'+req.user.id);
   });
-  app.get('/logout', function (req, res){
-  req.session.destroy(function (err) {
+app.get('/logout', (req, res) =>{
+  req.session.destroy((err) => {
     res.redirect('/');
   });
 });
+
+
+//authentication test
+function isLoggedIn(req, res, next){
+    console.log(req.session);
+    if(req.isAuthenticated()){
+        return next();
+    }
+    res.redirect('/login');
+}
+app.get('/auth', isLoggedIn, (req, res) => {
+  res.redirect('/about');
+});
+
 
 // universal routing and rendering
 app.get('*', (req, res) => {
@@ -81,7 +97,7 @@ app.get('*', (req, res) => {
 // start the server
 const port = process.env.PORT || 3000;
 const env = process.env.NODE_ENV || 'production';
-server.listen(port, err => {
+server.listen(port, (err) => {
   if (err) {
     return console.error(err);
   }
