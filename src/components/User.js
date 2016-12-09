@@ -1,11 +1,11 @@
 import React from 'react';
 import $ from 'jquery';
-import { connect } from 'react-redux';
-import { userSignIn } from '../actions';
+// import { connect } from 'react-redux';
+// import { userSignIn } from '../actions';
 
 const BASE_URL = 'http://127.0.0.1:3000';
 
-class User extends React.Component {
+export default class User extends React.Component {
 
   constructor(props) {
     super(props);
@@ -15,28 +15,28 @@ class User extends React.Component {
     }
   }
 
-  // getUser(id) {
-  //   $.ajax({
-  //     url: `${BASE_URL}/api/user/${id}`,
-  //     success: function(user) {
-  //       // console.log(user.data);
-  //       this.setState({user: user})
-  //     }.bind(this)
-  //   })
-  // }
-
-  componentWillMount() {
-    this.props.userSignIn(this.props.params.userId);
+  getUser(id) {
+    $.ajax({
+      url: `${BASE_URL}/api/user/${id}`,
+      success: function(user) {
+        // console.log(user.data);
+        this.setState({user: user})
+      }.bind(this)
+    })
   }
 
+  // componentWillMount() {
+  //   this.props.userSignIn(this.props.params.userId);
+  // }
+
   componentDidMount() {
-    //  this.getUser(this.props.params.userId);
+     this.getUser(this.props.params.userId);
   }
 
   render() {
     let banner_img;
     let profile_img;
-    const user = this.props.user;
+    const user = this.state.user;
     if (user.data){
       banner_img = <img src={user.data.profile_banner_url} />
       profile_img = <img src={user.data.profile_image_url} />
@@ -52,9 +52,9 @@ class User extends React.Component {
   }
 }
 
-const mapStateToProps = ({ auth }) => {
-  const { user } = auth;
-  return { user };
-};
-
-export default connect(mapStateToProps, { userSignIn })(User);
+// const mapStateToProps = ({ auth }) => {
+//   const { user } = auth;
+//   return { user };
+// };
+//
+// export default connect(mapStateToProps, { userSignIn })(User);
