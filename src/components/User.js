@@ -11,17 +11,38 @@ export default class User extends React.Component {
     super(props);
 
     this.state = {
-      user: {}
+      user: {},
+      hasErrored: false,
+      isLoading: false
     }
   }
 
+  // getUser(id) {
+  //   this.setState({ isLoading: true });
+  //
+  //   fetch(`${BASE_URL}/api/user/${id}`)
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw Error(response.statusText);
+  //       }
+  //       this.setState({ isLoading: false });
+  //       return response;
+  //     })
+  //     .then((response) => response.json())
+  //     .then((user) => this.setState({ user }))
+  //     .catch(() => this.setState({ hasErrored: true}));
+  // }
   getUser(id) {
+    this.setState({ isLoading: true });
     $.ajax({
       url: `${BASE_URL}/api/user/${id}`,
-      success: function(user) {
+      success: (user) => {
         // console.log(user.data);
-        this.setState({user: user})
-      }.bind(this)
+        this.setState({user: user, isLoading: false});
+      },
+      error: (XMLHttpRequest, textStatus, errorThrown) => {
+        alert("Status: " + textStatus); alert("Error: " + errorThrown);
+      }
     })
   }
 
@@ -34,6 +55,12 @@ export default class User extends React.Component {
   }
 
   render() {
+    if (this.state.hasErrored){
+      return (<p>Sorry!  There was an error loading your profile</p>);
+    }
+    if (this.state.isLoading) {
+      return (<p>Loading...</p>);
+    }
     let banner_img;
     let profile_img;
     const user = this.state.user;
