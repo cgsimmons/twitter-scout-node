@@ -12,16 +12,17 @@ Passport.use(new Strategy({
     callbackURL: Config.twitter.callbackURL
   },
   (token, tokenSecret, profile, done) => {
-
     var searchQuery = {
       displayName: profile.displayName,
     };
 
     var updates = {
-      displayName:  profile.displayName,
-      username:     profile.username,
-      twitterId:    profile.id,
-      token:        token
+      displayName:      profile.displayName,
+      username:         profile.username,
+      twitterId:        profile.id,
+      token:            token,
+      secret:           tokenSecret,
+      data:             profile._json
     };
 
     var options = {

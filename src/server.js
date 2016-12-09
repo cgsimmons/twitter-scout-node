@@ -12,11 +12,20 @@ import BodyParser from 'body-parser';
 import routes from './routes';
 import NotFoundPage from './components/NotFoundPage';
 import Mongoose from 'mongoose';
+import User from '../models/user';
 
 //initialize app, server and db
 const app = new Express();
 const server = new Server(app);
-Mongoose.connect('mongodb://localhost/twitter-scout');
+Mongoose.connect('mongodb://localhost/twitter-scout', (err, res) => {
+  if (err) {
+    console.log('ERROR: Not connected to DB.');
+  } else {
+    console.log('SUCCESS: Connected to DB');
+  }
+});
+
+
 //configure support for ejs templates
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -42,7 +51,7 @@ app.get('/auth/twitter/callback',
   function(req, res) {
     // Successful authentication
     //TODO get user info to pass
-    //TODO pass prop to set NavBar 
+    //TODO pass prop to set NavBar
     res.redirect('/user/'+req.user.id);
   });
 app.get('/logout', (req, res) =>{
@@ -51,10 +60,9 @@ app.get('/logout', (req, res) =>{
   });
 });
 
-
 //authentication test
 function isLoggedIn(req, res, next){
-    console.log(req.session);
+    // console.log(req.session);
     if(req.isAuthenticated()){
         return next();
     }
@@ -63,6 +71,28 @@ function isLoggedIn(req, res, next){
 app.get('/auth', isLoggedIn, (req, res) => {
   res.redirect('/about');
 });
+
+//api hooks
+app.get('/api/users', isLoggedIn, (req, res) => {
+  User.find({}, (err, users) => {
+    if(err){
+      res.status(500).send(err.message);
+    } else {
+      res.status(200).json(users);
+    }
+  });
+});
+app.get('/api/user/:userId', isLoggedIn, (req, res) => {
+  User.findById(req.params.userId, (err, user) => {
+    if(err){
+      res.status(500).send(err.message);
+    } else {
+      // console.log(user)
+      res.status(200).send(user);
+    }
+  });
+});
+
 
 
 // universal routing and rendering
