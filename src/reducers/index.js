@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
-import UserReducer from './UserReducer';
+import { user, userHasErrored, userIsLoading } from './UserReducers';
 
 export default combineReducers({
-  auth: UserReducer
-})
+  user,
+  userHasErrored,
+  userIsLoading
+});

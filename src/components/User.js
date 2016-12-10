@@ -1,69 +1,54 @@
 import React from 'react';
 import $ from 'jquery';
-// import { connect } from 'react-redux';
-// import { userSignIn } from '../actions';
+import { connect } from 'react-redux';
+import { userSignIn } from '../actions/UserActions';
 
 const BASE_URL = 'http://127.0.0.1:3000';
 
-export default class User extends React.Component {
+class User extends React.Component {
 
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      user: {},
-      hasErrored: false,
-      isLoading: false
-    }
-  }
-
-  // getUser(id) {
-  //   this.setState({ isLoading: true });
+  // constructor(props) {
+  //   super(props);
   //
-  //   fetch(`${BASE_URL}/api/user/${id}`)
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw Error(response.statusText);
-  //       }
-  //       this.setState({ isLoading: false });
-  //       return response;
-  //     })
-  //     .then((response) => response.json())
-  //     .then((user) => this.setState({ user }))
-  //     .catch(() => this.setState({ hasErrored: true}));
+  //   this.state = {
+  //     user: {},
+  //     hasErrored: false,
+  //     isLoading: false
+  //   }
   // }
-  getUser(id) {
-    this.setState({ isLoading: true });
-    $.ajax({
-      url: `${BASE_URL}/api/user/${id}`,
-      success: (user) => {
-        // console.log(user.data);
-        this.setState({user: user, isLoading: false});
-      },
-      error: (XMLHttpRequest, textStatus, errorThrown) => {
-        alert("Status: " + textStatus); alert("Error: " + errorThrown);
-      }
-    })
-  }
+
+  // getUser(url) {
+  //   this.setState({ isLoading: true });
+  //   $.ajax({
+  //     url: `${url}`,
+  //     success: (user) => {
+  //       // console.log(user.data);
+  //       this.setState({user: user, isLoading: false});
+  //     },
+  //     error: (XMLHttpRequest, textStatus, errorThrown) => {
+  //       alert("Status: " + textStatus); alert("Error: " + errorThrown);
+  //     }
+  //   })
+  // }
 
   // componentWillMount() {
   //   this.props.userSignIn(this.props.params.userId);
   // }
 
   componentDidMount() {
-     this.getUser(this.props.params.userId);
+     this.props.getUser(`${BASE_URL}/api/user/${this.props.params.userId}`);
   }
 
   render() {
-    if (this.state.hasErrored){
+    if (this.props.hasErrored){
       return (<p>Sorry!  There was an error loading your profile</p>);
     }
-    if (this.state.isLoading) {
+    if (this.props.isLoading) {
       return (<p>Loading...</p>);
     }
     let banner_img;
     let profile_img;
-    const user = this.state.user;
+    const user = this.props.user;
     if (user.data){
       banner_img = <img src={user.data.profile_banner_url} />
       profile_img = <img src={user.data.profile_image_url} />
@@ -78,6 +63,21 @@ export default class User extends React.Component {
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+    hasErrored: state.hasErrored,
+    isLoading: state.isLoading
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getUser: (url) => dispatch(userSignIn(url))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(User);
 
 // const mapStateToProps = ({ auth }) => {
 //   const { user } = auth;

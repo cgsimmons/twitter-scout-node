@@ -13,6 +13,10 @@ import routes from './routes';
 import NotFoundPage from './components/NotFoundPage';
 import Mongoose from 'mongoose';
 import User from '../models/user';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware } from 'redux';
+import rootReducer from './reducers';
+import thunk from 'redux-thunk';
 
 //initialize app, server and db
 const app = new Express();
@@ -94,7 +98,9 @@ app.get('/api/user/:userId', isLoggedIn, (req, res) => {
 });
 
 
-
+const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
+const store = createStoreWithMiddleware(rootReducer);
+const initialState = store.getState();
 // universal routing and rendering
 app.get('*', (req, res) => {
   match(
@@ -112,7 +118,7 @@ app.get('*', (req, res) => {
       let markup;
       if (renderProps) {
         // if the current route matched we have renderProps
-        markup = renderToString(<RouterContext {...renderProps}/>);
+        markup = renderToString(<Provider store={store}><RouterContext {...renderProps}/></Provider>);
       } else {
         // otherwise we can render a 404 page
         markup = renderToString(<NotFoundPage/>);
