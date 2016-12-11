@@ -31,6 +31,12 @@ export function userAjaxSuccess(user) {
   };
 }
 
+export function setUserId(id) {
+  return (dispatch) => {
+    dispatch(userId(id));
+  }
+}
+
 export function userSignIn(url) {
   return (dispatch) => {
     dispatch(userIsLoading(true));
