@@ -1,0 +1,16 @@
+.not-found {
+  margin: 0 auto;
+  max-width: 800px;
+  text-align: center;
+  width: 100%;
+}
+
+.not-found h1 {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+.not-found h2 {
+  font-size: 2em;
+  font-weight: bold;
+}

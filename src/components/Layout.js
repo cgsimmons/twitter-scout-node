@@ -10,7 +10,11 @@ export default class Layout extends React.Component {
         <header>
           <NavBar className='NavBar' />
         </header>
-        <div className="app-content">{this.props.children}</div>
+        <div className="app-body">
+          <div className="app-content">
+            {this.props.children}
+          </div>
+        </div>
         <footer>
           <p>
           <strong>Brought to you by Taco Corp.</strong>

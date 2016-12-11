@@ -14,26 +14,35 @@ class User extends React.Component {
       return (<p>Loading...</p>);
     }
 
-    let banner_img;
-    let profile_img;
-    let signed_in_message;
+    let banner_img, profile_img, signed_in_message, profile_displayName, profile_username;
+
     const user = this.props.user;
     if (user.data){
       banner_img = <img src={user.data.profile_banner_url} />
-      profile_img = <img src={user.data.profile_image_url} />
+      profile_img = <img src={user.data.profile_image_url.replace('_normal', '_bigger')} />
+      profile_displayName = <div className='profile-displayName'>{user.displayName}</div>
+      profile_username = <div className='profile-username'>@{user.username}</div>
     }
 
     return (
       <div className="User">
-        { banner_img }
-        { profile_img }
-        <h1>Welcome to your dashboard, {user.displayName}.</h1>
+        <div className='profile-banner'>
+          { banner_img }
+        </div>
+        <div className='profile-content'>
+          { profile_img }
+          <div className='profile-names'>
+            {profile_displayName}
+            {profile_username}
+          </div>
+          <h1>Welcome to your dashboard, {user.displayName}.</h1>
+        </div>
       </div>
     );
   }
 
   componentDidMount() {
-     this.props.getUser(`${BASE_URL}/api/user/${this.props.params.userId}`);
+     this.props.getUser(`${BASE_URL}/api/user/${this.props.userId}`);
   }
 }
 

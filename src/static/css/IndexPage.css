@@ -1,0 +1,12 @@
+.logo-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.logo {
+  display: block;
+  margin: 0 auto;
+  max-width: 400px;
+  width: 100%;
+  border-radius: 2%;
+}

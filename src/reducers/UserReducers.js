@@ -1,16 +1,3 @@
-// const INITIAL_STATE = {
-//   user: {}
-// }
-
-// export function user(state = INITIAL_STATE, action){
-//   switch(action.type) {
-//     case 'USER_SIGN_IN':
-//       return { ...state, user: action.payload };
-//     default:
-//       return state;
-//   }
-// }
-
 export function userHasErrored(state = false, action) {
   switch (action.type) {
     case 'USER_HAS_ERRORED':

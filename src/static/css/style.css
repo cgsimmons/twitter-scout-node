@@ -1,3 +1,10 @@
+@import url(Dashboard.css);
+@import url(IndexPage.css);
+@import url(NavBar.css);
+@import url(NotFoundPage.css);
+@import url(User.css);
+
+
 /*! CSS reset from benfrain/app-reset */
 *,:after,:before{box-sizing:inherit}html{box-sizing:border-box}
 *{user-select:none;-webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-tap-highlight-color:transparent}
@@ -18,33 +25,25 @@ header {
   padding: 0;
 }
 
-.logo-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.logo {
-  display: block;
-  margin: 0 auto;
-  max-width: 400px;
-  width: 100%;
-  border-radius: 2%;
-}
-
 body {
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
+  background-color: rgb(245,248,250);
 }
 
+.app-body{
+  display: flex;
+  justify-content: center;
+  padding: 0 0.5rem 0 0.5rem;
+}
+
+.app-content{
+  margin-top: 3.7rem;
+  width: 890px;
+}
 
 a {
   color: #00B7FF;
-}
-
-nav {
-  margin: 0;
-  overflow: auto;
-  background-color: WhiteSmoke;
 }
 
 main {
@@ -55,20 +54,6 @@ ul {
   list-style: none;
   padding: 0;
   margin: 0;
-}
-
-.nav-list {
-  display: flex;
-  padding: 0 1rem;
-  justify-content: flex-end;
-}
-
-.nav-left{
-  margin-right: auto;
-}
-
-.nav-list > li {
-  padding: 1rem 1rem;
 }
 
 footer {
@@ -82,21 +67,4 @@ footer {
 footer p {
   line-height: 1.2em;
   margin: 0 0 1em 0;
-}
-
-.not-found {
-  margin: 0 auto;
-  max-width: 800px;
-  text-align: center;
-  width: 100%;
-}
-
-.not-found h1 {
-  font-size: 3em;
-  font-weight: bold;
-}
-
-.not-found h2 {
-  font-size: 2em;
-  font-weight: bold;
 }

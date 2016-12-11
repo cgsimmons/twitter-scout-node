@@ -1,0 +1,37 @@
+.User {
+  border-radius: .5rem;
+  background-color: rgb(255,255,255);
+  border: .2rem solid rgb(225, 232, 237);
+}
+.profile-banner{
+  margin: -1px -1px 0 -1px;
+}
+.profile-banner img{
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+  background-color: #4fa9e3;
+}
+.profile-content {
+  padding: 0.5rem;
+  position: relative;
+}
+.profile-content img {
+  margin-top: -2rem;
+  border: 3px solid rgb(255,255,255);
+  border-radius: .5rem;
+  width: 72px;
+}
+
+.profile-names {
+  position: absolute;
+  top: 6px;
+  left: 85px;
+}
+.profile-displayName {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+.profile-username {
+  font-size: 0.8rem;
+  color: DimGrey;
+}

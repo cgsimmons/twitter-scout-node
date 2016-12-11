@@ -13,21 +13,25 @@ class NavBar extends React.Component {
       signInOrOut = <Link to='/login'>Sign-In</Link>
     }
     return (
-      <nav>
-        <ul className='nav-list'>
-          <li>
-            <Link to='/'>Home</Link>
-          </li>
-          <li>
-            <Link to='/about'>About</Link>
-          </li>
-          <li className='nav-left'>
-            <Link to='/contact'>Contact</Link>
-          </li>
-          {dash}
-          <li>{ signInOrOut }</li>
-        </ul>
-      </nav>
+      <div className='NavBar'>
+        <div className='nav-container'>
+          <nav>
+            <ul className='nav-list'>
+              <li>
+                <Link to='/'>Home</Link>
+              </li>
+              <li>
+                <Link to='/about'>About</Link>
+              </li>
+              <li className='nav-left'>
+                <Link to='/contact'>Contact</Link>
+              </li>
+              {dash}
+              <li>{ signInOrOut }</li>
+            </ul>
+          </nav>
+        </div>
+      </div>
     );
   }
 }
