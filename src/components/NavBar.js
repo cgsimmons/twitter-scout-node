@@ -1,8 +1,17 @@
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
 
-export default class NavBar extends React.Component {
+class NavBar extends React.Component {
   render(){
+    let signInOrOut;
+    let dash;
+    if(this.props.isSignedIn){
+      signInOrOut = <a href='/logout'>Sign-Out</a>
+      dash = <li><Link to={ `/user/${this.props.user._id}` }>Dash</Link></li>
+    } else {
+      signInOrOut = <Link to='/login'>Sign-In</Link>
+    }
     return (
       <nav>
         <ul className='nav-list'>
@@ -15,9 +24,19 @@ export default class NavBar extends React.Component {
           <li className='nav-left'>
             <Link to='/contact'>Contact</Link>
           </li>
-          <li><Link to='/login'>Sign-In</Link></li>
+          {dash}
+          <li>{ signInOrOut }</li>
         </ul>
       </nav>
     );
   }
 }
+
+const mapStateToProps = (state) => {
+  return {
+    isSignedIn: state.userIsSignedIn,
+    user:     state.user
+  };
+};
+
+export default connect(mapStateToProps)(NavBar);

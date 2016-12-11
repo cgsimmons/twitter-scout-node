@@ -12,6 +12,12 @@ export function userIsLoading(bool) {
     isLoading: bool
   };
 }
+export function userIsSignedIn(bool) {
+  return {
+    type: 'USER_IS_SIGNED_IN',
+    isSignedIn: bool
+  };
+}
 export function userAjaxSuccess(user) {
   return {
     type: 'USER_AJAX_SUCCESS',
@@ -22,6 +28,7 @@ export function userAjaxSuccess(user) {
 export function userSignIn(url) {
   return (dispatch) => {
     dispatch(userIsLoading(true));
+    dispatch(userIsSignedIn(true));
 
     $.ajax({
       url: `${url}`,
@@ -31,21 +38,8 @@ export function userSignIn(url) {
       },
       error: (XMLHttpRequest, textStatus, errorThrown) => {
         dispatch(userHasErrored(true));
+        dispatch(userIsSignedIn(false));
       }
     })
   }
 }
-// export const userSignIn = (id) => {
-//   return (dispatch) => {
-//     $.ajax({
-//       url: `${BASE_URL}/api/user/${id}`,
-//       success: (user) => {
-//         dispatch({
-//           type: 'USER_SIGN_IN',
-//           payload: {
-//             user: user}
-//         })
-//       }
-//     })
-//   }
-// }
