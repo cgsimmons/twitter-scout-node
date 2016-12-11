@@ -8,15 +8,15 @@ export default class Sidebar extends React.Component {
     return (
       <div className='Sidebar dashboard-panel'>
         <ul>
-          <li><Link activeClassName='active-sidebar' to={baseDashPath}>Statistics</Link></li>
+          <li><Link onlyActiveOnIndex activeClassName='active-sidebar' to={baseDashPath}>Statistics</Link></li>
           <hr/>
-          <li><Link to={baseDashPath + '/scheduled-tweets'}>Scheduled Tweets</Link></li>
+          <li><Link activeClassName='active-sidebar' to={baseDashPath + '/scheduled-tweets'}>Scheduled Tweets</Link></li>
           <hr/>
-          <li><Link to={baseDashPath + '/suggested-tweets'}>Suggested Tweets</Link></li>
+          <li><Link activeClassName='active-sidebar' to={baseDashPath + '/suggested-tweets'}>Suggested Tweets</Link></li>
           <hr/>
-          <li><Link to={baseDashPath + '/suggested-tweeters'}>Suggested Tweeters</Link></li>
+          <li><Link activeClassName='active-sidebar' to={baseDashPath + '/suggested-tweeters'}>Suggested Tweeters</Link></li>
           <hr/>
-          <li><Link to={baseDashPath + '/search-settings'}>Search Settings</Link></li>
+          <li><Link activeClassName='active-sidebar' to={baseDashPath + '/search-settings'}>Search Settings</Link></li>
         </ul>
       </div>
     );

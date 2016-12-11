@@ -18,9 +18,14 @@
 .dashboard-main{
   flex-grow: 1;
   min-width: 300px;
+  max-width: 590px;
   padding: 0 0.5rem 0 0.5rem;
 }
 
-.Statistics{
+.main-panel{
   padding: 0.5rem;
+}
+
+.section-header{
+  font-size: 2rem;
 }
