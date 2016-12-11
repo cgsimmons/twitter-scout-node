@@ -2,6 +2,7 @@
   border-radius: .5rem;
   background-color: rgb(255,255,255);
   border: .2rem solid rgb(225, 232, 237);
+  margin-bottom: 0.5rem;
 }
 .profile-banner{
   margin: -1px -1px 0 -1px;

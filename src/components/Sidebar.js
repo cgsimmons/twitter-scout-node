@@ -4,19 +4,19 @@ import { connect } from 'react-redux';
 
 export default class Sidebar extends React.Component {
   render(){
-
+    const baseDashPath = `/user/${this.props.userId}`;
     return (
-      <div className='Sidebar'>
+      <div className='Sidebar dashboard-panel'>
         <ul>
-          <li>Statistics</li>
+          <li><Link activeClassName='active-sidebar' to={baseDashPath}>Statistics</Link></li>
           <hr/>
-          <li>Scheduled Tweets</li>
+          <li><Link to={baseDashPath + '/scheduled-tweets'}>Scheduled Tweets</Link></li>
           <hr/>
-          <li>Suggested Tweets</li>
+          <li><Link to={baseDashPath + '/suggested-tweets'}>Suggested Tweets</Link></li>
           <hr/>
-          <li>Suggested Tweeters</li>
+          <li><Link to={baseDashPath + '/suggested-tweeters'}>Suggested Tweeters</Link></li>
           <hr/>
-          <li>Search Settings</li>
+          <li><Link to={baseDashPath + '/search-settings'}>Search Settings</Link></li>
         </ul>
       </div>
     );

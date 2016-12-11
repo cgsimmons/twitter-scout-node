@@ -6,6 +6,9 @@ export default class Dashboard extends React.Component {
     return (
       <div className='Dashboard'>
         <DashboardLeft userId={this.props.params.userId}/>
+        <div className="dashboard-main">
+          {this.props.children}
+        </div>
       </div>
     );
   }

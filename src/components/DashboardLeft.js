@@ -7,7 +7,7 @@ export default class DashboardLeft extends React.Component {
     return (
       <div className='DashboardLeft'>
         <User userId={this.props.userId}/>
-        <Sidebar />
+        <Sidebar userId={this.props.userId}/>
       </div>
     );
   }

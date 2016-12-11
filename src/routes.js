@@ -7,6 +7,7 @@ import NotFoundPage from './components/NotFoundPage';
 import Login from './components/Login';
 import About from './components/About';
 import Dashboard from './components/Dashboard';
+import Statistics from './components/Statistics';
 import Auth from './components/Auth';
 //
 // function authenticate(nextState, transition){
@@ -20,11 +21,11 @@ import Auth from './components/Auth';
 
 const routes = (
   <Route path="/" component={Layout}>
-    <IndexRoute                       component={IndexPage}/>
-    <Route path='about'               component={About}/>
-    <Route path="login"               component={Login}/>
-    <Route path="user/:userId"        component={Dashboard}>
-      <Route path="/scheduled-tweets" component={Dashboard}/>
+    <IndexRoute                component={IndexPage}/>
+    <Route path='about'        component={About}/>
+    <Route path="login"        component={Login}/>
+    <Route path="user/:userId" component={Dashboard}>
+      <IndexRoute              component={Statistics}/>
     </Route>
     <Route path="*"            component={NotFoundPage}/>
   </Route>

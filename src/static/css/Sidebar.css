@@ -1,30 +1,33 @@
-.Sidebar {
-  border-radius: .5rem;
-  background-color: rgb(255,255,255);
-  border: 0.2rem solid rgb(225, 232, 237);
-  margin: 0.5rem 0;
-}
 .Sidebar ul{
   padding: 0;
 }
-.Sidebar ul > li:first-child {
+.Sidebar li a{
+  display: block;
+}
+.Sidebar ul > li:first-child a{
   border-top-left-radius: 0.4rem;
   border-top-right-radius: 0.4rem;
 }
-.Sidebar ul > li:last-child {
+.Sidebar ul > li:last-child a{
   border-bottom-left-radius: 0.4rem;
   border-bottom-right-radius: 0.4rem;
 }
-.Sidebar li{
+.Sidebar li a{
   padding: 0.5rem;
   font-size: 1.3rem;
 }
-.Sidebar li:hover {
+.Sidebar li a:hover {
   background-color: rgb(38,183,255);
   color: rgb(255,255,255);
+  cursor: pointer;
 }
 
 .Sidebar hr {
   margin: 0;
   border: 1px solid lightgrey;
+}
+
+.active-sidebar{
+  background-color: rgb(38,183,255);
+  color: rgb(255,255,255);
 }
