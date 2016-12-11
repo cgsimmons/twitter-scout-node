@@ -18,6 +18,12 @@ export function userIsSignedIn(bool) {
     isSignedIn: bool
   };
 }
+export function userId(userId) {
+  return {
+    type: 'USER_ID',
+    userId: userId
+  }
+}
 export function userAjaxSuccess(user) {
   return {
     type: 'USER_AJAX_SUCCESS',
@@ -35,6 +41,7 @@ export function userSignIn(url) {
       success: (user) => {
         dispatch(userIsLoading(false));
         dispatch(userAjaxSuccess(user));
+        dispatch(userId(user._id));
       },
       error: (XMLHttpRequest, textStatus, errorThrown) => {
         dispatch(userHasErrored(true));

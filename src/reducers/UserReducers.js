@@ -23,6 +23,14 @@ export function userIsSignedIn(state = false, action) {
       return state;
   }
 }
+export function userId(state = '', action) {
+  switch (action.type) {
+    case 'USER_ID':
+      return action.userId;
+    default:
+      return state;
+  }
+}
 
 export function user(state = {}, action) {
   switch (action.type) {
