@@ -1,9 +1,10 @@
 import { combineReducers } from 'redux';
-import { user, userId, userHasErrored, userIsLoading, userIsSignedIn } from './UserReducers';
+import { user, userId, userTags, userHasErrored, userIsLoading, userIsSignedIn } from './UserReducers';
 
 export default combineReducers({
   user,
   userId,
+  userTags,
   userHasErrored,
   userIsLoading,
   userIsSignedIn

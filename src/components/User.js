@@ -2,8 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { userSignIn } from '../actions/UserActions';
 
-const BASE_URL = 'http://127.0.0.1:3000';
-
 class User extends React.Component {
 
   render() {
@@ -42,7 +40,7 @@ class User extends React.Component {
   }
 
   componentDidMount() {
-     this.props.getUser(`${BASE_URL}/api/user/${this.props.userId}`);
+     this.props.getUser(this.props.userId);
   }
 }
 
@@ -56,7 +54,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser: (url) => dispatch(userSignIn(url))
+    getUser: (id) => dispatch(userSignIn(id))
   };
 };
 

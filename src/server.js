@@ -96,6 +96,18 @@ app.get('/api/user/:userId', isLoggedIn, (req, res) => {
     }
   });
 });
+app.post('/api/user/:userId', (req, res) => {
+  User.findById(req.params.userId, (err, user) => {
+    if(err){
+      res.status(500).send(err.message);
+    } else {
+      console.log(req.body.tags);
+      user.tags = req.body.tags;
+      user.save();
+      res.status(200).send(user);
+    }
+  })
+});
 
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);

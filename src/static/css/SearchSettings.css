@@ -1,0 +1,30 @@
+.ReactTags__tag {
+  border: 1px solid #ddd;
+  background: #eee;
+  padding: 5px;
+  margin: 0.2rem 0.2rem;
+  border-radius: 2px;
+  display: inline-block;
+}
+
+.ReactTags__remove {
+  margin-left: 0.5rem;
+  color: rgb(173,170,170);
+  cursor: pointer;
+}
+.ReactTags__tagInput {
+  margin: 0.2rem;
+}
+.ReactTags__tagInputField {
+  padding: 0.7rem;
+  width: 100%;
+  border: 2px solid rgb(173,170,170);
+  border-radius: 3px;
+}
+
+.search-buttons {
+  text-align: right;
+}
+.search-buttons button:first-child{
+  margin-right: 0.5rem;
+}

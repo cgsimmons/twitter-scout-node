@@ -4,7 +4,7 @@
 @import url(NotFoundPage.css);
 @import url(User.css);
 @import url(Sidebar.css);
-
+@import url(SearchSettings.css);
 
 /*! CSS reset from benfrain/app-reset */
 *,:after,:before{box-sizing:inherit}html{box-sizing:border-box}

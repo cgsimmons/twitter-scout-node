@@ -8,7 +8,9 @@ var User = new Schema({
   username: String,
   twitterId: String,
   token: String,
-  data: Object
+  secret: String,
+  data: Object,
+  tags: Array
 });
 
 
