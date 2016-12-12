@@ -5,7 +5,7 @@
 @import url(User.css);
 @import url(Sidebar.css);
 @import url(SearchSettings.css);
-
+@import url(ScheduledTweets.css);
 /*! CSS reset from benfrain/app-reset */
 *,:after,:before{box-sizing:inherit}html{box-sizing:border-box}
 *{user-select:none;-webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-tap-highlight-color:transparent}
