@@ -6,9 +6,10 @@
 }
 
 .dashboard-panel{
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   background-color: rgb(255,255,255);
   border: 0.2rem solid rgb(225, 232, 237);
+  margin-bottom: 0.5rem;
 }
 
 .DashboardLeft {
