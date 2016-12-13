@@ -43,6 +43,28 @@ export function resetScheduledList(){
   }
 }
 
+export function setScheduledListArray(newArray) {
+  return {
+    type: 'SET_SCHEDULED_LIST_ARRAY',
+    listArray: newArray
+  }
+}
+
+export function addScheduledListToArray(newList){
+  return {
+    type: 'ADD_SCHEDULED_LIST_TO_ARRAY',
+    title:      newList.title,
+    startDate:  newList.startDate,
+    interval:   newList.interval,
+    userId:     newList.userId
+  }
+}
+export function removeScheduledListFromArray(listTitle){
+  return {
+    type: 'REMOVE_SCHEDULED_LIST_FROM_ARRAY',
+    title: listTitle
+  }
+}
 
 export function saveScheduledList(list) {
   return (dispatch) => {
@@ -59,6 +81,20 @@ export function saveScheduledList(list) {
       error: (XMLHttpRequest, textStatus, errorThrown) => {
         dispatch(scheduledListHasErrored(true));
         dispatch(scheduledListIsLoading(false));
+      }
+    })
+  }
+}
+
+export function getScheduledListArray(id) {
+  return (dispatch) => {
+    $.ajax({
+      url: `${BASE_URL}/api/user/${id}/scheduled-lists`,
+      success: (lists) => {
+        dispatch(setScheduledListArray(lists));
+      },
+      error: (XMLHttpRequest, textStatus, errorThrown) => {
+        alert(textStatus);
       }
     })
   }

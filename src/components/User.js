@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { userSignIn } from '../actions/UserActions';
+import { getScheduledListArray } from '../actions/ScheduledListActions';
 
 class User extends React.Component {
 
@@ -41,6 +42,7 @@ class User extends React.Component {
 
   componentDidMount() {
      this.props.getUser(this.props.userId);
+     this.props.getScheduledLists(this.props.userId);
   }
 }
 
@@ -54,7 +56,8 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser: (id) => dispatch(userSignIn(id))
+    getUser: (id) => dispatch(userSignIn(id)),
+    getScheduledLists: (id) => dispatch(getScheduledListArray(id))
   };
 };
 

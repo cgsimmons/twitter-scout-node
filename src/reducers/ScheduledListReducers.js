@@ -27,3 +27,29 @@ export function scheduledList(state = initialState, action) {
       return state;
   }
 }
+
+export function scheduledListArray(state = [], action) {
+  switch (action.type) {
+    case 'SET_SCHEDULED_LIST_ARRAY':
+      return action.listArray;
+    case 'ADD_SCHEDULED_LIST_TO_ARRAY':
+      return [
+        ...state,
+        {
+          title:      action.title,
+          startDate:  action.startDate,
+          interval:   action.interval,
+          userId:     action.userId
+        }
+      ];
+    case 'REMOVE_SCHEDULED_LIST_FROM_ARRAY':
+      const i = action.userTagIndex;
+      return state.map((item, index) => {
+              if(item.title !== action.title) {
+                return item
+              }
+            });
+    default:
+      return state;
+  }
+}

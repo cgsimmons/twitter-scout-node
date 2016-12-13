@@ -110,6 +110,17 @@ app.post('/api/user/:userId/tags', (req, res) => {
   })
 });
 
+app.get('/api/user/:userId/scheduled-lists', isLoggedIn, (req, res) => {
+  console.log(req.params.userId);
+  ScheduledList.find({userId: req.params.userId}, (err, lists) => {
+    if(err){
+      res.status(500).send(err.message);
+    } else {
+      res.status(200).send(lists);
+    }
+  });
+});
+
 app.post('/api/user/:userId/scheduled-list', (req, res) => {
   console.log(req.body.newList);
   let newList = req.body.newList;

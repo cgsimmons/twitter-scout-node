@@ -8,7 +8,7 @@
 .dashboard-panel{
   border-radius: 0.5rem;
   background-color: rgb(255,255,255);
-  border: 0.2rem solid rgb(225, 232, 237);
+  border: 0.1rem solid #ddd;
   margin-bottom: 0.5rem;
 }
 
