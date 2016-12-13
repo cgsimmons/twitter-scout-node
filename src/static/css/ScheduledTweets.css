@@ -12,11 +12,34 @@
 }
 
 .tweet-btn-container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
+  position: absolute;
+  right: 1.2rem;
+  bottom: 0.7rem;
 }
 
 .tweet-btn-container span {
   margin-right: 0.5rem;
+}
+.ScheduledList {
+  position: relative;
+}
+.ScheduledList hr{
+  margin: 0.3rem -0.5rem;
+}
+.ScheduledList h3{
+  font-size: 2rem;
+  padding: 0.3rem;
+}
+.ScheduledList p{
+  margin-left: 0.3rem;
+}
+.ScheduledList span{
+  float: right;
+  position: absolute;
+  right: 0.2rem;
+  top: 0.2rem;
+  border-radius: 0.4rem;
+}
+.ScheduledList a{
+  margin-left: 0;
 }
