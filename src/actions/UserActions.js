@@ -70,23 +70,16 @@ export function removeUserTag(index) {
 
 export function userUpdateTags(id, newTags) {
   return (dispatch) => {
-    dispatch(userIsLoading(true));
-
     $.ajax({
       type: 'POST',
-      url: `${BASE_URL}/api/user/${id}`,
+      url: `${BASE_URL}/api/user/${id}/tags`,
       data: { tags: newTags },
-      success: () => {
+      success: (user) => {
         dispatch(userIsLoading(false));
-        if(typeof newTags !== 'undefined'){
-          dispatch(setUserTags(newTags));
-        } else {
-          dispatch(setUserTags([]));
-        }
+        dispatch(userAjaxSuccess(user));
       },
       error: (XMLHttpRequest, textStatus, errorThrown) => {
         dispatch(userHasErrored(true));
-        dispatch(userIsSignedIn(false));
       }
     })
   }
@@ -95,14 +88,13 @@ export function userUpdateTags(id, newTags) {
 export function userSignIn(id) {
   return (dispatch) => {
     dispatch(userIsLoading(true));
-    dispatch(userIsSignedIn(true));
 
     $.ajax({
       url: `${BASE_URL}/api/user/${id}`,
       success: (user) => {
         dispatch(userIsLoading(false));
         dispatch(userAjaxSuccess(user));
-        dispatch(setUserId(user._id));
+        dispatch(userIsSignedIn(true));
         if(typeof user.tags !== 'undefined'){
           dispatch(setUserTags(user.tags));
         } else {

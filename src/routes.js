@@ -13,15 +13,6 @@ import SuggestedTweets from './components/SuggestedTweets';
 import SuggestedTweeters from './components/SuggestedTweeters';
 import SearchSettings from './components/SearchSettings';
 import Auth from './components/Auth';
-//
-// function authenticate(nextState, transition){
-//   if (!(!!localStorage.token)) {
-//     transition({
-//       pathname: '/login',
-//       state: {nextPathname: nextState.location.pathname}
-//     })
-//   }
-// }
 
 const routes = (
   <Route path="/" component={Layout}>

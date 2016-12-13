@@ -1,3 +1,7 @@
+.react-tab-panel select {
+  margin: 0 0.3rem;
+}
+
 .tweet-box textarea {
   width: 100%;
   resize: none;

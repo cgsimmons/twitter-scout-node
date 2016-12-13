@@ -17,7 +17,7 @@
   font-size: 1.3rem;
 }
 .Sidebar li a:hover {
-  background-color: rgb(38,183,255);
+  background-color: #2689FF;
   color: rgb(255,255,255);
   cursor: pointer;
 }
@@ -28,6 +28,6 @@
 }
 
 .active-sidebar{
-  background-color: rgb(38,183,255);
+  background-color: #2689FF;
   color: rgb(255,255,255);
 }

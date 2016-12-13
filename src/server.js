@@ -13,6 +13,7 @@ import routes from './routes';
 import NotFoundPage from './components/NotFoundPage';
 import Mongoose from 'mongoose';
 import User from '../models/user';
+import ScheduledList from '../models/scheduledTweetList';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
@@ -96,7 +97,7 @@ app.get('/api/user/:userId', isLoggedIn, (req, res) => {
     }
   });
 });
-app.post('/api/user/:userId', (req, res) => {
+app.post('/api/user/:userId/tags', (req, res) => {
   User.findById(req.params.userId, (err, user) => {
     if(err){
       res.status(500).send(err.message);
@@ -106,6 +107,24 @@ app.post('/api/user/:userId', (req, res) => {
       user.save();
       res.status(200).send(user);
     }
+  })
+});
+
+app.post('/api/user/:userId/scheduled-list', (req, res) => {
+  console.log(req.body.newList);
+  let newList = req.body.newList;
+  let list = new ScheduledList({
+    title:      newList.title,
+    userId:     newList.userId,
+    interval:   newList.interval,
+    startDate:  newList.startDate,
+    tweets:     []
+  })
+
+  list.save((err, list) => {
+    if (err)
+      return res.status(500).send(err.message);
+    res.status(200).send(list);
   })
 });
 

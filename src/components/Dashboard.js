@@ -1,7 +1,9 @@
 import React from 'react';
 import DashboardLeft from './DashboardLeft';
+import { connect } from 'react-redux';
+import { setUserId } from '../actions/UserActions';
 
-export default class Dashboard extends React.Component {
+class Dashboard extends React.Component {
   render(){
     return (
       <div className='Dashboard'>
@@ -12,4 +14,15 @@ export default class Dashboard extends React.Component {
       </div>
     );
   }
+  componentDidMount(){
+    this.props.setUserId(this.props.params.userId);
+  }
 }
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setUserId: (id) => dispatch(setUserId(id))
+  };
+};
+
+export default connect(null, mapDispatchToProps)(Dashboard);
