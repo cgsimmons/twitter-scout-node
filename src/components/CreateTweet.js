@@ -16,6 +16,9 @@ class CreateTweet extends React.Component {
 
   render(){
     return (
+      {let selections = this.props.lists.map((list)=>{
+
+      })}
       <div className='CreateTweet main-panel'>
         <h1 className='section-header'>Write a tweet</h1>
         <br/>
