@@ -66,6 +66,27 @@ export function removeScheduledListFromArray(listTitle){
   }
 }
 
+export function removeAndDeleteScheduledListArray(list){
+  return (dispatch) => {
+    dispatch(scheduledListIsLoading(true));
+
+    $.ajax({
+      type: 'POST',
+      url: `${BASE_URL}/api/user/${list.userId}/scheduled-list/${list._id}`,
+      success: (newArray) => {
+        // dispatch(removeScheduledListFromArray(list.title));
+        dispatch(setScheduledListArray(newArray));
+        dispatch(scheduledListIsLoading(false));
+
+      },
+      error: (XMLHttpRequest, textStatus, errorThrown) => {
+        dispatch(scheduledListHasErrored(true));
+        dispatch(scheduledListIsLoading(false));
+      }
+    })
+  }
+}
+
 export function saveScheduledList(list) {
   return (dispatch) => {
     dispatch(scheduledListIsLoading(true));
@@ -74,9 +95,10 @@ export function saveScheduledList(list) {
       type: 'POST',
       url: `${BASE_URL}/api/user/${list.userId}/scheduled-list`,
       data: { newList: list },
-      success: () => {
-        resetScheduledList();
-        //TODO add list to array of lists
+      success: (newArray) => {
+        dispatch(setScheduledListArray(newArray));
+        dispatch(resetScheduledList());
+        dispatch(scheduledListIsLoading(false));
       },
       error: (XMLHttpRequest, textStatus, errorThrown) => {
         dispatch(scheduledListHasErrored(true));

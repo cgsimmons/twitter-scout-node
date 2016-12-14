@@ -102,7 +102,6 @@ app.post('/api/user/:userId/tags', (req, res) => {
     if(err){
       res.status(500).send(err.message);
     } else {
-      console.log(req.body.tags);
       user.tags = req.body.tags;
       user.save();
       res.status(200).send(user);
@@ -111,7 +110,6 @@ app.post('/api/user/:userId/tags', (req, res) => {
 });
 
 app.get('/api/user/:userId/scheduled-lists', isLoggedIn, (req, res) => {
-  console.log(req.params.userId);
   ScheduledList.find({userId: req.params.userId}, (err, lists) => {
     if(err){
       res.status(500).send(err.message);
@@ -121,8 +119,21 @@ app.get('/api/user/:userId/scheduled-lists', isLoggedIn, (req, res) => {
   });
 });
 
+app.post('/api/user/:userId/scheduled-list/:listId', (req, res) => {
+  ScheduledList.remove({userId: req.params.userId, _id: req.params.listId}, (err, removed) => {
+    if (err)
+      return res.status(500).send(err.message);
+
+    ScheduledList.find({userId: req.params.userId}, (err, newList) => {
+      if (err)
+        return res.status(500).send(err.message);
+
+      res.status(200).send(newList)
+    })
+  })
+});
+
 app.post('/api/user/:userId/scheduled-list', (req, res) => {
-  console.log(req.body.newList);
   let newList = req.body.newList;
   let list = new ScheduledList({
     title:      newList.title,
@@ -135,7 +146,14 @@ app.post('/api/user/:userId/scheduled-list', (req, res) => {
   list.save((err, list) => {
     if (err)
       return res.status(500).send(err.message);
-    res.status(200).send(list);
+
+    ScheduledList.find({userId: req.params.userId}, (err, lists) => {
+      if(err){
+        res.status(500).send(err.message);
+      } else {
+        res.status(200).send(lists);
+      }
+    });
   })
 });
 

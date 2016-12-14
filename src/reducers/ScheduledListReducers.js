@@ -6,6 +6,13 @@ const initialState = {
   interval:      'Day',
   userId:        ''
 };
+const resetState = {
+  hasErrored:    false,
+  isLoading:     false,
+  title:         '',
+  startDate:     new Date(),
+  interval:      'Day'
+};
 
 export function scheduledList(state = initialState, action) {
   switch (action.type) {
@@ -22,7 +29,7 @@ export function scheduledList(state = initialState, action) {
     case 'SET_SCHEDULED_LIST_USER_ID':
       return {...state, userId: action.userId};
     case 'RESET_SCHEDULED_LIST':
-      return {...state,...initialState};
+      return {...state,...resetState};
     default:
       return state;
   }
@@ -43,12 +50,13 @@ export function scheduledListArray(state = [], action) {
         }
       ];
     case 'REMOVE_SCHEDULED_LIST_FROM_ARRAY':
-      const i = action.userTagIndex;
-      return state.map((item, index) => {
-              if(item.title !== action.title) {
-                return item
-              }
-            });
+      const i = state.findIndex(x => x.title === action.title);
+      console.log(i);
+      console.log("is the index");
+      return [
+        ...state.slice(0, i),
+        ...state.slice(i + 1)
+      ];
     default:
       return state;
   }

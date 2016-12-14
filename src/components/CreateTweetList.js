@@ -29,7 +29,7 @@ handleTitle = (event) => {
         <h1 className='section-header'>New List</h1>
         <br/>
         <div className='tweet-box'>
-          <p>Create a list to organize tweets that should be released on a set inteval.</p>
+          <p>Create a list to organize tweets that should be automatically posted at a set interval.</p>
         <br/>
             <div className='input-container'>
               <label>Title</label>
@@ -46,7 +46,7 @@ handleTitle = (event) => {
                 forceValidDate
                 onChange={this.handleDate}
                 defaultValue={this.props.list.startDate}
-                dateFormat="YYYY-MM-DD HH:mm a">
+                dateFormat="YYYY-MM-DD HH:mm">
                 <TransitionView>
                   <Calendar/>
                 </TransitionView>

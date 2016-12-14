@@ -24,8 +24,8 @@ class CreateTweet extends React.Component {
           <br/><br/>
           <DateField
             forceValidDate
-            defaultValue={"2016-05-30 15:23:34"}
-            dateFormat="YYYY-MM-DD HH:mm a">
+            defaultValue={"2016-05-30 15:23"}
+            dateFormat="YYYY-MM-DD HH:mm">
             <TransitionView>
               <Calendar/>
             </TransitionView>
