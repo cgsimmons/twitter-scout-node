@@ -7,10 +7,11 @@ var ScheduledTweetList = new Schema({
   userId: String,
   interval: String,
   startDate: Date,
-  tweets: Array
+  tweets: []
 },{
   timestamps: true
 });
 
 
 module.exports = mongoose.model('scheduledTweetLists', ScheduledTweetList);
+// module.exports = mongoose.model('scheduledTweets', ScheduledTweet);

@@ -1,9 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCounter } from '../actions/TweetActions';
+import { setCounter, setSelectedList } from '../actions/TweetActions';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
 import Select from 'react-select';
-
 
 const MAX_COUNT = 140;
 
@@ -14,11 +13,21 @@ class CreateTweet extends React.Component {
     this.props.setCount(MAX_COUNT - input.length);
   }
 
-  render(){
-    return (
-      {let selections = this.props.lists.map((list)=>{
+  handleSelection = (value) => {
+    this.props.setSelection(value);
+    //TODO Disable/enable date
+  }
 
-      })}
+  handleSave = (event) => {
+
+  }
+
+  render(){
+    let selection = this.props.lists.map((list, index) => {
+      return ({ value: list.title, label: list.title });
+    });
+    let isDisabled = (this.props.selection === 'Special Tweets' ? '' : 'disabled');
+    return (
       <div className='CreateTweet main-panel'>
         <h1 className='section-header'>Write a tweet</h1>
         <br/>
@@ -38,12 +47,13 @@ class CreateTweet extends React.Component {
           <br/><br/>
           <label>Add to list</label><br/>
           <Select
-            value={"Special Posts"}
-            options={[{value: 'Special Posts', label: 'Special Posts'}]}
+            value={this.props.selection}
+            onChange={this.handleSelection}
+            options={[{value: 'Special Tweets', label: 'Special Tweets'}, ...selection]}
             clearable={false}
           />
           <div className='tweet-btn-container'>
-              <span>{this.props.counter}</span><button>Save</button>
+              <span>{this.props.counter}</span><button onClick={this.handleSave}>Save</button>
           </div>
         </div>
       </div>
@@ -53,13 +63,16 @@ class CreateTweet extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    counter: state.tweetCounter,
-    lists:    state.scheduledListArray
+    counter:    state.tweetCounter,
+    selection:  state.selectedList,
+    lists:      state.scheduledListArray,
+    list:       state.scheduledList
   };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-      setCount: (num) => dispatch(setCounter(num))
+      setCount: (num) => dispatch(setCounter(num)),
+      setSelection: (val) => dispatch(setSelectedList(val))
     };
 };
 

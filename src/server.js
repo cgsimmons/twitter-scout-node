@@ -134,6 +134,7 @@ app.post('/api/user/:userId/scheduled-list/:listId', (req, res) => {
 
 app.post('/api/user/:userId/scheduled-list', (req, res) => {
   let newList = req.body.newList;
+  console.log(req.body.newList);
   let list = new ScheduledList({
     title:      newList.title,
     userId:     newList.userId,
