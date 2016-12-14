@@ -8,6 +8,8 @@ var ScheduledTweetList = new Schema({
   interval: String,
   startDate: Date,
   tweets: Array
+},{
+  timestamps: true
 });
 
 

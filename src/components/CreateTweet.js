@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { setCounter } from '../actions/TweetActions';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
+import Select from 'react-select';
 
 
 const MAX_COUNT = 140;
@@ -22,6 +23,7 @@ class CreateTweet extends React.Component {
         <div className='tweet-box'>
           <textarea autoFocus='true' placeholder='Enter a tweet' maxLength='140' rows='3' onChange={this.countChars}></textarea>
           <br/><br/>
+          <label>Date to post</label><br/>
           <DateField
             forceValidDate
             defaultValue={"2016-05-30 15:23"}
@@ -30,6 +32,13 @@ class CreateTweet extends React.Component {
               <Calendar/>
             </TransitionView>
           </DateField>
+          <br/><br/>
+          <label>Add to list</label><br/>
+          <Select
+            value={"Special Posts"}
+            options={[{value: 'Special Posts', label: 'Special Posts'}]}
+            clearable={false}
+          />
           <div className='tweet-btn-container'>
               <span>{this.props.counter}</span><button>Save</button>
           </div>
@@ -41,7 +50,8 @@ class CreateTweet extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    counter: state.tweetCounter
+    counter: state.tweetCounter,
+    lists:    state.scheduledListArray
   };
 };
 const mapDispatchToProps = (dispatch) => {

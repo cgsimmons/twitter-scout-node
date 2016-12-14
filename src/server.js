@@ -108,9 +108,8 @@ app.post('/api/user/:userId/tags', (req, res) => {
     }
   })
 });
-
 app.get('/api/user/:userId/scheduled-lists', isLoggedIn, (req, res) => {
-  ScheduledList.find({userId: req.params.userId}, (err, lists) => {
+  ScheduledList.find({userId: req.params.userId}).sort('-createdAt').exec((err, lists) => {
     if(err){
       res.status(500).send(err.message);
     } else {
@@ -124,7 +123,7 @@ app.post('/api/user/:userId/scheduled-list/:listId', (req, res) => {
     if (err)
       return res.status(500).send(err.message);
 
-    ScheduledList.find({userId: req.params.userId}, (err, newList) => {
+    ScheduledList.find({userId: req.params.userId}).sort('-createdAt').exec((err, newList) => {
       if (err)
         return res.status(500).send(err.message);
 
@@ -147,7 +146,7 @@ app.post('/api/user/:userId/scheduled-list', (req, res) => {
     if (err)
       return res.status(500).send(err.message);
 
-    ScheduledList.find({userId: req.params.userId}, (err, lists) => {
+    ScheduledList.find({userId: req.params.userId}).sort('-createdAt').exec((err, lists) => {
       if(err){
         res.status(500).send(err.message);
       } else {

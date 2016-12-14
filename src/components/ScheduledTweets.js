@@ -23,7 +23,7 @@ class ScheduledTweets extends React.Component {
           this.props.lists.map (
             (list, index) => {
               return (
-                <ScheduledList list={list}>{list.title}</ScheduledList>
+                <ScheduledList list={list} />
               )
             }
           )

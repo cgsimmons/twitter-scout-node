@@ -14,7 +14,7 @@
   .react-date-field *:after {
     box-sizing: border-box; }
   .react-date-field > .react-date-field__picker {
-    min-width: 100%;
+    width: 100%;
     position: absolute;
     z-index: 100;
     left: -1px;
@@ -27,7 +27,7 @@
   bottom: 100%; }
 
 .react-date-field__input {
-  width: 100%;
+  width: 50%;
   -webkit-box-flex: 1;
   -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
@@ -2263,6 +2263,7 @@
           flex-shrink: 100; }
 
 .react-date-field--theme-default {
+  width: 50%;
   resize: none;
   padding: 0.3rem;
   border: 1px solid rgb(173,170,170);

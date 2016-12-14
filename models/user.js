@@ -11,6 +11,8 @@ var User = new Schema({
   secret: String,
   data: Object,
   tags: Array
+},{
+    timestamps: true
 });
 
 

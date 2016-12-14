@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { removeAndDeleteScheduledListArray } from '../actions/ScheduledListActions';
+import moment from 'moment';
 
 class ScheduledList extends React.Component {
 
@@ -17,7 +18,7 @@ class ScheduledList extends React.Component {
         <span className="ReactTags__tag">
           <a className="ReactTags__remove delete" onClick={this.handleDelete}>×</a>
         </span>
-        <p>{this.props.list.interval.replace('y', 'i')}ly from {this.props.list.startDate.slice(0,21)}</p>
+        <p>{this.props.list.interval.replace('y', 'i')}ly from {moment(this.props.list.startDate).format("MMM Do YYYY, h:mm a")}</p>
         <hr/>
 
       </div>
