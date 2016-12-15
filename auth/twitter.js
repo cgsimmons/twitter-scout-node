@@ -2,6 +2,7 @@ import Passport from 'passport';
 import Strategy from 'passport-twitter';
 
 import User from '../models/user';
+import ScheduledTweetList from '../models/scheduledTweetList';
 import Config from '../_config';
 import Init from './init';
 
@@ -33,9 +34,20 @@ Passport.use(new Strategy({
       if(err){
         return done(err);
       } else {
+
+        let listUpdates = {
+          title: 'Special Tweets',
+          userId: user._id,
+          interval: '',
+          startDate: '',
+        };
+
+        ScheduledTweetList.findOneAndUpdate( {userId: user._id, title: 'Special Tweets'}, listUpdates, options);
+
         return done(null, user);
       }
     });
+
   }
 ));
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCounter, setSelectedList, setScheduledTweetBody } from '../actions/TweetActions';
+import { setCounter, setSelectedList, setScheduledTweetBody, saveScheduledTweet } from '../actions/TweetActions';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
 import Select from 'react-select';
 
@@ -24,7 +24,7 @@ class CreateTweet extends React.Component {
   }
 
   handleSave = (event) => {
-
+    this.props.saveTweet(this.props.tweet, this.props.userId);
   }
 
   render(){
@@ -38,12 +38,12 @@ class CreateTweet extends React.Component {
         <br/>
         <p>Publish your tweet at a specific time or add it to a list of tweets to be published at a specified interval.</p><br/>
         <div className='tweet-box'>
-          <textarea autoFocus='true' placeholder='Enter a tweet' maxLength='140' rows='3' onChange={this.handleTextChange}>{this.props.tweetBody}</textarea>
+          <textarea autoFocus='true' placeholder='Enter a tweet' maxLength='140' rows='3' onChange={this.handleTextChange} value={this.props.tweetBody}></textarea>
           <br/><br/>
           <label>Date to post</label><br/>
           <DateField
             forceValidDate
-            defaultValue={"2016-05-30 15:23"}
+            defaultValue={this.props.tweet.postDate}
             dateFormat="YYYY-MM-DD HH:mm">
             <TransitionView>
               <Calendar/>
@@ -68,6 +68,7 @@ class CreateTweet extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    userId:     state.userId,
     counter:    state.scheduledTweet.tweetCounter,
     selection:  state.scheduledTweet.selectedList,
     tweetBody:  state.scheduledTweet.body,
@@ -81,7 +82,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
       setCount:     (num) => dispatch(setCounter(num)),
       setSelection: (val) => dispatch(setSelectedList(val)),
-      setBody:      (body) => dispatch(setScheduledTweetBody(body))
+      setBody:      (body) => dispatch(setScheduledTweetBody(body)),
+      saveTweet:    (tweet, user) => dispatch(saveScheduledTweet(tweet, user))
     };
 };
 

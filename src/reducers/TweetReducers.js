@@ -2,7 +2,7 @@ const INITIAL_TWEET_STATE = {
   body:     '',
   postDate: new Date(),
   posted:    false,
-  selectedList: 'Special Tweets',
+  selectedList: '0',
   tweetCounter: 140
 }
 

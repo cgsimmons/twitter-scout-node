@@ -1,3 +1,5 @@
+import $ from 'jquery';
+const BASE_URL = 'http://127.0.0.1:3000';
 
 export function setCounter(num){
   return {
@@ -33,21 +35,23 @@ export function resetScheduledTweet(){
   }
 }
 
-export function saveScheduledTweet(tweet, list) {
+export function saveScheduledTweet(tweet, userId) {
   return (dispatch) => {
-    // 
-    // $.ajax({
-    //   type: 'POST',
-    //   url: `${BASE_URL}/api/user/${list.userId}/scheduled-list/${}`,
-    //   data: { newList: list },
-    //   success: (newArray) => {
-    //     dispatch(setScheduledListArray(newArray));
-    //     dispatch(resetScheduledList());
-    //     dispatch(scheduledListIsLoading(false));
-    //   },
-    //   error: (XMLHttpRequest, textStatus, errorThrown) => {
-    //     console.log(textStatus);
-    //   }
-    // })
+
+    $.ajax({
+      type: 'POST',
+      url: `${BASE_URL}/api/user/${userId}/scheduled-list/${tweet.selectedList}`,
+      data: { newTweet: tweet },
+      success: (newlist) => {
+        // dispatch(setScheduledListArray(newArray));
+        // dispatch(resetScheduledList());
+        // dispatch(scheduledListIsLoading(false));
+        console.log('Success on client');
+        console.log(newList);
+      },
+      error: (XMLHttpRequest, textStatus, errorThrown) => {
+        console.log(textStatus);
+      }
+    })
   }
 }
