@@ -16,8 +16,8 @@ handleDate = (datestr, timeObj) => {
   this.props.setDate(timeObj.timestamp);
 }
 
-handleInterval = (value) => {
-  this.props.setInterval(value);
+handleInterval = (selectObj) => {
+  this.props.setInterval(selectObj.value);
 }
 
 handleTitle = (event) => {

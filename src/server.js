@@ -78,6 +78,8 @@ app.get('/auth', isLoggedIn, (req, res) => {
 });
 
 //api hooks
+
+//get all users
 app.get('/api/users', isLoggedIn, (req, res) => {
   User.find({}, (err, users) => {
     if(err){
@@ -87,6 +89,8 @@ app.get('/api/users', isLoggedIn, (req, res) => {
     }
   });
 });
+
+//get user
 app.get('/api/user/:userId', isLoggedIn, (req, res) => {
   User.findById(req.params.userId, (err, user) => {
     if(err){
@@ -97,6 +101,8 @@ app.get('/api/user/:userId', isLoggedIn, (req, res) => {
     }
   });
 });
+
+//accept tags
 app.post('/api/user/:userId/tags', (req, res) => {
   User.findById(req.params.userId, (err, user) => {
     if(err){
@@ -108,6 +114,8 @@ app.post('/api/user/:userId/tags', (req, res) => {
     }
   })
 });
+
+//get all lists
 app.get('/api/user/:userId/scheduled-lists', isLoggedIn, (req, res) => {
   ScheduledList.find({userId: req.params.userId}).sort('-createdAt').exec((err, lists) => {
     if(err){
@@ -118,6 +126,7 @@ app.get('/api/user/:userId/scheduled-lists', isLoggedIn, (req, res) => {
   });
 });
 
+//remove a list
 app.post('/api/user/:userId/scheduled-list/:listId', (req, res) => {
   ScheduledList.remove({userId: req.params.userId, _id: req.params.listId}, (err, removed) => {
     if (err)
@@ -132,6 +141,30 @@ app.post('/api/user/:userId/scheduled-list/:listId', (req, res) => {
   })
 });
 
+//accept a new tweet
+app.post('/api/user/:userId/scheduled-list/:listId/tweet', (req, res) => {
+  ScheduledList.findOne({_id: req.params.listId}, (err, list) => {
+    if (err)
+      return res.status(500).send(err.message);
+
+    let newTweet = req.body.newTweet;
+    let tweet = {
+      body: newTweet.body,
+      postDate: newTweet.postDate,
+      posted: false,
+    };
+    list.tweets.push(tweet)
+    list.save((err, newList) => {
+      if (err)
+        return res.status(500).send(err.message);
+
+      res.status(200).send(newList);
+
+    })
+  })
+});
+
+//accept a new list
 app.post('/api/user/:userId/scheduled-list', (req, res) => {
   let newList = req.body.newList;
   console.log(req.body.newList);
@@ -141,7 +174,7 @@ app.post('/api/user/:userId/scheduled-list', (req, res) => {
     interval:   newList.interval,
     startDate:  newList.startDate,
     tweets:     []
-  })
+  });
 
   list.save((err, list) => {
     if (err)

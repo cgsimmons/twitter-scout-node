@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCounter, setSelectedList } from '../actions/TweetActions';
+import { setCounter, setSelectedList, setScheduledTweetBody } from '../actions/TweetActions';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
 import Select from 'react-select';
 
@@ -8,13 +8,18 @@ const MAX_COUNT = 140;
 
 class CreateTweet extends React.Component {
 
+  handleTextChange = (event) => {
+    const input = event.target.value;
+    this.props.setCount(MAX_COUNT - input.length);
+    this.props.setBody(input);
+  }
   countChars = (event) => {
     const input = event.target.value;
     this.props.setCount(MAX_COUNT - input.length);
   }
 
-  handleSelection = (value) => {
-    this.props.setSelection(value);
+  handleSelection = (selectObj) => {
+    this.props.setSelection(selectObj.value);
     //TODO Disable/enable date
   }
 
@@ -24,7 +29,7 @@ class CreateTweet extends React.Component {
 
   render(){
     let selection = this.props.lists.map((list, index) => {
-      return ({ value: list.title, label: list.title });
+      return ({ value: list._id, label: list.title });
     });
     let isDisabled = (this.props.selection === 'Special Tweets' ? '' : 'disabled');
     return (
@@ -33,7 +38,7 @@ class CreateTweet extends React.Component {
         <br/>
         <p>Publish your tweet at a specific time or add it to a list of tweets to be published at a specified interval.</p><br/>
         <div className='tweet-box'>
-          <textarea autoFocus='true' placeholder='Enter a tweet' maxLength='140' rows='3' onChange={this.countChars}></textarea>
+          <textarea autoFocus='true' placeholder='Enter a tweet' maxLength='140' rows='3' onChange={this.handleTextChange}>{this.props.tweetBody}</textarea>
           <br/><br/>
           <label>Date to post</label><br/>
           <DateField
@@ -49,7 +54,7 @@ class CreateTweet extends React.Component {
           <Select
             value={this.props.selection}
             onChange={this.handleSelection}
-            options={[{value: 'Special Tweets', label: 'Special Tweets'}, ...selection]}
+            options={[{value: '0', label: 'Special Tweets'}, ...selection]}
             clearable={false}
           />
           <div className='tweet-btn-container'>
@@ -63,16 +68,20 @@ class CreateTweet extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    counter:    state.tweetCounter,
-    selection:  state.selectedList,
+    counter:    state.scheduledTweet.tweetCounter,
+    selection:  state.scheduledTweet.selectedList,
+    tweetBody:  state.scheduledTweet.body,
+    postDate:   state.scheduledTweet.postDate,
     lists:      state.scheduledListArray,
-    list:       state.scheduledList
+    list:       state.scheduledList,
+    tweet:      state.scheduledTweet
   };
 };
 const mapDispatchToProps = (dispatch) => {
     return {
-      setCount: (num) => dispatch(setCounter(num)),
-      setSelection: (val) => dispatch(setSelectedList(val))
+      setCount:     (num) => dispatch(setCounter(num)),
+      setSelection: (val) => dispatch(setSelectedList(val)),
+      setBody:      (body) => dispatch(setScheduledTweetBody(body))
     };
 };
 
