@@ -4,7 +4,7 @@ const initialState = {
   title:         '',
   startDate:     new Date(),
   interval:      'Day',
-  userId:        ''
+  userId:        '',
 };
 const resetState = {
   hasErrored:    false,
@@ -13,6 +13,15 @@ const resetState = {
   startDate:     new Date(),
   interval:      'Day'
 };
+
+export function specialList(state = '', action){
+  switch(action.type) {
+    case 'SET_SPECIAL_LIST':
+      return action.listId;
+    default:
+      return state;
+  }
+}
 
 export function scheduledList(state = initialState, action) {
   switch (action.type) {
@@ -51,8 +60,6 @@ export function scheduledListArray(state = [], action) {
       ];
     case 'REMOVE_SCHEDULED_LIST_FROM_ARRAY':
       const i = state.findIndex(x => x.title === action.title);
-      console.log(i);
-      console.log("is the index");
       return [
         ...state.slice(0, i),
         ...state.slice(i + 1)

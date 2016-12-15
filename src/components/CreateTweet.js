@@ -32,6 +32,7 @@ class CreateTweet extends React.Component {
       return ({ value: list._id, label: list.title });
     });
     let isDisabled = (this.props.selection === 'Special Tweets' ? '' : 'disabled');
+
     return (
       <div className='CreateTweet main-panel'>
         <h1 className='section-header'>Write a tweet</h1>
@@ -52,9 +53,10 @@ class CreateTweet extends React.Component {
           <br/><br/>
           <label>Add to list</label><br/>
           <Select
+            {isDisabled}
             value={this.props.selection}
             onChange={this.handleSelection}
-            options={[{value: '0', label: 'Special Tweets'}, ...selection]}
+            options={selection}
             clearable={false}
           />
           <div className='tweet-btn-container'>
@@ -64,6 +66,10 @@ class CreateTweet extends React.Component {
       </div>
     );
   }
+  componentDidMount() {
+    if (this.props.selection === '0')
+      this.props.setSelection(this.props.spList);
+  }
 }
 
 const mapStateToProps = (state) => {
@@ -71,6 +77,7 @@ const mapStateToProps = (state) => {
     userId:     state.userId,
     counter:    state.scheduledTweet.tweetCounter,
     selection:  state.scheduledTweet.selectedList,
+    spList:     state.specialList,
     tweetBody:  state.scheduledTweet.body,
     postDate:   state.scheduledTweet.postDate,
     lists:      state.scheduledListArray,

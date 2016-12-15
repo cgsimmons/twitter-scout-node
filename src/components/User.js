@@ -48,15 +48,15 @@ class User extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.user,
-    hasErrored: state.userHasErrored,
-    isLoading: state.userIsLoading,
-    isSignedIn: state.userIsSignedIn
+    user:         state.user,
+    hasErrored:   state.userHasErrored,
+    isLoading:    state.userIsLoading,
+    isSignedIn:   state.userIsSignedIn
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser: (id) => dispatch(userSignIn(id)),
+    getUser:           (id) => dispatch(userSignIn(id)),
     getScheduledLists: (id) => dispatch(getScheduledListArray(id))
   };
 };
