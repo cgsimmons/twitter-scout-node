@@ -48,7 +48,8 @@
     "react-tab-panel": "^2.2.7",
     "react-tag-input": "^4.6.1",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.1.0"
+    "redux-thunk": "^2.1.0",
+    "twitter": "^1.7.0"
   },
   "devDependencies": {
     "babel-loader": "^6.2.8",
