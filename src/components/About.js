@@ -5,7 +5,7 @@ export default class About extends React.Component {
     return (
       <div className="About">
         <div className="logo-box">
-          <img className="logo" src="/img/about-taco.jpg"/>
+          <img className="logo" src="/img/scope.jpeg"/>
         </div>
         <h3>We are all about tacos!</h3>
       </div>

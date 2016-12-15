@@ -43,3 +43,19 @@
 .ScheduledList a{
   margin-left: 0;
 }
+.ScheduledList li {
+  position: relative;
+}
+.ScheduledList li p{
+  font-size: 0.8rem;
+  color: DimGrey;
+}
+.ScheduledList li h4{
+  margin-left: 0.3rem;
+  margin: 0.5rem 0.3rem;
+}
+.scheduledTweet a{
+  position:absolute;
+  right: 0.2rem;
+  top: 0.5rem;
+}

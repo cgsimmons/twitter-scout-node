@@ -22,7 +22,6 @@ svg{display:inline-flex}img{max-width:100%;display:block}
 html {
   color: #030303;
   font: caption;
-  padding-bottom: 2em;
 }
 
 header {
@@ -38,16 +37,15 @@ body {
 .app-body{
   display: flex;
   justify-content: center;
-  padding: 0 0.5rem 0 0.5rem;
 }
 
 .app-content{
-  margin-top: 3.7rem;
-  width: 890px;
+  margin-top: 3.1rem;
+  width: 100%;
 }
 
 a {
-  color: #2689FF;
+  color: #03A9F4;
 }
 
 main {
@@ -61,14 +59,18 @@ ul {
 }
 
 footer {
-  margin: 4em auto;
+  margin: 4em 0 0 0;
   padding: 2em;
   text-align: center;
-  max-width: 800px;
   width: 100%;
+  height: 10rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #303F9F
 }
 
 footer p {
-  line-height: 1.2em;
-  margin: 0 0 1em 0;
+  color:white;
+  font-weight: bold;
 }

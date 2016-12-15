@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCounter, setSelectedList, setScheduledTweetBody, saveScheduledTweet } from '../actions/TweetActions';
+import { setCounter, setSelectedList, setScheduledTweetBody } from '../actions/TweetActions';
+import { saveScheduledTweet } from '../actions/ScheduledListActions';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
 import Select from 'react-select';
 
@@ -31,7 +32,6 @@ class CreateTweet extends React.Component {
     let selection = this.props.lists.map((list, index) => {
       return ({ value: list._id, label: list.title });
     });
-    let isDisabled = (this.props.selection === 'Special Tweets' ? '' : 'disabled');
 
     return (
       <div className='CreateTweet main-panel'>
@@ -53,7 +53,6 @@ class CreateTweet extends React.Component {
           <br/><br/>
           <label>Add to list</label><br/>
           <Select
-            {isDisabled}
             value={this.props.selection}
             onChange={this.handleSelection}
             options={selection}

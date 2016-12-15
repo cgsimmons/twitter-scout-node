@@ -7,10 +7,10 @@ class NavBar extends React.Component {
     let signInOrOut;
     let dash;
     if(this.props.isSignedIn){
-      signInOrOut = <a href='/logout'>Sign-Out</a>
-      dash = <li><Link to={ `/user/${this.props.userId}` }>Dash</Link></li>
+      signInOrOut = <a href='/logout'>SIGN-OUT</a>
+      dash = <li><Link to={ `/user/${this.props.userId}` }>DASHBOARD</Link></li>
     } else {
-      signInOrOut = <Link to='/login'>Sign-In</Link>
+      signInOrOut = <Link to='/login'>SIGN-IN</Link>
     }
     return (
       <div className='NavBar'>
@@ -18,13 +18,13 @@ class NavBar extends React.Component {
           <nav>
             <ul className='nav-list'>
               <li>
-                <Link to='/'>Home</Link>
+                <Link to='/'>HOME</Link>
               </li>
               <li>
-                <Link to='/about'>About</Link>
+                <Link to='/about'>ABOUT</Link>
               </li>
               <li className='nav-left'>
-                <Link to='/contact'>Contact</Link>
+                <Link to='/contact'>CONTACT</Link>
               </li>
               {dash}
               <li>{ signInOrOut }</li>

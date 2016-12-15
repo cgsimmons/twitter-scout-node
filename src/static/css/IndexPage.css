@@ -1,12 +1,51 @@
 .logo-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+position: relative;
+height: 650px;
 }
 .logo {
-  display: block;
-  margin: 0 auto;
-  max-width: 400px;
-  width: 100%;
-  border-radius: 2%;
+  position: absolute;
+  clip: rect(0px,auto,650px,0px);
+}
+
+.logo-title{
+  font-family: Impact, Charcoal, sans-serif;
+  font-size: 5rem;
+  position: absolute;
+  z-index: 9999;
+  top: 8rem;
+  right: 30%;
+}
+
+.logo-tagline {
+  position: absolute;
+      z-index: 9999;
+      top: 13.5rem;
+      right: 32%;
+}
+
+@media all and (max-width: 1400px){
+  .logo-title{
+    top: 3rem;
+    right: 20%;
+  }
+
+  .logo-tagline {
+    position: absolute;
+        top: 8.5rem;
+        right: 28%;
+  }
+}
+
+@media all and (max-width: 750px){
+  .logo-title{
+    font-size: 2.5rem;
+    top: 3rem;
+    right: 20%;
+  }
+
+  .logo-tagline {
+    font-size: 0.8rem;
+        top: 5.5rem;
+        right: 22%;
+  }
 }

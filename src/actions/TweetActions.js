@@ -34,24 +34,3 @@ export function resetScheduledTweet(){
     type: 'RESET_SCHEDULED_TWEET'
   }
 }
-
-export function saveScheduledTweet(tweet, userId) {
-  return (dispatch) => {
-
-    $.ajax({
-      type: 'POST',
-      url: `${BASE_URL}/api/user/${userId}/scheduled-list/${tweet.selectedList}`,
-      data: { newTweet: tweet },
-      success: (newlist) => {
-        // dispatch(setScheduledListArray(newArray));
-        // dispatch(resetScheduledList());
-        // dispatch(scheduledListIsLoading(false));
-        console.log('Success on client');
-        console.log(newList);
-      },
-      error: (XMLHttpRequest, textStatus, errorThrown) => {
-        console.log(textStatus);
-      }
-    })
-  }
-}

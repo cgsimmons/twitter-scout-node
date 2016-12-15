@@ -55,7 +55,7 @@ app.get('/auth/twitter/callback',
   PassportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   function(req, res) {
     // Successful authentication
-    
+
     res.redirect('/user/'+req.user.id);
   });
 app.get('/logout', (req, res) =>{
@@ -141,26 +141,32 @@ app.post('/api/user/:userId/scheduled-list/:listId', (req, res) => {
 });
 
 //accept a new tweet
-app.post('/api/user/:userId/scheduled-list/:listId/tweet', (req, res) => {
+app.post('/api/scheduled-list/:listId/tweet', (req, res) => {
   ScheduledList.findOne({_id: req.params.listId}, (err, list) => {
     if (err)
       return res.status(500).send(err.message);
-    //
-    // let newTweet = req.body.newTweet;
-    // let postDate = (newTweet.)
-    // let tweet = {
-    //   body: newTweet.body,
-    //   postDate: newTweet.postDate,
-    //   posted: false,
-    // };
-    // list.tweets.push(tweet)
-    // list.save((err, newList) => {
-    //   if (err)
-    //     return res.status(500).send(err.message);
 
-      res.status(200).send(newList);
+    let newTweet = req.body.newTweet;
+    // let postDate = newTweet.postDate;
+    let tweet = {
+      body: newTweet.body,
+      postDate: newTweet.postDate,
+      posted: false,
+    };
+    list.tweets.push(tweet)
+    list.save((err, newList) => {
+      if (err)
+        return res.status(500).send(err.message);
 
-    // })
+      // return res.status(200).send(newList);
+      ScheduledList.find({userId: newList.userId}).sort('-createdAt').exec((err, lists) => {
+        if(err){
+          res.status(500).send(err.message);
+        } else {
+          res.status(200).send(lists);
+        }
+      });
+    })
   })
 });
 
