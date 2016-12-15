@@ -44,9 +44,7 @@
 .ScheduledList a{
   margin-left: 0;
 }
-.ScheduledList a:hover, a:focus{
-  color: #f60;
-}
+
 .ScheduledList li {
   position: relative;
 }
@@ -63,7 +61,4 @@
   position:absolute;
   right: 0.2rem;
   top: 0.5rem;
-}
-.scheduledTweet a:hover, a:focus{
-  color: #f60;
 }

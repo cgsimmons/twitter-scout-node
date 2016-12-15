@@ -20,8 +20,8 @@ const routes = (
     <Route path='about'                 component={About}/>
     <Route path="login"                 component={Login}/>
     <Route path="user/:userId"          component={Dashboard}>
-      <IndexRoute                       component={Statistics}/>
-      <Route path='scheduled-tweets'    component={ScheduledTweets}/>
+      <IndexRoute                   component={ScheduledTweets}/>
+      <Route path='statistics'    component={Statistics}/>
       <Route path='suggested-tweets'    component={SuggestedTweets}/>
       <Route path='suggested-tweeters'  component={SuggestedTweeters}/>
       <Route path='search-settings'     component={SearchSettings}/>

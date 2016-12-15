@@ -18,7 +18,7 @@ export default class Layout extends React.Component {
         <footer>
           <div className='footer-inner'>
           <p>
-          <strong>Brought to you by Taco Corp.</strong>
+          <strong>Brought to you by Chris Simmons.</strong>
           </p>
           </div>
         </footer>
