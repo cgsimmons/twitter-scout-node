@@ -56,7 +56,7 @@ handleTitle = (event) => {
               </DateField>
             </div>
           <div className='tweet-btn-container'>
-            <button onClick={this.handleSubmit}>Add List</button>
+            <a href='#' className='submit-button' onClick={this.handleSubmit}>Add List</a>
           </div>
         </div>
       </div>

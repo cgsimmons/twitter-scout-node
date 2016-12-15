@@ -25,6 +25,7 @@ class CreateTweet extends React.Component {
   }
 
   handleSave = (event) => {
+    event.preventDefault();
     this.props.saveTweet(this.props.tweet, this.props.userId);
   }
 
@@ -59,7 +60,7 @@ class CreateTweet extends React.Component {
             clearable={false}
           />
           <div className='tweet-btn-container'>
-              <span>{this.props.counter}</span><button onClick={this.handleSave}>Save</button>
+              <span>{this.props.counter}</span><a href='#' className='submit-button' onClick={this.handleSave}>Save</a>
           </div>
         </div>
       </div>

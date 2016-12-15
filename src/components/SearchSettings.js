@@ -5,7 +5,8 @@ import { addUserTag, removeUserTag, setUserTags, userUpdateTags } from '../actio
 
 
 class SearchSettings extends React.Component {
-  cancelTags = () => {
+  cancelTags = (event) => {
+    event.preventDefault();
     if(typeof this.props.user.tags !== 'undefined'){
       this.props.setUserTags(this.props.user.tags);
     } else {
@@ -13,7 +14,8 @@ class SearchSettings extends React.Component {
     }
   };
 
-  updateTags = () => {
+  updateTags = (event) => {
+      event.preventDefault();
       this.props.updateUserTags(this.props.user._id, this.props.userTags);
   };
 
@@ -36,8 +38,8 @@ class SearchSettings extends React.Component {
           />
         </div>
         <div className='search-buttons'>
-          <button onClick={this.updateTags}>Save</button>
-          <button onClick={this.cancelTags}>Cancel</button>
+          <a href='#' className="submit-button" onClick={this.updateTags}>Save</a>
+          <a href='#' className="submit-button" onClick={this.cancelTags}>Cancel</a>
         </div>
       </div>
     );
