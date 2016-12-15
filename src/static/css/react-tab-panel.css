@@ -2213,6 +2213,7 @@
   border-bottom-left-radius: 0.5rem;
   border-bottom-right-radius: 0.5rem;
   background-color: rgb(255,255,255);
+  text-align: left;
   }
 
 .react-tab-panel--theme-default .react-tab-panel__tab-title-close-icon {
