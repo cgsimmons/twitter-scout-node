@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { setCounter, setSelectedList, setScheduledTweetBody } from '../actions/TweetActions';
+import { resetScheduledTweet, setCounter, setSelectedList, setScheduledTweetBody } from '../actions/TweetActions';
 import { saveScheduledTweet } from '../actions/ScheduledListActions';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
 import Select from 'react-select';
@@ -27,6 +27,7 @@ class CreateTweet extends React.Component {
   handleSave = (event) => {
     event.preventDefault();
     this.props.saveTweet(this.props.tweet, this.props.userId);
+    this.props.resetTweet();
   }
 
   render(){
@@ -90,7 +91,8 @@ const mapDispatchToProps = (dispatch) => {
       setCount:     (num) => dispatch(setCounter(num)),
       setSelection: (val) => dispatch(setSelectedList(val)),
       setBody:      (body) => dispatch(setScheduledTweetBody(body)),
-      saveTweet:    (tweet, user) => dispatch(saveScheduledTweet(tweet, user))
+      saveTweet:    (tweet, user) => dispatch(saveScheduledTweet(tweet, user)),
+      resetTweet:   () => dispatch(resetScheduledTweet())
     };
 };
 
