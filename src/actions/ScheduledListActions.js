@@ -66,13 +66,6 @@ export function removeScheduledListFromArray(listTitle){
   }
 }
 
-export function setSpecialList(id) {
-  return {
-    type: 'SET_SPECIAL_LIST',
-    listId: id
-  }
-}
-
 export function removeAndDeleteScheduledListArray(list){
   return (dispatch) => {
     dispatch(scheduledListIsLoading(true));
@@ -121,7 +114,7 @@ export function getScheduledListArray(id) {
       url: `${BASE_URL}/api/user/${id}/scheduled-lists`,
       success: (lists) => {
         dispatch(setScheduledListArray(lists));
-        dispatch(setSpecialList(lists.filter((obj)=>{return obj.title==='Special Tweets';})[0]._id));
+        // dispatch(setSpecialList(lists.filter((obj)=>{return obj.title==='Special Tweets';})[0]._id));
 
       },
       error: (XMLHttpRequest, textStatus, errorThrown) => {

@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 import { user, userId, userTags, userHasErrored, userIsLoading, userIsSignedIn } from './UserReducers';
 import { scheduledTweet } from './TweetReducers';
-import { scheduledList, scheduledListArray, specialList } from './ScheduledListReducers';
+import { scheduledList, scheduledListArray } from './ScheduledListReducers';
 
 export default combineReducers({
   user,
@@ -12,6 +12,5 @@ export default combineReducers({
   userIsSignedIn,
   scheduledTweet,
   scheduledList,
-  scheduledListArray,
-  specialList
+  scheduledListArray
 });

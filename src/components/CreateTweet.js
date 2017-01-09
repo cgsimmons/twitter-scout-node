@@ -31,7 +31,10 @@ class CreateTweet extends React.Component {
   }
 
   render(){
-    let selection = this.props.lists.map((list, index) => {
+    let selections = this.props.lists.map((list, index) => {
+      if ((list.title === 'Special Tweets') && (this.props.selection === '0')){
+        this.props.setSelection(list._id);
+      }
       return ({ value: list._id, label: list.title });
     });
 
@@ -57,7 +60,7 @@ class CreateTweet extends React.Component {
           <Select
             value={this.props.selection}
             onChange={this.handleSelection}
-            options={selection}
+            options={selections}
             clearable={false}
           />
           <div className='tweet-btn-container'>
@@ -67,10 +70,6 @@ class CreateTweet extends React.Component {
       </div>
     );
   }
-  componentDidMount() {
-    if (this.props.selection === '0')
-      this.props.setSelection(this.props.spList);
-  }
 }
 
 const mapStateToProps = (state) => {
@@ -78,7 +77,6 @@ const mapStateToProps = (state) => {
     userId:     state.userId,
     counter:    state.scheduledTweet.tweetCounter,
     selection:  state.scheduledTweet.selectedList,
-    spList:     state.specialList,
     tweetBody:  state.scheduledTweet.body,
     postDate:   state.scheduledTweet.postDate,
     lists:      state.scheduledListArray,
