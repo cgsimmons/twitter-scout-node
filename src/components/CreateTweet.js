@@ -50,7 +50,8 @@ class CreateTweet extends React.Component {
           <DateField
             forceValidDate
             defaultValue={this.props.tweet.postDate}
-            dateFormat="YYYY-MM-DD HH:mm">
+            dateFormat="YYYY-MM-DD HH:mm"
+            disabled={((selections.length > 0) && (selections[selections.length - 1].value !== this.props.selection))}>
             <TransitionView>
               <Calendar/>
             </TransitionView>

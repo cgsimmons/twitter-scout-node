@@ -36,4 +36,9 @@
 .profile-username {
   font-size: 0.8rem;
   color: DimGrey;
+  text-align: left;
+}
+
+.profile-message {
+  text-align: left;
 }
