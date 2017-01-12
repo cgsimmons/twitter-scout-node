@@ -21,12 +21,32 @@ class CreateTweet extends React.Component {
 
   handleSelection = (selectObj) => {
     this.props.setSelection(selectObj.value);
+    for(let i = 0; i < this.props.lists.length - 1; i++){
+      if((selectObj.startDate !== '') && (this.props.lists[i]._id === selectObj.value)){
+        let newDate = new Date(this.props.lists[i].startDate);
+        switch(this.props.lists[i].interval){
+          case 'Day':
+            newDate.setDate(newDate.getDate() + this.props.lists[i].tweets.length);
+            break;
+          case 'Week':
+            console.log(newDate.getDate() + (this.props.lists[i].tweets.length * 7));
+            newDate.setDate(newDate.getDate() + (this.props.lists[i].tweets.length * 7));
+            break;
+          case 'Month':
+            newDate.setMonth(newDate.getMonth() + this.props.lists[i].tweets.length);
+            break;
+        }
+        this.props.setDate(newDate);
+        return;
+      }
+    }
+    this.props.setDate(new Date());
   }
 
   handleSave = (event) => {
     event.preventDefault();
     this.props.saveTweet(this.props.tweet, this.props.userId);
-    this.props.resetTweet();
+    this.props.setBody('');
   }
 
   render(){
@@ -48,7 +68,7 @@ class CreateTweet extends React.Component {
           <label>Date to post</label><br/>
           <DateField
             forceValidDate
-            defaultValue={this.props.tweetDate}
+            value={this.props.tweetDate}
             onChange={this.handleDate}
             dateFormat="YYYY-MM-DD hh:mm a"
             disabled={((selections.length > 0) && (selections[selections.length - 1].value !== this.props.selection))}>
