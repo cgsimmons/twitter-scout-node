@@ -173,7 +173,7 @@ app.post('/api/scheduled-list/:listId/tweet', (req, res) => {
 //accept a new list
 app.post('/api/user/:userId/scheduled-list', (req, res) => {
   let newList = req.body.newList;
-  console.log(req.body.newList);
+  // console.log(req.body.newList);
   let list = new ScheduledList({
     title:      newList.title,
     userId:     newList.userId,

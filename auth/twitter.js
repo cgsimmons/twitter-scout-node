@@ -41,10 +41,10 @@ Passport.use(new Strategy({
           interval: '',
           startDate: '',
         };
-        console.log(user);
+        // console.log(user);
         ScheduledTweetList.findOneAndUpdate( {userId: user._id, title: 'Special Tweets'}, listUpdates, options, (err, list) => {
-          console.log(list);
-          console.log(err);
+          // console.log(list);
+          // console.error(err);
         });
 
         return done(null, user);

@@ -12,8 +12,8 @@ handleSubmit = (event) => {
   this.props.saveList(this.props.list);
 }
 
-handleDate = (datestr, timeObj) => {
-  this.props.setDate(timeObj.timestamp);
+handleDate = (datestr, dateObj) => {
+  this.props.setDate(dateObj.dateMoment._d);
 }
 
 handleInterval = (selectObj) => {

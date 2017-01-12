@@ -14,6 +14,8 @@ export function scheduledTweet(state = INITIAL_TWEET_STATE, action){
       return {...state, tweetCounter: action.count};
     case 'SET_SCHEDULED_TWEET_BODY':
       return {...state, body: action.body};
+    case 'SET_SCHEDULED_TWEET_POSTDATE':
+      return {...state, postDate: action.date};
     case 'SET_SELECTED_LIST':
       return {...state, selectedList: action.selection};
     case 'RESET_SCHEDULED_TWEET':

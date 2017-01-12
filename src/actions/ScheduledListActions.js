@@ -5,49 +5,49 @@ export function setScheduledListTitle(title) {
   return {
     type: 'SET_SCHEDULED_LIST_TITLE',
     title: title
-  }
+  };
 }
 export function setScheduledListStartDate(date) {
   return {
     type: 'SET_SCHEDULED_LIST_START_DATE',
     startDate: date
-  }
+  };
 }
 export function setScheduledListInterval(interval) {
   return {
     type: 'SET_SCHEDULED_LIST_INTERVAL',
     interval: interval
-  }
+  };
 }
 export function scheduledListIsLoading(bool){
   return {
     type: 'SCHEDULED_LIST_IS_LOADING',
     isLoading: bool
-  }
+  };
 }
 export function scheduledListHasErrored(bool){
   return {
     type: 'SCHEDULED_LIST_HAS_ERRORED',
     hasErrored: bool
-  }
+  };
 }
 export function setScheduledListUserId(id){
   return {
     type: 'SET_SCHEDULED_LIST_USER_ID',
     userId: id
-  }
+  };
 }
 export function resetScheduledList(){
   return {
     type: 'RESET_SCHEDULED_LIST'
-  }
+  };
 }
 
 export function setScheduledListArray(newArray) {
   return {
     type: 'SET_SCHEDULED_LIST_ARRAY',
     listArray: newArray
-  }
+  };
 }
 
 export function addScheduledListToArray(newList){
@@ -57,13 +57,13 @@ export function addScheduledListToArray(newList){
     startDate:  newList.startDate,
     interval:   newList.interval,
     userId:     newList.userId
-  }
+  };
 }
 export function removeScheduledListFromArray(listTitle){
   return {
     type: 'REMOVE_SCHEDULED_LIST_FROM_ARRAY',
     title: listTitle
-  }
+  };
 }
 
 export function removeAndDeleteScheduledListArray(list){
@@ -84,7 +84,7 @@ export function removeAndDeleteScheduledListArray(list){
         dispatch(scheduledListIsLoading(false));
       }
     })
-  }
+  };
 }
 
 export function saveScheduledList(list) {
@@ -105,7 +105,7 @@ export function saveScheduledList(list) {
         dispatch(scheduledListIsLoading(false));
       }
     })
-  }
+  };
 }
 
 export function getScheduledListArray(id) {
@@ -121,7 +121,7 @@ export function getScheduledListArray(id) {
         alert(textStatus);
       }
     })
-  }
+  };
 }
 
 export function saveScheduledTweet(tweet) {
@@ -139,5 +139,5 @@ export function saveScheduledTweet(tweet) {
         console.log(textStatus);
       }
     })
-  }
+  };
 }

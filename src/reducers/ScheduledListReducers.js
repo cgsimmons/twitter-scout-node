@@ -14,15 +14,6 @@ const resetState = {
   interval:      'Day'
 };
 
-export function specialList(state = '', action){
-  switch(action.type) {
-    case 'SET_SPECIAL_LIST':
-      return action.listId;
-    default:
-      return state;
-  }
-}
-
 export function scheduledList(state = initialState, action) {
   switch (action.type) {
     case 'SCHEDULED_LIST_HAS_ERRORED':
