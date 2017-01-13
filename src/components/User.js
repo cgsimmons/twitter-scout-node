@@ -34,7 +34,7 @@ class User extends React.Component {
             {profile_displayName}
             {profile_username}
           </div>
-          <h1>Welcome to your dashboard, {user.displayName}.</h1>
+          <h1 className='profile-message'>Welcome to your dashboard.</h1>
         </div>
       </div>
     );

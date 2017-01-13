@@ -19,18 +19,25 @@ export function setScheduledTweetBody(body) {
   return {
     type: 'SET_SCHEDULED_TWEET_BODY',
     body: body
-  }
+  };
+}
+
+export function setScheduledTweetPostDate(date) {
+  return {
+    type: 'SET_SCHEDULED_TWEET_POSTDATE',
+    date: date
+  };
 }
 
 export function setScheduledTweet(tweet){
   return {
     type: 'SET_SCHEDULED_TWEET',
     tweet: tweet
-  }
+  };
 }
 
 export function resetScheduledTweet(){
   return {
     type: 'RESET_SCHEDULED_TWEET'
-  }
+  };
 }

@@ -14,23 +14,18 @@ class ScheduledList extends React.Component {
 
   render(){
     let message;
-    let deleteButton;
-    if (this.props.list.title === 'Special Tweets'){
+    if (this.props.list.interval === ''){
       message = <p>These tweets will each be posted according to their individually set times.</p>;
     } else {
       message = <p>{this.props.list.interval.replace('y', 'i')}ly from {moment(this.props.list.startDate).format("MMM Do YYYY, h:mm a")}</p>;
     }
-    if(this.props.list.title !== 'Special Tweets'){
-      deleteButton =   <span className="ReactTags__tag">
-          <a className="ReactTags__remove delete" onClick={this.handleDelete}>×</a>
-        </span>;
-    }
 
     return (
-
       <div className='ScheduledList dashboard-panel main-panel'>
         <h3>{this.props.list.title}</h3>
-        {deleteButton}
+        <span className="ReactTags__tag">
+          <a className="ReactTags__remove delete" onClick={this.handleDelete}>×</a>
+        </span>
         {message}
         <ul>
         {
