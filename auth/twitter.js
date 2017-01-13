@@ -35,17 +35,17 @@ Passport.use(new Strategy({
         return done(err);
       } else {
 
-        let listUpdates = {
-          title: 'Special Tweets',
-          userId: user._id,
-          interval: '',
-          startDate: '',
-        };
-        // console.log(user);
-        ScheduledTweetList.findOneAndUpdate( {userId: user._id, title: 'Special Tweets'}, listUpdates, options, (err, list) => {
-          // console.log(list);
-          // console.error(err);
-        });
+        // let listUpdates = {
+        //   title: 'Special Tweets',
+        //   userId: user._id,
+        //   interval: '',
+        //   startDate: '',
+        // };
+        // // console.log(user);
+        // ScheduledTweetList.findOneAndUpdate( {userId: user._id, title: 'Special Tweets'}, listUpdates, options, (err, list) => {
+        //   // console.log(list);
+        //   // console.error(err);
+        // });
 
         return done(null, user);
       }

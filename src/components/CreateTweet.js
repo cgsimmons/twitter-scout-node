@@ -51,7 +51,7 @@ class CreateTweet extends React.Component {
 
   render(){
     let selections = this.props.lists.map((list, index) => {
-      if ((list.title === 'Special Tweets') && (this.props.selection === '0')){
+      if (this.props.selection === '0'){
         this.props.setSelection(list._id);
       }
       return ({ value: list._id, label: list.title, startDate: list.startDate });
@@ -63,7 +63,7 @@ class CreateTweet extends React.Component {
         <br/>
         <p>Publish your tweet at a specific time or add it to a list of tweets to be published at a specified interval.</p><br/>
         <div className='tweet-box'>
-          <textarea autoFocus='true' placeholder='Enter a tweet' maxLength='140' rows='3' onChange={this.handleText} value={this.props.tweetBody}></textarea>
+          <textarea autoFocus='true' placeholder='Enter a tweet...' maxLength='140' rows='3' onChange={this.handleText} value={this.props.tweetBody}></textarea>
           <br/><br/>
           <label>Date to post</label><br/>
           <DateField
@@ -79,6 +79,7 @@ class CreateTweet extends React.Component {
           <br/><br/>
           <label>Add to list</label><br/>
           <Select
+            placeholder='No lists available'
             value={this.props.selection}
             onChange={this.handleSelection}
             options={selections}
