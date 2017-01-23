@@ -49,6 +49,10 @@ class CreateTweet extends React.Component {
     this.props.setBody('');
   }
 
+  disableDate = ()=>{
+
+  }
+
   render(){
     let selections = this.props.lists.map((list, index) => {
       if (this.props.selection === '0'){
@@ -56,6 +60,18 @@ class CreateTweet extends React.Component {
       }
       return ({ value: list._id, label: list.title, startDate: list.startDate });
     });
+    let disableDate = false;
+    if (this.props.lists.length > 0) {
+      let result = this.props.lists.filter((list)=>{return list._id === this.props.selection;})
+      if (result.length > 0) {
+        if(result[0].interval !== ''){
+          disableDate = true;
+        }
+      }
+      else {
+        this.props.setSelection(this.props.lists[0]._id);
+      }
+    }
 
     return (
       <div className='CreateTweet main-panel'>
@@ -71,7 +87,7 @@ class CreateTweet extends React.Component {
             value={this.props.tweetDate}
             onChange={this.handleDate}
             dateFormat="YYYY-MM-DD hh:mm a"
-            disabled={((selections.length > 0) && (selections[selections.length - 1].value !== this.props.selection))}>
+            disabled={disableDate}>
             <TransitionView>
               <Calendar/>
             </TransitionView>
