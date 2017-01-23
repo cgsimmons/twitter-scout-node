@@ -7,27 +7,30 @@ import { saveScheduledList, setScheduledListTitle, setScheduledListStartDate, se
 
 class CreateTweetList extends React.Component {
 
-handleSubmit = (event) => {
-  event.preventDefault();
-  this.props.saveList(this.props.list);
-}
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.saveList(this.props.list);
+  }
 
-handleDate = (datestr, dateObj) => {
-  this.props.setDate(dateObj.dateMoment._d);
-}
+  handleDate = (datestr, dateObj) => {
+    this.props.setDate(dateObj.dateMoment._d);
+  }
 
-handleInterval = (selectObj) => {
-  this.props.setInterval(selectObj.value);
-}
+  handleInterval = (selectObj) => {
+    this.props.setInterval(selectObj.value);
+  }
 
-handleTitle = (event) => {
-  this.props.setTitle(event.target.value);
-}
+  handleTitle = (event) => {
+    this.props.setTitle(event.target.value);
+  }
 
-handleCheck = (event) => {
-  let newInterval = (this.props.list.interval === '' ? 'Day' : '');
-  this.props.setInterval(newInterval);
-}
+  handleCheck = (event) => {
+    let newInterval = (this.props.list.interval === '' ? 'Day' : '');
+    this.props.setInterval(newInterval);
+    if (newInterval === ''){
+      this.props.setDate('');
+    }
+  }
 
   render(){
     return (

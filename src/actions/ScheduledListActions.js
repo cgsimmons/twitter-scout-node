@@ -123,21 +123,3 @@ export function getScheduledListArray(id) {
     })
   };
 }
-
-export function saveScheduledTweet(tweet) {
-  return (dispatch) => {
-
-    $.ajax({
-      type: 'POST',
-      url: `${BASE_URL}/api/scheduled-list/${tweet.selectedList}/tweet`,
-      data: { newTweet: tweet },
-      success: (newArray) => {
-        dispatch(setScheduledListArray(newArray));
-        console.log('success');
-      },
-      error: (XMLHttpRequest, textStatus, errorThrown) => {
-        console.log(textStatus);
-      }
-    })
-  };
-}
