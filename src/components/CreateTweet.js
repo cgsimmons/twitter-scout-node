@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { resetScheduledTweet, setCounter, setSelectedList, setScheduledTweetBody, setScheduledTweetPostDate } from '../actions/TweetActions';
-import { saveScheduledTweet } from '../actions/ScheduledListActions';
+import { resetScheduledTweet, setCounter, setSelectedList, setScheduledTweetBody, setScheduledTweetPostDate, saveScheduledTweet } from '../actions/TweetActions';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
 import Select from 'react-select';
 
@@ -21,19 +20,30 @@ class CreateTweet extends React.Component {
 
   handleSelection = (selectObj) => {
     this.props.setSelection(selectObj.value);
-    for(let i = 0; i < this.props.lists.length - 1; i++){
-      if((selectObj.startDate !== '') && (this.props.lists[i]._id === selectObj.value)){
-        let newDate = new Date(this.props.lists[i].startDate);
-        switch(this.props.lists[i].interval){
+    let lists = this.props.lists;
+    for(let i = 0; i < lists.length - 1; i++){
+      if((lists[i]._id === selectObj.value) && (lists[i].startDate !== '')){
+        let newDate = new Date(lists[i].startDate);
+        let lastPostDate = new Date();
+        if (lists[i].tweets.length > 0) {
+          lastPostDate = new Date(lists[i].tweets[lists[i].tweets.length - 1].postDate);
+        }
+
+        switch(lists[i].interval){
           case 'Day':
-            newDate.setDate(newDate.getDate() + this.props.lists[i].tweets.length);
+            while ((newDate < Date.now()) || (newDate <= lastPostDate)){
+              newDate.setDate(newDate.getDate() + 1);
+            }
             break;
           case 'Week':
-            console.log(newDate.getDate() + (this.props.lists[i].tweets.length * 7));
-            newDate.setDate(newDate.getDate() + (this.props.lists[i].tweets.length * 7));
+            while ((newDate < Date.now()) || (newDate <= lastPostDate)){
+              newDate.setDate(newDate.getDate() + 7);
+            }
             break;
           case 'Month':
-            newDate.setMonth(newDate.getMonth() + this.props.lists[i].tweets.length);
+            while ((newDate < Date.now()) || (newDate <= lastPostDate)){
+              newDate.setMonth(newDate.getMonth() + 1);
+            }
             break;
         }
         this.props.setDate(newDate);
@@ -45,19 +55,20 @@ class CreateTweet extends React.Component {
 
   handleSave = (event) => {
     event.preventDefault();
+
+    if(this.props.lists.length < 1){
+      alert('Please add a list.');
+      return;
+    }
     this.props.saveTweet(this.props.tweet, this.props.userId);
     this.props.setBody('');
   }
 
-  disableDate = ()=>{
-
-  }
-
   render(){
     let selections = this.props.lists.map((list, index) => {
-      if (this.props.selection === '0'){
-        this.props.setSelection(list._id);
-      }
+      // if (this.props.selection === '0'){
+      //   this.props.setSelection(list._id);
+      // }
       return ({ value: list._id, label: list.title, startDate: list.startDate });
     });
     let disableDate = false;
@@ -69,7 +80,7 @@ class CreateTweet extends React.Component {
         }
       }
       else {
-        this.props.setSelection(this.props.lists[0]._id);
+        this.handleSelection({value: this.props.lists[0]._id});
       }
     }
 
