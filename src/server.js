@@ -238,5 +238,5 @@ server.listen(port, (err) => {
   if (err) {
     return console.error(err);
   }
-  console.info(`Server running on http://localhost:${port} [${env}]`);
+  console.info(`Server running on http://127.0.0.1:${port} [${env}]`);
 });

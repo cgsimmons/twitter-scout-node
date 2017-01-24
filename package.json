@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node src/server.js",
-    "dev:client": "NODE_ENV=development node_modules/.bin/webpack -d --watch",
-    "build:client": "NODE_ENV=production node_modules/.bin/webpack -p"
+    "dev": "NODE_ENV=development node_modules/.bin/webpack -d --watch",
+    "build": "NODE_ENV=production node_modules/.bin/webpack -p"
   },
   "repository": {
     "type": "git",
