@@ -1,3 +1,4 @@
+import {} from 'dotenv/config';
 import path from 'path';
 import { Server } from 'http';
 import Express from 'express';
@@ -18,6 +19,7 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import rootReducer from './reducers';
 import thunk from 'redux-thunk';
+
 
 //initialize app, server and db
 const app = new Express();

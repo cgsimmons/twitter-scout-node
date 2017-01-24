@@ -4,7 +4,10 @@
   "description": "Customize your twitter activity and target specific user personality types",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "babel-node src/server.js",
+    "dev:client": "NODE_ENV=development node_modules/.bin/webpack -d --watch",
+    "build:client": "NODE_ENV=production node_modules/.bin/webpack -p"
   },
   "repository": {
     "type": "git",
@@ -12,8 +15,6 @@
   },
   "keywords": [
     "twitter",
-    "ibm",
-    "watson",
     "node",
     "react"
   ],
@@ -24,10 +25,7 @@
   },
   "homepage": "https://github.com/cgsimmons/twitter-scout-node#readme",
   "dependencies": {
-    "babel-cli": "^6.11.4",
-    "babel-core": "^6.13.2",
-    "babel-preset-es2015": "^6.13.2",
-    "babel-preset-react": "^6.11.1",
+    "dotenv": "^4.0.0",
     "ejs": "^2.5.3",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
@@ -36,7 +34,7 @@
     "mongoose": "^4.7.1",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",
-    "react": "^15.3.2",
+    "react": "^15.4.2",
     "react-bootstrap": "^0.30.7",
     "react-date-picker": "^5.3.28",
     "react-dom": "^15.3.2",
@@ -44,7 +42,6 @@
     "react-redux": "^4.4.6",
     "react-router": "^2.6.1",
     "react-select": "^1.0.0-rc.2",
-    "react-social-button": "^1.0.2",
     "react-tab-panel": "^2.2.7",
     "react-tag-input": "^4.6.1",
     "redux": "^3.6.0",
@@ -52,10 +49,12 @@
     "twitter": "^1.7.0"
   },
   "devDependencies": {
+    "babel-cli": "^6.22.2",
+    "babel-core": "^6.22.1",
     "babel-loader": "^6.2.8",
+    "babel-preset-es2015": "^6.22.0",
+    "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.18.0",
-    "http-server": "^0.9.0",
-    "tachyons": "^4.5.5",
     "webpack": "^1.13.3"
   }
 }

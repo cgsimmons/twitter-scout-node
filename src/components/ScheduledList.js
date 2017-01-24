@@ -5,11 +5,20 @@ import moment from 'moment';
 
 class ScheduledList extends React.Component {
 
-  handleDelete = (event) => {
+  handleListDelete = (event) => {
     // this.props.deleteList(this.props.list.title);
     let r = confirm("Are you sure you want to delete all tweets associated with this list?");
     if(r)
       this.props.deleteList(this.props.list);
+  }
+
+  handleTweetDelete = (event) => {
+    // this.props.deleteList(this.props.list.title);
+    let r = confirm("Are you sure you want to delete this tweet?");
+    if(r)
+      console.log('deleted');
+      // this.props.deleteList(this.props.list);
+      // TODO: make delete method
   }
 
   render(){
@@ -24,7 +33,7 @@ class ScheduledList extends React.Component {
       <div className='ScheduledList dashboard-panel main-panel'>
         <h3>{this.props.list.title}</h3>
         <span className="ReactTags__tag">
-          <a className="ReactTags__remove delete" onClick={this.handleDelete}>×</a>
+          <a className="ReactTags__remove delete" onClick={this.handleListDelete}>×</a>
         </span>
         {message}
         <ul>
@@ -33,7 +42,7 @@ class ScheduledList extends React.Component {
             (tweet, index) => {
               return (
                 <li className='scheduledTweet'><hr/><h4>{tweet.body}</h4>
-                  <a className="ReactTags__remove delete" onClick={this.handleDelete}>×</a>
+                  <a className="ReactTags__remove delete" onClick={this.handleTweetDelete}>×</a>
                   <p>Scheduled for {moment(tweet.postDate).format("MMM Do YYYY, h:mm a")}</p>
                 </li>
               );
@@ -48,7 +57,7 @@ class ScheduledList extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteList: (list) => dispatch(removeAndDeleteScheduledListArray(list)),
+    deleteList:   (list) => dispatch(removeAndDeleteScheduledListArray(list)),
   };
 };
 

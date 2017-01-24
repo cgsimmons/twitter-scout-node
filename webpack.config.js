@@ -2,7 +2,6 @@ const webpack = require('webpack');
 const path = require('path');
 
 module.exports = {
-  debug: true,
   entry: path.join(__dirname, 'src', 'app-client.js'),
   output: {
     path: path.join(__dirname, 'src', 'static', 'js'),
@@ -14,7 +13,6 @@ module.exports = {
       loader: ['babel-loader'],
       query: {
         cacheDirectory: 'babel_cache',
-        presets: ['react', 'es2015', 'stage-2']
       }
     }]
   },
@@ -32,5 +30,4 @@ module.exports = {
       dead_code: true
     })
   ],
-  watch: true
 };
