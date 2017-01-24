@@ -6,30 +6,33 @@ This is a simple tweet manager built using the **MERN** stack. The app uses univ
 
 I mainly built this as an exercise to become better acquainted with React, Redux, Node, and universal routing/Javascript.
 
+## Twitter API
+
+You must first register with twitter in order to generate the necessary keys to complete installation. You can sign up at <a href='https://apps.twitter.com'>https://apps.twitter.com</a>.
+
+**NOTE:** If you plan to run the app locally, set your twitter callback to **http://127.0.0.1:3000/auth/twitter/callback**. If you will run in production then change the domain and port to match your desired location. You will need to modify **_config.js** to match your callback.
+```javascript
+const ids = {
+  twitter: {
+    consumerKey: process.env.CONSUMER_KEY,
+    consumerSecret: process.env.CONSUMER_SECRET,
+    callbackURL: "http://127.0.0.1:3000/auth/twitter/callback"
+  }
+};
+```
+
 ## Installation
 
-Make a copy of the '.sample-env' file and save it as '.env' in the root directory. You must enter your personal keys into the variables. The keys are generated when you sign up at <a href='https://apps.twitter.com'>https://apps.twitter.com</a>
+Make a copy of the '.sample-env' file and save it as '.env' in the root directory. You must enter your personal keys into the variables. The keys are generated when you sign up at
 
 After your keys have been entered you can continue with the installation.
 
 ```bash
 npm install
-```
-
-Next you need to have WebPack build your javascript bundle. There is a production build as well as a development build command. The development build command uses hot module replacement, which allows the bundle to dynamically build on file changes.
-
-**Production**
-```bash
 npm run build
-```
-
-**Development**
-```bash
-npm run dev
-```
-After choosing a build option you can start the server.
-
-```bash
 npm start
 ```
+
+You may alternative use **npm run dev** if you would like webpack to use hot module replacement and dynamically build the bundle on file changes.
+
 **NOTE:** Be sure to use '127.0.0.1' instead of 'localhost' in your browser address. This is due to a limitation of the twitter api.
