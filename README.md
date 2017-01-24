@@ -23,7 +23,14 @@ const ids = {
 
 ## Installation
 
-Make a copy of the '.sample-env' file and save it as '.env' in the root directory. You must enter your personal keys into the variables. The keys are generated when you sign up at
+Make a copy of the '.sample-env' file and save it as '.env' in the root directory. You must enter your personal keys into the variables. In a production setting be sure to set the environment variables manually.
+
+```bash
+CONSUMER_KEY=your_consumer_key
+CONSUMER_SECRET=your_consumer_secret
+ACCESS_TOKEN=your_access_token
+ACCESS_SECRET=your_access_secret
+```
 
 After your keys have been entered you can continue with the installation.
 
@@ -33,6 +40,6 @@ npm run build
 npm start
 ```
 
-You may alternative use **npm run dev** if you would like webpack to use hot module replacement and dynamically build the bundle on file changes.
+You may alternatively use **npm run dev** instead of **npm run build** if you would like webpack to use hot reloading.
 
 **NOTE:** Be sure to use '127.0.0.1' instead of 'localhost' in your browser address. This is due to a limitation of the twitter api.
