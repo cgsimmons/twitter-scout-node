@@ -1,12 +1,11 @@
 import React from 'react';
 
-export default class Statistics extends React.Component {
-  render(){
+const Statistics = () => {
+  return (
+    <div className="Statistics dashboard-panel main-panel">
+      <h1>This is the statistics page</h1>
+    </div>
+  );
+};
 
-    return (
-      <div className='Statistics dashboard-panel main-panel'>
-        <h1>This is the statistics page</h1>
-      </div>
-    );
-  }
-}
+export default Statistics;

@@ -1,20 +1,19 @@
 import React from 'react';
-import $ from 'jquery';
+// import $ from 'jquery';
 
 
 export default class Tweet extends React.Component {
 
-  constructor(props){
-    super(props);
-
-    this.state = {
-      markup: ''
-    }
-  }
-  componentDidMount(){
-    this.getMarkup(this.props.tweetId);
-  }
-  getMarkup(id) {
+  // constructor(props){
+  //   super(props);
+  //   this.state = {
+  //     markup: ''
+  //   }
+  // }
+  // componentDidMount(){
+  //   this.getMarkup(this.props.tweetId);
+  // }
+  // getMarkup(id) {
     // if (id) {
     //   $.ajax({
     //     // url: `https://publish.twitter.com/oembed?id=${id}`,
@@ -25,11 +24,10 @@ export default class Tweet extends React.Component {
     //     }
     //   })
     // }
-  }
-
-  render(){
+  // }
+  render() {
     return (
-      <div className='Tweet'>
+      <div className="Tweet">
         <h1>{this.props.tweetId}</h1>
         {this.state.markup}
       </div>

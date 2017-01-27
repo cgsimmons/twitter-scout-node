@@ -5,59 +5,62 @@ import { getScheduledListArray } from '../actions/ScheduledListActions';
 
 class User extends React.Component {
 
+  componentDidMount() {
+    this.props.getUser(this.props.userId);
+    this.props.getScheduledLists(this.props.userId);
+  }
+
   render() {
-    if (this.props.hasErrored){
+    if (this.props.hasErrored) {
       return (<p>Sorry!  There was an error loading your profile</p>);
     }
     if (this.props.isLoading) {
       return (<p>Loading...</p>);
     }
 
-    let banner_img, profile_img, signed_in_message, profile_displayName, profile_username;
+    let bannerImg;
+    let profileImg;
+    let profileDisplayName;
+    let profileUsername;
 
     const user = this.props.user;
-    if (user.data){
-      banner_img = <img src={user.data.profile_banner_url} />
-      profile_img = <img src={user.data.profile_image_url.replace('_normal', '_bigger')} />
-      profile_displayName = <div className='profile-displayName'>{user.displayName}</div>
-      profile_username = <div className='profile-username'>@{user.username}</div>
+    if (user.data) {
+      bannerImg = <img src={user.data.profile_banner_url} alt="Banner" />;
+      profileImg = <img src={user.data.profile_image_url.replace('_normal', '_bigger')} alt="Profile" />;
+      profileDisplayName = <div className="profile-displayName">{user.displayName}</div>;
+      profileUsername = <div className="profile-username">@{user.username}</div>;
     }
 
     return (
       <div className="User">
-        <div className='profile-banner'>
-          { banner_img }
+        <div className="profile-banner">
+          { bannerImg }
         </div>
-        <div className='profile-content'>
-          { profile_img }
-          <div className='profile-names'>
-            {profile_displayName}
-            {profile_username}
+        <div className="profile-content">
+          { profileImg }
+          <div className="profile-names">
+            {profileDisplayName}
+            {profileUsername}
           </div>
-          <h1 className='profile-message'>Welcome to your dashboard.</h1>
+          <h1 className="profile-message">Welcome to your dashboard.</h1>
         </div>
       </div>
     );
-  }
-
-  componentDidMount() {
-     this.props.getUser(this.props.userId);
-     this.props.getScheduledLists(this.props.userId);
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    user:         state.user,
-    hasErrored:   state.userHasErrored,
-    isLoading:    state.userIsLoading,
-    isSignedIn:   state.userIsSignedIn
+    user: state.user,
+    hasErrored: state.userHasErrored,
+    isLoading: state.userIsLoading,
+    isSignedIn: state.userIsSignedIn,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    getUser:           (id) => dispatch(userSignIn(id)),
-    getScheduledLists: (id) => dispatch(getScheduledListArray(id))
+    getUser: (id) => { dispatch(userSignIn(id)); },
+    getScheduledLists: (id) => { dispatch(getScheduledListArray(id)); },
   };
 };
 

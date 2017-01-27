@@ -1,31 +1,30 @@
 import React from 'react';
+import TabPanel from 'react-tab-panel';
 import { connect } from 'react-redux';
-import { setCounter } from '../actions/TweetActions';
 import CreateTweet from './CreateTweet';
 import CreateTweetList from './CreateTweetList';
 import ScheduledList from './ScheduledList';
-import TabPanel from 'react-tab-panel';
 
 class ScheduledTweets extends React.Component {
 
-  render(){
+  render() {
     return (
-      <div className='ScheduledTweets'>
+      <div className="ScheduledTweets">
         <TabPanel>
           <div tabTitle="WRITE TWEET">
             <CreateTweet />
           </div>
-          <div tabTitle='ADD LIST'>
+          <div tabTitle="ADD LIST">
             <CreateTweetList />
           </div>
         </TabPanel>
         {
-          this.props.lists.map (
-            (list, index) => {
+          this.props.lists.map(
+            (list) => {
               return (
                 <ScheduledList list={list} />
-              )
-            }
+              );
+            },
           )
         }
       </div>
@@ -35,7 +34,7 @@ class ScheduledTweets extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    lists: state.scheduledListArray
+    lists: state.scheduledListArray,
   };
 };
 

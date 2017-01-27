@@ -4,10 +4,10 @@
   "rules": {
     "strict": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-    "react/prop-types": [2, { skipUndeclared: true }],
+    "react/prop-types": [2, { "skipUndeclared": true }],
     "arrow-body-style": ["error", "always"],
-    "no-underscore-dangle": [2, { "allow": ["_json", "_id", "_d"] }],
-    "no-console": ["error", { allow: ["warn", "error", "log"] }],
+    "no-underscore-dangle": "off",
+    "no-console": "off",
     "no-alert": "off",
   },
   "env": {
