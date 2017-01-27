@@ -1,19 +1,21 @@
-var mongoose = require('mongoose');
-var Schema = mongoose.Schema;
+const mongoose = require('mongoose');
+
+const Schema = mongoose.Schema;
 
 
 // create User Schema
-var User = new Schema({
+const User = new Schema({
   displayName: String,
   username: String,
   twitterId: String,
   token: String,
   secret: String,
   data: Object,
-  tags: Array
-},{
-    timestamps: true
-});
+  tags: Array,
+},
+  {
+    timestamps: true,
+  });
 
 
 module.exports = mongoose.model('users', User);

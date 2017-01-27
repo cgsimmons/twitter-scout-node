@@ -1,13 +1,11 @@
 import React from 'react';
-import { Link } from 'react-router';
 
+const Login = () => {
+  return (
+    <div className="Login">
+      <a href="/auth/twitter">Log In with Twitter</a>
+    </div>
+  );
+};
 
-export default class Login extends React.Component {
-  render() {
-    return (
-      <div className="Login">
-        <a href="/auth/twitter">Log In with Twitter</a>
-      </div>
-    );
-  }
-}
+export default Login;

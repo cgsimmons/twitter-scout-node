@@ -6,8 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "babel-node src/server.js",
-    "dev": "NODE_ENV=development node_modules/.bin/webpack -d --watch",
-    "build": "NODE_ENV=production node_modules/.bin/webpack -p"
+    "dev": "NODE_ENV=development node_modules/.bin/webpack -d --watch --progress",
+    "build": "NODE_ENV=production node_modules/.bin/webpack -p --progress"
   },
   "repository": {
     "type": "git",
@@ -25,20 +25,21 @@
   },
   "homepage": "https://github.com/cgsimmons/twitter-scout-node#readme",
   "dependencies": {
+    "body-parser": "^1.16.0",
+    "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "ejs": "^2.5.3",
     "express": "^4.14.0",
     "express-session": "^1.14.2",
     "immutable": "^3.8.1",
+    "jquery": "^3.1.1",
     "moment": "^2.17.1",
     "mongoose": "^4.7.1",
     "passport": "^0.3.2",
     "passport-twitter": "^1.0.4",
     "react": "^15.4.2",
-    "react-bootstrap": "^0.30.7",
     "react-date-picker": "^5.3.28",
     "react-dom": "^15.3.2",
-    "react-fontawesome": "^1.5.0",
     "react-redux": "^4.4.6",
     "react-router": "^2.6.1",
     "react-select": "^1.0.0-rc.2",
@@ -51,10 +52,17 @@
   "devDependencies": {
     "babel-cli": "^6.22.2",
     "babel-core": "^6.22.1",
+    "babel-eslint": "^7.1.1",
     "babel-loader": "^6.2.8",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-react": "^6.22.0",
     "babel-preset-stage-2": "^6.18.0",
+    "compression-webpack-plugin": "^0.3.2",
+    "eslint": "^3.14.0",
+    "eslint-config-airbnb": "^14.0.0",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-jsx-a11y": "^3.0.2",
+    "eslint-plugin-react": "^6.9.0",
     "webpack": "^1.13.3"
   }
 }

@@ -12,5 +12,5 @@ export default combineReducers({
   userIsSignedIn,
   scheduledTweet,
   scheduledList,
-  scheduledListArray
+  scheduledListArray,
 });

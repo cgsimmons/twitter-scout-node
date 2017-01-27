@@ -1,0 +1,17 @@
+{
+  "parser": "babel-eslint",
+  "extends": "airbnb",
+  "rules": {
+    "strict": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": [2, { skipUndeclared: true }],
+    "arrow-body-style": ["error", "always"],
+    "no-underscore-dangle": [2, { "allow": ["_json", "_id", "_d"] }],
+    "no-console": ["error", { allow: ["warn", "error", "log"] }],
+    "no-alert": "off",
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+  }
+}

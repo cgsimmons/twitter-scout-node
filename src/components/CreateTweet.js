@@ -1,15 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { resetScheduledTweet, setCounter, setSelectedList, setScheduledTweetBody, setScheduledTweetPostDate, saveScheduledTweet } from '../actions/TweetActions';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
 import Select from 'react-select';
+import { resetScheduledTweet, setCounter, setSelectedList, setScheduledTweetBody, setScheduledTweetPostDate, saveScheduledTweet } from '../actions/TweetActions';
 
 const MAX_COUNT = 140;
 
 class CreateTweet extends React.Component {
 
   handleText = (event) => {
-    let input = event.target.value;
+    const input = event.target.value;
     this.props.setCount(MAX_COUNT - input.length);
     this.props.setBody(input);
   }
@@ -20,30 +20,32 @@ class CreateTweet extends React.Component {
 
   handleSelection = (selectObj) => {
     this.props.setSelection(selectObj.value);
-    let lists = this.props.lists;
-    for(let i = 0; i < lists.length - 1; i++){
-      if((lists[i]._id === selectObj.value) && (lists[i].startDate !== '')){
-        let newDate = new Date(lists[i].startDate);
+    const lists = this.props.lists;
+    for (let i = 0; i < lists.length - 1; i += 1) {
+      if ((lists[i]._id === selectObj.value) && (lists[i].startDate !== '')) {
+        const newDate = new Date(lists[i].startDate);
         let lastPostDate = new Date();
         if (lists[i].tweets.length > 0) {
           lastPostDate = new Date(lists[i].tweets[lists[i].tweets.length - 1].postDate);
         }
 
-        switch(lists[i].interval){
+        switch (lists[i].interval) {
           case 'Day':
-            while ((newDate < Date.now()) || (newDate <= lastPostDate)){
+            while ((newDate < Date.now()) || (newDate <= lastPostDate)) {
               newDate.setDate(newDate.getDate() + 1);
             }
             break;
           case 'Week':
-            while ((newDate < Date.now()) || (newDate <= lastPostDate)){
+            while ((newDate < Date.now()) || (newDate <= lastPostDate)) {
               newDate.setDate(newDate.getDate() + 7);
             }
             break;
           case 'Month':
-            while ((newDate < Date.now()) || (newDate <= lastPostDate)){
+            while ((newDate < Date.now()) || (newDate <= lastPostDate)) {
               newDate.setMonth(newDate.getMonth() + 1);
             }
+            break;
+          default:
             break;
         }
         this.props.setDate(newDate);
@@ -56,7 +58,7 @@ class CreateTweet extends React.Component {
   handleSave = (event) => {
     event.preventDefault();
 
-    if(this.props.lists.length < 1){
+    if (this.props.lists.length < 1) {
       alert('Please add a list.');
       return;
     }
@@ -64,56 +66,62 @@ class CreateTweet extends React.Component {
     this.props.setBody('');
   }
 
-  render(){
-    let selections = this.props.lists.map((list, index) => {
-      // if (this.props.selection === '0'){
-      //   this.props.setSelection(list._id);
-      // }
+  render() {
+    const selections = this.props.lists.map((list) => {
       return ({ value: list._id, label: list.title, startDate: list.startDate });
     });
     let disableDate = false;
     if (this.props.lists.length > 0) {
-      let result = this.props.lists.filter((list)=>{return list._id === this.props.selection;})
+      const result = this.props.lists.filter(
+        (list) => { return list._id === this.props.selection; });
       if (result.length > 0) {
-        if(result[0].interval !== ''){
+        if (result[0].interval !== '') {
           disableDate = true;
         }
-      }
-      else {
-        this.handleSelection({value: this.props.lists[0]._id});
+      } else {
+        this.handleSelection({ value: this.props.lists[0]._id });
       }
     }
 
     return (
-      <div className='CreateTweet main-panel'>
-        <h1 className='section-header'>Write a Tweet</h1>
-        <br/>
-        <p>Publish your tweet at a specific time or add it to a list of tweets to be published at a specified interval.</p><br/>
-        <div className='tweet-box'>
-          <textarea autoFocus='true' placeholder='Enter a tweet...' maxLength='140' rows='3' onChange={this.handleText} value={this.props.tweetBody}></textarea>
-          <br/><br/>
-          <label>Date to post</label><br/>
+      <div className="CreateTweet main-panel">
+        <h1 className="section-header">Write a Tweet</h1>
+        <br />
+        <p>Publish your tweet at a specific time or add it to a list of tweets
+           to be published at a specified interval.</p><br />
+        <div className="tweet-box">
+          <textarea
+            autoFocus="true"
+            placeholder="Enter a tweet..."
+            maxLength="140"
+            rows="3"
+            onChange={this.handleText} value={this.props.tweetBody}
+          />
+          <br /><br />
+          <label htmlFor="date">Date to post</label><br />
           <DateField
             forceValidDate
             value={this.props.tweetDate}
             onChange={this.handleDate}
             dateFormat="YYYY-MM-DD hh:mm a"
-            disabled={disableDate}>
+            disabled={disableDate}
+          >
             <TransitionView>
-              <Calendar/>
+              <Calendar />
             </TransitionView>
           </DateField>
-          <br/><br/>
-          <label>Add to list</label><br/>
+          <br /><br />
+          <label htmlFor="list">Add to list</label><br />
           <Select
-            placeholder='No lists available'
+            placeholder="No lists available"
             value={this.props.selection}
             onChange={this.handleSelection}
             options={selections}
             clearable={false}
           />
-          <div className='tweet-btn-container'>
-              <span>{this.props.counter}</span><a href='#' className='submit-button' onClick={this.handleSave}>Save</a>
+          <div className="tweet-btn-container">
+            <span>{this.props.counter}</span>
+            <button className="submit-button" onClick={this.handleSave}>Save</button>
           </div>
         </div>
       </div>
@@ -123,24 +131,24 @@ class CreateTweet extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    userId:     state.userId,
-    tweet:      state.scheduledTweet,
-    counter:    state.scheduledTweet.tweetCounter,
-    selection:  state.scheduledTweet.selectedList,
-    tweetBody:  state.scheduledTweet.body,
-    tweetDate:  state.scheduledTweet.postDate,
-    lists:      state.scheduledListArray
+    userId: state.userId,
+    tweet: state.scheduledTweet,
+    counter: state.scheduledTweet.tweetCounter,
+    selection: state.scheduledTweet.selectedList,
+    tweetBody: state.scheduledTweet.body,
+    tweetDate: state.scheduledTweet.postDate,
+    lists: state.scheduledListArray,
   };
 };
 const mapDispatchToProps = (dispatch) => {
-    return {
-      setCount:     (num) => dispatch(setCounter(num)),
-      setSelection: (val) => dispatch(setSelectedList(val)),
-      setBody:      (body) => dispatch(setScheduledTweetBody(body)),
-      setDate:      (date) => dispatch(setScheduledTweetPostDate(date)),
-      saveTweet:    (tweet, user) => dispatch(saveScheduledTweet(tweet, user)),
-      resetTweet:   () => dispatch(resetScheduledTweet())
-    };
+  return {
+    setCount: (num) => { dispatch(setCounter(num)); },
+    setSelection: (val) => { dispatch(setSelectedList(val)); },
+    setBody: (body) => { dispatch(setScheduledTweetBody(body)); },
+    setDate: (date) => { dispatch(setScheduledTweetPostDate(date)); },
+    saveTweet: (tweet, user) => { dispatch(saveScheduledTweet(tweet, user)); },
+    resetTweet: () => { dispatch(resetScheduledTweet()); },
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreateTweet);
