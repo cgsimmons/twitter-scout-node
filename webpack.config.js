@@ -4,9 +4,9 @@ const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
   devtool: 'cheap-module-source-map',
-  entry: path.join(__dirname, 'src', 'app-client.js'),
+  entry: path.join(__dirname, 'src', 'client', 'app-client.js'),
   output: {
-    path: path.join(__dirname, 'src', 'static', 'js'),
+    path: path.join(__dirname, 'src', 'server', 'static', 'js'),
     filename: 'bundle.js',
   },
   module: {

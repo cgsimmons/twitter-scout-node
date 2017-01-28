@@ -1,8 +1,8 @@
 import Passport from 'passport';
 import Strategy from 'passport-twitter';
 import User from '../models/user';
-import Config from '../_config';
-import Init from './init';
+import Config from './config';
+import Init from './serialize';
 
 // Configure twitter passport
 Passport.use(new Strategy({

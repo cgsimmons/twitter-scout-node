@@ -13,12 +13,12 @@ import { Provider } from 'react-redux';
 import Mongoose from 'mongoose';
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import routes from './routes';
-import PassportTwitter from '../auth/twitter';
-import NotFoundPage from './components/NotFoundPage';
-import User from '../models/user';
-import ScheduledList from '../models/scheduledTweetList';
-import rootReducer from './reducers';
+import PassportTwitter from './authentication/twitter';
+import User from './models/user';
+import ScheduledList from './models/scheduledTweetList';
+import routes from '../common/routes';
+import NotFoundPage from '../common/components/NotFoundPage';
+import rootReducer from '../common/reducers';
 
 // initialize app, server and db
 const app = new Express();
@@ -32,7 +32,7 @@ Mongoose.connect('mongodb://localhost/twitter-scout', (err) => {
 });
 
 
-// configure support for ejs templates
+// configure support for ejs templates for markup injection
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
