@@ -7,7 +7,7 @@ class NavBar extends React.Component {
     let signInOrOut;
     let dash;
     if(this.props.isSignedIn){
-      signInOrOut = <a href='/logout'>SIGN-OUT</a>
+      signInOrOut = <a href='/auth/logout'>SIGN-OUT</a>
       dash = <li><Link to={ `/user/${this.props.userId}` }>DASHBOARD</Link></li>
     } else {
       signInOrOut = <Link to='/auth/twitter'>SIGN-IN</Link>
