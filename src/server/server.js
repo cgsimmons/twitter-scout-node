@@ -16,7 +16,6 @@ import Passport from 'passport';
 import api from './api';
 import auth from './auth';
 import routes from '../common/routes';
-import NotFoundPage from '../common/components/NotFoundPage';
 import rootReducer from '../common/reducers';
 
 // initialize app, server and db
@@ -24,9 +23,9 @@ const app = new Express();
 const server = new Server(app);
 Mongoose.connect('mongodb://localhost/twitter-scout', (err) => {
   if (err) {
-    console.log('ERROR: Not connected to DB.');
+    console.error('ERROR: Not connected to DB.');
   } else {
-    console.log('SUCCESS: Connected to DB');
+    console.info('SUCCESS: Connected to DB');
   }
 });
 
@@ -55,9 +54,11 @@ app.use('/auth', auth);
 // api routes
 app.use('/api', api);
 
+// set up redux store
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(rootReducer);
 store.getState();
+
 // universal routing and rendering
 app.get('*', (req, res) => {
   match(
@@ -66,24 +67,19 @@ app.get('*', (req, res) => {
       // in case of error display the error message
       if (err) {
         return res.status(500).send(err.message);
-      }
-      // in case of redirect propagate the redirect to the browser
-      if (redirectLocation) {
+      } else if (redirectLocation) {
+        // in case of redirect propagate the redirect to the browser
         return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-      }
-      // generate the React markup for the current route
-      let markup;
-      if (renderProps) {
+      } else if (renderProps) {
         // if the current route matched we have renderProps
-        markup = renderToString(
+        // generate the React markup for the current route
+        const markup = renderToString(
           <Provider store={store}><RouterContext {...renderProps} /></Provider>);
-      } else {
-        // otherwise we can render a 404 page
-        markup = renderToString(<NotFoundPage />);
-        res.status(404);
+        // render the index template with the embedded React markup
+        return res.render('index', { markup });
       }
-      // render the index template with the embedded React markup
-      return res.render('index', { markup });
+      // This should always be caught by react-router * route
+      return res.status(404).end('Not found');
     },
   );
 });
