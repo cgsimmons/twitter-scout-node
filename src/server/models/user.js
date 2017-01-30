@@ -1,7 +1,6 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
-
 
 // create User Schema
 const User = new Schema({
@@ -16,6 +15,5 @@ const User = new Schema({
   {
     timestamps: true,
   });
-
 
 module.exports = mongoose.model('users', User);

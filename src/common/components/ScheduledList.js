@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { removeAndDeleteScheduledListArray } from '../actions/ScheduledListActions';
+import { deleteScheduledListArray } from '../actions/ScheduledListActions';
 
 class ScheduledList extends React.Component {
 
@@ -59,7 +59,7 @@ class ScheduledList extends React.Component {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    deleteList: (list) => { dispatch(removeAndDeleteScheduledListArray(list)); },
+    deleteList: (list) => { dispatch(deleteScheduledListArray(list)); },
   };
 };
 

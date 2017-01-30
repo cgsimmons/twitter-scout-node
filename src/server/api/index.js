@@ -14,10 +14,6 @@ function isLoggedIn(req, res, next) {
   res.redirect('/login');
 }
 
-// router.get('/auth', isLoggedIn, (req, res) => {
-//   res.redirect('/about');
-// });
-
 // get all users
 router.get('/users', isLoggedIn, (req, res) => {
   User.find({}, (err, users) => {
@@ -41,8 +37,8 @@ router.get('/user/:userId', isLoggedIn, (req, res) => {
   });
 });
 
-// accept tags
-router.post('/user/:userId/tags', (req, res) => {
+// update tags
+router.put('/user/:userId/tags', (req, res) => {
   User.findById(req.params.userId, (err, user) => {
     if (err) {
       res.status(500).send(err.message);
@@ -67,7 +63,7 @@ router.get('/user/:userId/scheduled-lists', isLoggedIn, (req, res) => {
 });
 
 // remove a list
-router.post('/user/:userId/scheduled-list/:listId', (req, res) => {
+router.delete('/user/:userId/scheduled-list/:listId', isLoggedIn, (req, res) => {
   ScheduledList.remove({ userId: req.params.userId, _id: req.params.listId }, (err) => {
     if (err) {
       res.status(500).send(err.message);
@@ -83,14 +79,58 @@ router.post('/user/:userId/scheduled-list/:listId', (req, res) => {
   });
 });
 
-// accept a new tweet
-router.post('/scheduled-list/:listId/tweet', (req, res) => {
-  ScheduledList.findOne({ _id: req.params.listId }, (err, list) => {
+// new list
+router.post('/scheduled-list', isLoggedIn, (req, res) => {
+  const newList = req.body.newList;
+  const list = new ScheduledList({
+    title: newList.title,
+    userId: newList.userId,
+    interval: newList.interval,
+    startDate: newList.startDate,
+    tweets: [],
+  });
+
+  list.save((err) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
-      const newTweet = req.body.newTweet;
-      // let postDate = newTweet.postDate;
+      ScheduledList.find({ userId: list.userId }).sort('-createdAt').exec((listErr, lists) => {
+        if (listErr) {
+          res.status(500).send(err.message);
+        } else {
+          res.status(200).send(lists);
+        }
+      });
+    }
+  });
+});
+
+// delete tweet
+router.post('/tweet/:tweetId', (req, res) => {
+  ScheduledList.findOne({ 'tweets._id': req.params.tweetId }, (err, list) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
+      list.tweets.id(req.params.tweetId).remove();
+      list.save((tweetErr) => {
+        if (tweetErr) {
+          res.status(500).send(err.message);
+        } else {
+          res.status(200).send(list);
+        }
+      });
+    }
+  });
+});
+
+// new tweet
+router.post('/scheduled-list/tweet', isLoggedIn, (req, res) => {
+  const newTweet = req.body.newTweet;
+
+  ScheduledList.findOne({ _id: newTweet.selectedList }, (err, list) => {
+    if (err) {
+      res.status(500).send(err.message);
+    } else {
       const tweet = {
         body: newTweet.body,
         postDate: newTweet.postDate,
@@ -109,33 +149,6 @@ router.post('/scheduled-list/:listId/tweet', (req, res) => {
               res.status(200).send(lists);
             }
           });
-        }
-      });
-    }
-  });
-});
-
-// accept a new list
-router.post('/user/:userId/scheduled-list', (req, res) => {
-  const newList = req.body.newList;
-  // console.log(req.body.newList);
-  const list = new ScheduledList({
-    title: newList.title,
-    userId: newList.userId,
-    interval: newList.interval,
-    startDate: newList.startDate,
-    tweets: [],
-  });
-
-  list.save((err) => {
-    if (err) {
-      res.status(500).send(err.message);
-    } else {
-      ScheduledList.find({ userId: req.params.userId }).sort('-createdAt').exec((listErr, lists) => {
-        if (listErr) {
-          res.status(500).send(err.message);
-        } else {
-          res.status(200).send(lists);
         }
       });
     }

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
 import Select from 'react-select';
-import { saveScheduledList, setScheduledListTitle, setScheduledListStartDate, setScheduledListInterval, setScheduledListUserId } from '../actions/ScheduledListActions';
+import { newScheduledList, setScheduledListTitle, setScheduledListStartDate, setScheduledListInterval, setScheduledListUserId } from '../actions/ScheduledListActions';
 
 
 class CreateTweetList extends React.Component {
@@ -103,7 +103,7 @@ const mapStateToProps = (state) => {
 };
 const mapDispatchToProps = (dispatch) => {
   return {
-    saveList: (list) => { dispatch(saveScheduledList(list)); },
+    saveList: (list) => { dispatch(newScheduledList(list)); },
     setTitle: (title) => { dispatch(setScheduledListTitle(title)); },
     setDate: (date) => { dispatch(setScheduledListStartDate(date)); },
     setInterval: (interval) => { dispatch(setScheduledListInterval(interval)); },

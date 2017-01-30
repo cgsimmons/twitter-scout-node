@@ -21,8 +21,10 @@ class CreateTweet extends React.Component {
   handleSelection = (selectObj) => {
     this.props.setSelection(selectObj.value);
     const lists = this.props.lists;
+    // find currently selected list
     for (let i = 0; i < lists.length - 1; i += 1) {
-      if ((lists[i]._id === selectObj.value) && (lists[i].startDate !== '')) {
+      // if list matches selected list and startDate is not null
+      if ((lists[i]._id === selectObj.value) && (lists[i].startDate !== null)) {
         const newDate = new Date(lists[i].startDate);
         let lastPostDate = new Date();
         if (lists[i].tweets.length > 0) {
@@ -52,6 +54,9 @@ class CreateTweet extends React.Component {
         return;
       }
     }
+
+    // if startDate was not set at this point it must be a list
+    // for individually set tweet dates
     this.props.setDate(new Date());
   }
 

@@ -82,7 +82,7 @@ export function saveScheduledTweet(tweet) {
   return (dispatch) => {
     $.ajax({
       type: 'POST',
-      url: `${BASE_URL}/api/scheduled-list/${tweet.selectedList}/tweet`,
+      url: `${BASE_URL}/api/scheduled-list/tweet`,
       data: { newTweet: tweet },
       success: (newArray) => {
         dispatch(setScheduledListArray(newArray));

@@ -72,7 +72,7 @@ export function removeUserTag(index) {
 export function userUpdateTags(id, newTags) {
   return (dispatch) => {
     $.ajax({
-      type: 'POST',
+      type: 'PUT',
       url: `${BASE_URL}/api/user/${id}/tags`,
       data: { tags: newTags },
       success: (user) => {

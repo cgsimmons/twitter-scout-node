@@ -60,6 +60,7 @@ export function addScheduledListToArray(newList) {
     userId: newList.userId,
   };
 }
+
 export function removeScheduledListFromArray(listTitle) {
   return {
     type: 'REMOVE_SCHEDULED_LIST_FROM_ARRAY',
@@ -67,15 +68,14 @@ export function removeScheduledListFromArray(listTitle) {
   };
 }
 
-export function removeAndDeleteScheduledListArray(list) {
+export function deleteScheduledListArray(list) {
   return (dispatch) => {
     dispatch(scheduledListIsLoading(true));
 
     $.ajax({
-      type: 'POST',
+      type: 'DELETE',
       url: `${BASE_URL}/api/user/${list.userId}/scheduled-list/${list._id}`,
       success: (newArray) => {
-        // dispatch(removeScheduledListFromArray(list.title));
         dispatch(setScheduledListArray(newArray));
         dispatch(scheduledListIsLoading(false));
       },
@@ -87,13 +87,13 @@ export function removeAndDeleteScheduledListArray(list) {
   };
 }
 
-export function saveScheduledList(list) {
+export function newScheduledList(list) {
   return (dispatch) => {
     dispatch(scheduledListIsLoading(true));
 
     $.ajax({
       type: 'POST',
-      url: `${BASE_URL}/api/user/${list.userId}/scheduled-list`,
+      url: `${BASE_URL}/api/scheduled-list`,
       data: { newList: list },
       success: (newArray) => {
         dispatch(setScheduledListArray(newArray));
@@ -117,6 +117,21 @@ export function getScheduledListArray(id) {
       },
       error: (XMLHttpRequest, textStatus) => {
         alert(textStatus);
+      },
+    });
+  };
+}
+
+export function deleteTweetFromList(tweet) {
+  return (dispatch) => {
+    $.ajax({
+      type: 'DELETE',
+      url: `${BASE_URL}/api/tweet/${tweet._id}`,
+      success: () => {
+        console.log('successful delete');
+      },
+      error: (XMLHttpRequest, textStatus) => {
+        console.log(textStatus);
       },
     });
   };
