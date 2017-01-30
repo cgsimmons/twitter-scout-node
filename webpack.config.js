@@ -1,12 +1,13 @@
 const webpack = require('webpack');
 const path = require('path');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-  debug: true,
-  entry: path.join(__dirname, 'src', 'app-client.js'),
+  devtool: 'cheap-module-source-map',
+  entry: path.join(__dirname, 'src', 'client', 'app-client.js'),
   output: {
-    path: path.join(__dirname, 'src', 'static', 'js'),
-    filename: 'bundle.js'
+    path: path.join(__dirname, 'src', 'server', 'static', 'js'),
+    filename: 'bundle.js',
   },
   module: {
     loaders: [{
@@ -14,23 +15,39 @@ module.exports = {
       loader: ['babel-loader'],
       query: {
         cacheDirectory: 'babel_cache',
-        presets: ['react', 'es2015', 'stage-2']
-      }
-    }]
+      },
+    }],
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+      'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV),
     }),
     new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
+      compress: {
+        warnings: false,
+        pure_getters: true,
+        unsafe: true,
+        unsafe_comps: true,
+        screw_ie8: true,
+      },
       mangle: true,
       sourcemap: false,
       beautify: false,
-      dead_code: true
-    })
+      dead_code: true,
+      output: {
+        comments: false,
+      },
+    }),
+    new webpack.optimize.AggressiveMergingPlugin(),
+    new webpack.IgnorePlugin(/^\.\/locale$/, [/moment$/]),
+    new CompressionPlugin({
+      asset: '[path].gz[query]',
+      algorithm: 'gzip',
+      test: /\.js$|\.css$|\.html$/,
+      threshold: 10240,
+      minRatio: 0,
+    }),
   ],
-  watch: true
 };

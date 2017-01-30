@@ -48,3 +48,6 @@ babel_cache
 
 # Yarn Integrity file
 .yarn-integrity
+
+# Environment variables file
+.env
