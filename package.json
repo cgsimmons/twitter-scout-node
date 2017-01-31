@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/cgsimmons/twitter-scout-node#readme",
   "dependencies": {
+    "babel": "^6.5.2",
     "body-parser": "^1.16.0",
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
