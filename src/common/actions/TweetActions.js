@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { setScheduledListArray } from './ScheduledListActions';
 
-const BASE_URL = 'http://127.0.0.1:3000';
+const BASE_URL = 'https://twitter-scout.herokuapp.com';
 
 export function setCounter(num) {
   return {

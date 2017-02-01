@@ -2,8 +2,10 @@ const ids = {
   twitter: {
     consumerKey: process.env.CONSUMER_KEY,
     consumerSecret: process.env.CONSUMER_SECRET,
-    callbackURL: 'http://127.0.0.1:3000/auth/twitter/callback',
+    callbackURL: 'https://twitter-scout.herokuapp.com/auth/twitter/callback',
   },
 };
+
+console.log(ids.twitter.callbackURL);
 
 export default ids;
