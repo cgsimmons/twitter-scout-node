@@ -21,7 +21,7 @@ import rootReducer from '../common/reducers';
 // initialize app, server and db
 const app = new Express();
 const server = new Server(app);
-Mongoose.connect('mongodb://localhost/twitter-scout', (err) => {
+Mongoose.connect(process.env.MONGODB_URI, (err) => {
   if (err) {
     console.error('ERROR: Not connected to DB.');
   } else {
