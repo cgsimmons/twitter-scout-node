@@ -85,6 +85,7 @@ export function saveScheduledTweet(tweet) {
       url: `${BASE_URL}/api/scheduled-list/tweet`,
       data: { newTweet: tweet },
       success: (newArray) => {
+        dispatch(resetScheduledTweet());
         dispatch(setScheduledListArray(newArray));
         console.log('success saving new tweet');
         dispatch(
