@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { setScheduledListArray } from './ScheduledListActions';
 
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = 'http://127.0.0.1:3000';
 
 export function setCounter(num) {
   return {
@@ -46,7 +46,7 @@ export function resetScheduledTweet() {
 
 function updateScheduledListPostDate(listArray, listId) {
   for (let i = 0; i < listArray.length - 1; i += 1) {
-    if ((listArray[i]._id === listId) && (listArray[i].startDate !== '')) {
+    if ((listArray[i]._id === listId) && (listArray[i].startDate !== null)) {
       const newDate = new Date(listArray[i].startDate);
       let lastPostDate = new Date();
       if (listArray[i].tweets.length > 0) {

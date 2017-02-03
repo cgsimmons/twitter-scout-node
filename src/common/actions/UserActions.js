@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = 'http://127.0.0.1:3000';
 
 export function userHasErrored(bool) {
   return {

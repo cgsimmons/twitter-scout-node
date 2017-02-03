@@ -35,6 +35,7 @@ export function userId(state = '', action) {
 }
 
 export function userTags(state = [], action) {
+  let i = 0;
   switch (action.type) {
     case 'SET_USER_TAGS':
       return action.userTags;
@@ -43,14 +44,16 @@ export function userTags(state = [], action) {
         ...state,
         {
           id: state.length + 1,
-          text: action.text
-        }
+          text: action.text,
+        },
       ];
     case 'REMOVE_USER_TAG':
-      const i = action.userTagIndex;
+      i = action.userTagIndex;
       return [
         ...state.slice(0, i),
-        ...state.slice(i + 1).map((item, index) => { return {id: index+i+1, text: item.text}})
+        ...state.slice(i + 1).map(
+          (item, index) => { return { id: index + i + 1, text: item.text }; },
+        ),
       ];
     default:
       return state;
