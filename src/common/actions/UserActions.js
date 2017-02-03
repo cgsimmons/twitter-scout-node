@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const BASE_URL = 'https://twitter-scout.herokuapp.com';
+const BASE_URL = process.env.BASE_URL;
 
 export function userHasErrored(bool) {
   return {

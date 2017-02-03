@@ -6,7 +6,7 @@ const INITIAL_TWEET_STATE = {
   tweetCounter: 140,
 };
 
-export default function scheduledTweet(state = INITIAL_TWEET_STATE, action) {
+export function scheduledTweet(state = INITIAL_TWEET_STATE, action) {
   switch (action.type) {
     case 'SET_SCHEDULED_TWEET':
       return { ...state, ...action.tweet };
