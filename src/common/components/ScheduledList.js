@@ -35,7 +35,7 @@ class ScheduledList extends React.Component {
       <div className="ScheduledList dashboard-panel main-panel">
         <h3>{this.props.list.title}</h3>
         <span className="ReactTags__tag">
-          <a className="ReactTags__remove delete" onClick={this.handleListDelete}>×</a>
+          <a className="ReactTags__remove" onClick={this.handleListDelete}>×</a>
         </span>
         {message}
         <ul>
@@ -44,7 +44,7 @@ class ScheduledList extends React.Component {
               (tweet) => {
                 return (
                   <li className="scheduledTweet"><hr /><h4>{tweet.body}</h4>
-                    <a className="ReactTags__remove delete" onClick={this.handleTweetDelete}>×</a>
+                    <a className="ReactTags__remove" onClick={this.handleTweetDelete}>×</a>
                     <p>Scheduled for {moment(tweet.postDate).format('MMM Do YYYY, h:mm a')}</p>
                   </li>
                 );

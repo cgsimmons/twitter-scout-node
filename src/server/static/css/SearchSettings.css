@@ -12,6 +12,9 @@
   color: rgb(173,170,170);
   cursor: pointer;
 }
+.ReactTags__remove:hover {
+  color: #f60;
+}
 .ReactTags__tagInput {
   margin: 0.2rem;
 }

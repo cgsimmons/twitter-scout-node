@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import { setScheduledListArray } from './ScheduledListActions';
 
-const BASE_URL = 'https://twitter-scout.herokuapp.com';
+const BASE_URL = 'http://127.0.0.1:3000';
 
 export function setCounter(num) {
   return {
@@ -46,7 +46,7 @@ export function resetScheduledTweet() {
 
 function updateScheduledListPostDate(listArray, listId) {
   for (let i = 0; i < listArray.length - 1; i += 1) {
-    if ((listArray[i]._id === listId) && (listArray[i].startDate !== '')) {
+    if ((listArray[i]._id === listId) && (listArray[i].startDate !== null)) {
       const newDate = new Date(listArray[i].startDate);
       let lastPostDate = new Date();
       if (listArray[i].tweets.length > 0) {
@@ -85,6 +85,7 @@ export function saveScheduledTweet(tweet) {
       url: `${BASE_URL}/api/scheduled-list/tweet`,
       data: { newTweet: tweet },
       success: (newArray) => {
+        dispatch(resetScheduledTweet());
         dispatch(setScheduledListArray(newArray));
         console.log('success saving new tweet');
         dispatch(

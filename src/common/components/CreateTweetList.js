@@ -31,9 +31,11 @@ class CreateTweetList extends React.Component {
   handleCheck = () => {
     const newInterval = (this.props.list.interval === '' ? 'Day' : '');
     this.props.setInterval(newInterval);
-    if (newInterval === '') {
-      this.props.setDate('');
-    }
+    // if (newInterval === '') {
+    //   this.props.setDate('');
+    // } else {
+    //   this.props.setDate(new Date());
+    // }
   }
 
   render() {
@@ -51,6 +53,7 @@ class CreateTweetList extends React.Component {
             <br />
             <label htmlFor="startDate">Start date</label><br />
             <DateField
+              updateOnDateClick
               forceValidDate
               onChange={this.handleDate}
               defaultValue={this.props.list.startDate}

@@ -86,7 +86,7 @@ router.post('/scheduled-list', isLoggedIn, (req, res) => {
     title: newList.title,
     userId: newList.userId,
     interval: newList.interval,
-    startDate: newList.startDate,
+    startDate: (newList.interval === '' ? '' : newList.startDate),
     tweets: [],
   });
 

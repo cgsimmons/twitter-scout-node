@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { DateField, TransitionView, Calendar } from 'react-date-picker';
 import Select from 'react-select';
-import { resetScheduledTweet, setCounter, setSelectedList, setScheduledTweetBody, setScheduledTweetPostDate, saveScheduledTweet } from '../actions/TweetActions';
+import { setCounter, setSelectedList, setScheduledTweetBody, setScheduledTweetPostDate, saveScheduledTweet } from '../actions/TweetActions';
 
 const MAX_COUNT = 140;
 
@@ -22,7 +22,7 @@ class CreateTweet extends React.Component {
     this.props.setSelection(selectObj.value);
     const lists = this.props.lists;
     // find currently selected list
-    for (let i = 0; i < lists.length - 1; i += 1) {
+    for (let i = 0; i < lists.length; i += 1) {
       // if list matches selected list and startDate is not null
       if ((lists[i]._id === selectObj.value) && (lists[i].startDate !== null)) {
         const newDate = new Date(lists[i].startDate);
@@ -54,7 +54,6 @@ class CreateTweet extends React.Component {
         return;
       }
     }
-
     // if startDate was not set at this point it must be a list
     // for individually set tweet dates
     this.props.setDate(new Date());
@@ -76,14 +75,19 @@ class CreateTweet extends React.Component {
       return ({ value: list._id, label: list.title, startDate: list.startDate });
     });
     let disableDate = false;
+    // check if initial list needs to be selected
     if (this.props.lists.length > 0) {
+      // find selected list
       const result = this.props.lists.filter(
         (list) => { return list._id === this.props.selection; });
+      // if selected list exists
       if (result.length > 0) {
+        // disable date selection if list uses intervals
         if (result[0].interval !== '') {
           disableDate = true;
         }
       } else {
+        // set initial selected list as the first list in the array
         this.handleSelection({ value: this.props.lists[0]._id });
       }
     }
@@ -105,6 +109,7 @@ class CreateTweet extends React.Component {
           <br /><br />
           <label htmlFor="date">Date to post</label><br />
           <DateField
+            updateOnDateClick
             forceValidDate
             value={this.props.tweetDate}
             onChange={this.handleDate}
@@ -152,7 +157,6 @@ const mapDispatchToProps = (dispatch) => {
     setBody: (body) => { dispatch(setScheduledTweetBody(body)); },
     setDate: (date) => { dispatch(setScheduledTweetPostDate(date)); },
     saveTweet: (tweet, user) => { dispatch(saveScheduledTweet(tweet, user)); },
-    resetTweet: () => { dispatch(resetScheduledTweet()); },
   };
 };
 
