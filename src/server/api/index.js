@@ -106,7 +106,7 @@ router.post('/scheduled-list', isLoggedIn, (req, res) => {
 });
 
 // delete tweet
-router.post('/tweet/:tweetId', (req, res) => {
+router.delete('/tweet/:tweetId', (req, res) => {
   ScheduledList.findOne({ 'tweets._id': req.params.tweetId }, (err, list) => {
     if (err) {
       res.status(500).send(err.message);
@@ -116,7 +116,14 @@ router.post('/tweet/:tweetId', (req, res) => {
         if (tweetErr) {
           res.status(500).send(err.message);
         } else {
-          res.status(200).send(list);
+          // res.status(200).send(list);
+          ScheduledList.find({ userId: list.userId }).sort('-createdAt').exec((listErr, lists) => {
+            if (listErr) {
+              res.status(500).send(err.message);
+            } else {
+              res.status(200).send(lists);
+            }
+          });
         }
       });
     }

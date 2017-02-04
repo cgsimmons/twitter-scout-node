@@ -1,7 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
-import { deleteScheduledListArray } from '../actions/ScheduledListActions';
+import { deleteScheduledListArray, deleteTweetFromList } from '../actions/ScheduledListActions';
+import ScheduledTweet from './scheduledTweet';
 
 class ScheduledList extends React.Component {
 
@@ -11,16 +12,6 @@ class ScheduledList extends React.Component {
     if (r) {
       this.props.deleteList(this.props.list);
     }
-  }
-
-  handleTweetDelete = () => {
-    // this.props.deleteList(this.props.list.title);
-    const r = confirm('Are you sure you want to delete this tweet?');
-    if (r) {
-      console.log('deleted');
-    }
-      // this.props.deleteList(this.props.list);
-      // TODO: make delete method
   }
 
   render() {
@@ -43,10 +34,7 @@ class ScheduledList extends React.Component {
             this.props.list.tweets.map(
               (tweet) => {
                 return (
-                  <li className="scheduledTweet"><hr /><h4>{tweet.body}</h4>
-                    <a className="ReactTags__remove" onClick={this.handleTweetDelete}>×</a>
-                    <p>Scheduled for {moment(tweet.postDate).format('MMM Do YYYY, h:mm a')}</p>
-                  </li>
+                  <ScheduledTweet tweet={tweet} />
                 );
               },
             )
@@ -60,6 +48,7 @@ class ScheduledList extends React.Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     deleteList: (list) => { dispatch(deleteScheduledListArray(list)); },
+    deleteTweet: (tweet) => { dispatch(deleteTweetFromList(tweet)); },
   };
 };
 

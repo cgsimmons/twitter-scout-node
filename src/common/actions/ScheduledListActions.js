@@ -124,14 +124,19 @@ export function getScheduledListArray(id) {
 
 export function deleteTweetFromList(tweet) {
   return (dispatch) => {
+    dispatch(scheduledListIsLoading(true));
+
     $.ajax({
       type: 'DELETE',
       url: `${BASE_URL}/api/tweet/${tweet._id}`,
-      success: () => {
-        console.log('successful delete');
+      success: (newArray) => {
+        dispatch(setScheduledListArray(newArray));
+        dispatch(scheduledListIsLoading(false));
       },
       error: (XMLHttpRequest, textStatus) => {
         console.log(textStatus);
+        dispatch(scheduledListHasErrored(true));
+        dispatch(scheduledListIsLoading(false));
       },
     });
   };
