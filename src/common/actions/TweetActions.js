@@ -45,7 +45,7 @@ export function resetScheduledTweet() {
 }
 
 function updateScheduledListPostDate(listArray, listId) {
-  for (let i = 0; i < listArray.length - 1; i += 1) {
+  for (let i = 0; i < listArray.length; i += 1) {
     if ((listArray[i]._id === listId) && (listArray[i].startDate !== null)) {
       const newDate = new Date(listArray[i].startDate);
       let lastPostDate = new Date();

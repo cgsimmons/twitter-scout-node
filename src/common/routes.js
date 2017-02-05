@@ -5,6 +5,7 @@ import IndexPage from './components/IndexPage';
 import NotFoundPage from './components/NotFoundPage';
 import Login from './components/Login';
 import About from './components/About';
+import Contact from './components/Contact';
 import Dashboard from './components/Dashboard';
 import Statistics from './components/Statistics';
 import ScheduledTweets from './components/ScheduledTweets';
@@ -17,6 +18,7 @@ const routes = (
     <IndexRoute component={IndexPage} />
     <Route path="about" component={About} />
     <Route path="login" component={Login} />
+    <Route path="contact" component={Contact} />
     <Route path="user/:userId" component={Dashboard}>
       <IndexRoute component={ScheduledTweets} />
       <Route path="statistics" component={Statistics} />

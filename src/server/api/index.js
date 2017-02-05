@@ -14,10 +14,6 @@ function isLoggedIn(req, res, next) {
   res.redirect('/login');
 }
 
-function updateTweetDates(list) {
-
-}
-
 // get all users
 router.get('/users', isLoggedIn, (req, res) => {
   User.find({}, (err, users) => {
@@ -116,12 +112,13 @@ router.delete('/tweet/:tweetId', (req, res) => {
       res.status(500).send(err.message);
     } else {
       list.tweets.id(req.params.tweetId).remove();
-      // TODO: add some middleware to update tweet dates before saving
+
+      // TODO: Adjust tweet postDates after one is deleted
+
       list.save((tweetErr) => {
         if (tweetErr) {
           res.status(500).send(err.message);
         } else {
-          // res.status(200).send(list);
           ScheduledList.find({ userId: list.userId }).sort('-createdAt').exec((listErr, lists) => {
             if (listErr) {
               res.status(500).send(err.message);
@@ -144,6 +141,7 @@ router.post('/scheduled-list/tweet', isLoggedIn, (req, res) => {
       res.status(500).send(err.message);
     } else {
       const tweet = {
+        listId: newTweet.selectedList,
         body: newTweet.body,
         postDate: newTweet.postDate,
         posted: false,

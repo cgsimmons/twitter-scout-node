@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const ScheduledTweet = new Schema({
+  listId: String,
   body: String,
   postDate: Date,
   posted: Boolean,
@@ -10,7 +11,6 @@ const ScheduledTweet = new Schema({
   {
     timestamps: true,
   });
-
 
 const ScheduledTweetList = new Schema({
   title: String,
@@ -22,5 +22,13 @@ const ScheduledTweetList = new Schema({
   {
     timestamps: true,
   });
+
+// ScheduledTweet.post('remove', (doc) => {
+//   ScheduledTweetList.findOne({ _id: doc.listId }, (err, list) => {
+//     for (let i = 0; i < list.tweets.length; i += 1) {
+//       console.log(list.tweets[i].body);
+//     }
+//   });
+// });
 
 module.exports = mongoose.model('scheduledTweetLists', ScheduledTweetList);

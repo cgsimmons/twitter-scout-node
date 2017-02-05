@@ -10,7 +10,7 @@ class NavBar extends React.Component {
       signInOrOut = <a href='/auth/logout'>SIGN-OUT</a>
       dash = <li><Link to={ `/user/${this.props.userId}` }>DASHBOARD</Link></li>
     } else {
-      signInOrOut = <Link to='/auth/twitter'>SIGN-IN</Link>
+      signInOrOut = <Link to='/login'>SIGN-IN</Link>
     }
     return (
       <div className='NavBar'>
@@ -39,7 +39,7 @@ class NavBar extends React.Component {
 const mapStateToProps = (state) => {
   return {
     isSignedIn: state.userIsSignedIn,
-    userId:     state.userId
+    userId: state.userId,
   };
 };
 
