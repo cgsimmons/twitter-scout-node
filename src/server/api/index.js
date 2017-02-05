@@ -14,6 +14,10 @@ function isLoggedIn(req, res, next) {
   res.redirect('/login');
 }
 
+function updateTweetDates(list) {
+
+}
+
 // get all users
 router.get('/users', isLoggedIn, (req, res) => {
   User.find({}, (err, users) => {
@@ -112,6 +116,7 @@ router.delete('/tweet/:tweetId', (req, res) => {
       res.status(500).send(err.message);
     } else {
       list.tweets.id(req.params.tweetId).remove();
+      // TODO: add some middleware to update tweet dates before saving
       list.save((tweetErr) => {
         if (tweetErr) {
           res.status(500).send(err.message);
