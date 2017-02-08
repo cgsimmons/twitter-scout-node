@@ -1,6 +1,6 @@
 import $ from 'jquery';
 
-const BASE_URL = 'http://127.0.0.1:3000';
+const BASE_URL = 'https://twitter-scout.herokuapp.com';
 
 export function setScheduledListTitle(title) {
   return {
@@ -124,14 +124,19 @@ export function getScheduledListArray(id) {
 
 export function deleteTweetFromList(tweet) {
   return (dispatch) => {
+    dispatch(scheduledListIsLoading(true));
+
     $.ajax({
       type: 'DELETE',
       url: `${BASE_URL}/api/tweet/${tweet._id}`,
-      success: () => {
-        console.log('successful delete');
+      success: (newArray) => {
+        dispatch(setScheduledListArray(newArray));
+        dispatch(scheduledListIsLoading(false));
       },
       error: (XMLHttpRequest, textStatus) => {
         console.log(textStatus);
+        dispatch(scheduledListHasErrored(true));
+        dispatch(scheduledListIsLoading(false));
       },
     });
   };

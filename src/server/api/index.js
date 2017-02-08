@@ -106,17 +106,26 @@ router.post('/scheduled-list', isLoggedIn, (req, res) => {
 });
 
 // delete tweet
-router.post('/tweet/:tweetId', (req, res) => {
+router.delete('/tweet/:tweetId', (req, res) => {
   ScheduledList.findOne({ 'tweets._id': req.params.tweetId }, (err, list) => {
     if (err) {
       res.status(500).send(err.message);
     } else {
       list.tweets.id(req.params.tweetId).remove();
+
+      // TODO: Adjust tweet postDates after one is deleted
+
       list.save((tweetErr) => {
         if (tweetErr) {
           res.status(500).send(err.message);
         } else {
-          res.status(200).send(list);
+          ScheduledList.find({ userId: list.userId }).sort('-createdAt').exec((listErr, lists) => {
+            if (listErr) {
+              res.status(500).send(err.message);
+            } else {
+              res.status(200).send(lists);
+            }
+          });
         }
       });
     }
@@ -132,6 +141,7 @@ router.post('/scheduled-list/tweet', isLoggedIn, (req, res) => {
       res.status(500).send(err.message);
     } else {
       const tweet = {
+        listId: newTweet.selectedList,
         body: newTweet.body,
         postDate: newTweet.postDate,
         posted: false,
