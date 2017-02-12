@@ -21,6 +21,9 @@
   color: rgb(255,255,255);
   cursor: pointer;
 }
+.Sidebar li a:focus {
+  color: #fff;
+}
 
 hr {
   margin: 0;

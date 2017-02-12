@@ -12,21 +12,19 @@ height: 700px;
   font-family: Impact, Charcoal, sans-serif;
   font-size: 5rem;
   position: absolute;
-  z-index: 9999;
   top: 8rem;
   right: 30%;
+  padding-top: 1rem;
 }
 
 .logo-tagline {
   position: absolute;
-      z-index: 9999;
       top: 13.5rem;
       right: 32%;
 }
 
 .under-logo {
   position: absolute;
-  z-index: 9999;
   top: 15rem;
   right: 30%;
 }
@@ -60,7 +58,11 @@ height: 700px;
 
   .logo-tagline {
     font-size: 0.8rem;
-        top: 5.5rem;
+        top: 6.5rem;
         right: 22%;
+  }
+  .under-logo {
+    top: 15rem;
+    right: 25%;
   }
 }
