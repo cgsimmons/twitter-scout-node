@@ -1,9 +1,9 @@
 @import url(Dashboard.css);
 @import url(IndexPage.css);
-@import url(NavBar.css);
 @import url(NotFoundPage.css);
 @import url(User.css);
 @import url(Sidebar.css);
+@import url(NavBar.css);
 @import url(SearchSettings.css);
 @import url(ScheduledTweets.css);
 @import url(react-tab-panel.css);
@@ -11,6 +11,7 @@
 @import url(react-select.css);
 @import url(test.css);
 @import url(CreateTweetList.css);
+
 /*! CSS reset from benfrain/app-reset */
 *,:after,:before{box-sizing:inherit}html{box-sizing:border-box}
 *{user-select:none;-webkit-tap-highlight-color:rgba(255,255,255,0);-webkit-tap-highlight-color:transparent}
@@ -34,6 +35,7 @@ body {
   font: 14px "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin: 0;
   background-color: rgb(245,248,250);
+  margin-top: 49px;
 }
 
 .app-body{
@@ -42,7 +44,7 @@ body {
 }
 
 .app-content{
-  margin-top: 3.1rem;
+  margin: 0;
   width: 100%;
 }
 
@@ -113,5 +115,6 @@ footer p {
 .submit-button:hover {
   background-color: rgb(3,169,244);
   box-shadow: 0.05rem 0.05rem 0.1rem #888888;
+  color: #fff;
 
 }
