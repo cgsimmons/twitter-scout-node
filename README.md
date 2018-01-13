@@ -21,7 +21,6 @@ ACCESS_TOKEN=your_access_token
 ACCESS_SECRET=your_access_secret
 TWITTER_CALLBACK=http://127.0.0.1:3000/auth/twitter/callback
 MONGODB_URI=mongodb://localhost/twitter-scout
-BASE_URL=http://127.0.0.1:3000
 ```
 
 After your keys have been entered you can continue with the installation.
