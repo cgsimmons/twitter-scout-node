@@ -3,25 +3,25 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const ScheduledTweet = new Schema({
-  listId: String,
-  body: String,
-  postDate: Date,
-  posted: Boolean,
+    listId: String,
+    body: String,
+    postDate: Date,
+    posted: Boolean,
 },
-  {
-    timestamps: true,
-  });
+    {
+        timestamps: true,
+    });
 
 const ScheduledTweetList = new Schema({
-  title: String,
-  userId: String,
-  interval: String,
-  startDate: Date,
-  tweets: [ScheduledTweet],
+    title: String,
+    userId: String,
+    interval: String,
+    startDate: Date,
+    tweets: [ScheduledTweet],
 },
-  {
-    timestamps: true,
-  });
+    {
+        timestamps: true,
+    });
 
 // ScheduledTweet.post('remove', (doc) => {
 //   ScheduledTweetList.findOne({ _id: doc.listId }, (err, list) => {

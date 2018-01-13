@@ -1,45 +1,38 @@
 import React from 'react';
-import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import TabPanel from 'react-tab-panel';
 import { connect } from 'react-redux';
 import CreateTweet from './CreateTweet';
 import CreateTweetList from './CreateTweetList';
 import ScheduledList from './ScheduledList';
 
-class ScheduledTweets extends React.Component {
-
-  render() {
+function ScheduledTweets(props) {
     return (
-      <Tabs className="ScheduledTweets">
-        <TabList>
-          <Tab>WRITE TWEET</Tab>
-          <Tab>ADD LIST</Tab>
-        </TabList>
-
+      <div className="ScheduledTweets">
         <TabPanel>
-          <CreateTweet />
+          <div tabTitle="WRITE TWEET">
+            <CreateTweet />
+          </div>
+          <div tabTitle="ADD LIST">
+            <CreateTweetList />
+          </div>
         </TabPanel>
-        <TabPanel>
-          <CreateTweetList />
-        </TabPanel>
-
         {
-          this.props.lists.map(
-            (list) => {
-              return (
-                <ScheduledList list={list} />
-              );
-            },
-          )
-        }
-      </Tabs>
+      props.lists.map(
+        (list) => {
+            return (
+              <ScheduledList list={list} />
+            );
+        },
+      )
+    }
+      </div>
     );
-  }
 }
 
 const mapStateToProps = (state) => {
-  return {
-    lists: state.scheduledListArray,
-  };
+    return {
+        lists: state.scheduledListArray,
+    };
 };
 
 export default connect(mapStateToProps)(ScheduledTweets);

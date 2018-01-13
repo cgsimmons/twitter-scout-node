@@ -2,13 +2,11 @@ import React from 'react';
 import User from './User';
 import Sidebar from './Sidebar';
 
-export default class DashboardLeft extends React.Component {
-  render(){
+export default function DashboardLeft(props) {
     return (
-      <div className='DashboardLeft'>
-        <User userId={this.props.userId}/>
-        <Sidebar userId={this.props.userId}/>
+      <div className="DashboardLeft">
+        <User userId={props.userId} />
+        <Sidebar userId={props.userId} />
       </div>
     );
-  }
 }

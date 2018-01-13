@@ -4,9 +4,13 @@ import routes from '../routes';
 
 
 const AppRoutes = () => {
-  return (
-    <Router history={browserHistory} routes={routes} onUpdate={() => { window.scrollTo(0, 0); }} />
-  );
+    return (
+      <Router
+        history={browserHistory}
+        routes={routes}
+        onUpdate={() => { window.scrollTo(0, 0); }}
+      />
+    );
 };
 
 export default AppRoutes;

@@ -21,27 +21,31 @@ import rootReducer from '../common/reducers';
 // initialize app, server and db
 const app = new Express();
 const server = new Server(app);
-Mongoose.connect(process.env.MONGODB_URI, (err) => {
-  if (err) {
-    console.error('ERROR: Not connected to DB.');
-  } else {
-    console.info('SUCCESS: Connected to DB');
-  }
-});
-
+Mongoose.connect(
+    process.env.MONGODB_URI,
+    {
+        useMongoClient: true,
+    }, (err) => {
+        if (err) {
+            console.error('ERROR: Not connected to DB.');
+        } else {
+            console.info('SUCCESS: Connected to DB');
+        }
+    },
+);
 
 // configure support for ejs templates for markup injection
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // define the folder that will be used for static assets
-app.use(Express.static(path.join(__dirname, 'static')));
+app.use(Express.static(path.join(__dirname, '/static')));
 app.use(CookieParser());
 app.use(BodyParser.urlencoded({ extended: true }));
 app.use(Session({
-  secret: 'keyboard cat',
-  resave: true,
-  saveUninitialized: true,
+    secret: 'keyboard cat',
+    resave: true,
+    saveUninitialized: true,
 }));
 
 // Initialize Passport
@@ -61,25 +65,25 @@ store.getState();
 
 // universal routing and rendering
 app.get('*', (req, res) => {
-  match(
+    match(
     { routes, location: req.url },
     (err, redirectLocation, renderProps) => {
       // in case of error display the error message
-      if (err) {
-        return res.status(500).send(err.message);
-      } else if (redirectLocation) {
+        if (err) {
+            return res.status(500).send(err.message);
+        } else if (redirectLocation) {
         // in case of redirect propagate the redirect to the browser
-        return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
-      } else if (renderProps) {
+            return res.redirect(302, redirectLocation.pathname + redirectLocation.search);
+        } else if (renderProps) {
         // if the current route matched we have renderProps
         // generate the React markup for the current route
-        const markup = renderToString(
-          <Provider store={store}><RouterContext {...renderProps} /></Provider>);
+            const markup = renderToString(
+              <Provider store={store}><RouterContext {...renderProps} /></Provider>);
         // render the index template with the embedded React markup
-        return res.render('index', { markup });
-      }
+            return res.render('index', { markup });
+        }
       // This should always be caught by react-router * route
-      return res.status(404).end('Not found');
+        return res.status(404).end('Not found');
     },
   );
 });
@@ -88,9 +92,9 @@ app.get('*', (req, res) => {
 const port = process.env.PORT || 3000;
 const env = process.env.NODE_ENV || 'production';
 server.listen(port, (err) => {
-  if (err) {
-    console.error(err);
-  } else {
-    console.info(`Server running on http://127.0.0.1:${port} [${env}]`);
-  }
+    if (err) {
+        console.error(err);
+    } else {
+        console.info(`Server running on http://127.0.0.1:${port} [${env}]`);
+    }
 });

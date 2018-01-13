@@ -9,6 +9,7 @@
     "no-underscore-dangle": "off",
     "no-console": "off",
     "no-alert": "off",
+    "indent": ["error", 4],
   },
   "env": {
     "browser": true,

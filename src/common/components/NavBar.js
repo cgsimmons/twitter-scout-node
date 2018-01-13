@@ -3,16 +3,14 @@ import { connect } from 'react-redux';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
 
-class NavBar extends React.Component {
-
-  render() {
+function NavBar(props) {
     let signInOrOut;
     let dash;
-    if (this.props.isSignedIn) {
-      signInOrOut = <li><a href="/auth/logout">SIGN-OUT</a></li>;
-      dash = <LinkContainer to={`/user/${this.props.userId}`} activeHref="active"><NavItem>DASHBOARD</NavItem></LinkContainer>;
+    if (props.isSignedIn) {
+        signInOrOut = <li><a href="/auth/logout">SIGN-OUT</a></li>;
+        dash = <LinkContainer to={`/user/${props.userId}`} activeHref="active"><NavItem>DASHBOARD</NavItem></LinkContainer>;
     } else {
-      signInOrOut = <LinkContainer to="/login" activeHref="active"><NavItem>SIGN-IN</NavItem></LinkContainer>;
+        signInOrOut = <LinkContainer to="/login" activeHref="active"><NavItem>SIGN-IN</NavItem></LinkContainer>;
     }
     return (
       <Navbar collapseOnSelect fixedTop>
@@ -41,14 +39,13 @@ class NavBar extends React.Component {
         </Navbar.Collapse>
       </Navbar>
     );
-  }
 }
 
 const mapStateToProps = (state) => {
-  return {
-    isSignedIn: state.userIsSignedIn,
-    userId: state.userId,
-  };
+    return {
+        isSignedIn: state.userIsSignedIn,
+        userId: state.userId,
+    };
 };
 
 export default connect(mapStateToProps, null, null, { pure: false })(NavBar);

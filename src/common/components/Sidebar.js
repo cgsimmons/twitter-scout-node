@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router';
 
-export default class Sidebar extends React.Component {
-  render() {
-    const baseDashPath = `/user/${this.props.userId}`;
+export default function Sidebar(props) {
+    const baseDashPath = `/user/${props.userId}`;
     const suggestedTweets = `${baseDashPath}/suggested-tweets`;
     const suggestedTweeters = `${baseDashPath}/suggested-tweeters`;
     const statistics = `${baseDashPath}/statistics`;
@@ -24,5 +23,4 @@ export default class Sidebar extends React.Component {
         </ul>
       </div>
     );
-  }
 }

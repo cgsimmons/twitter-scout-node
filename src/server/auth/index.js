@@ -9,12 +9,12 @@ router.get('/twitter/callback',
   PassportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
   (req, res) => {
     // Successful authentication
-    res.redirect(`/user/${req.user.id}`);
+      res.redirect(`/user/${req.user.id}`);
   });
 router.get('/logout', (req, res) => {
-  req.session.destroy(() => {
-    res.redirect('/');
-  });
+    req.session.destroy(() => {
+        res.redirect('/');
+    });
 });
 
 export default router;

@@ -1,72 +1,72 @@
 export function userHasErrored(state = false, action) {
-  switch (action.type) {
+    switch (action.type) {
     case 'USER_HAS_ERRORED':
-      return action.hasErrored;
+        return action.hasErrored;
     default:
-      return state;
-  }
+        return state;
+    }
 }
 
 export function userIsLoading(state = true, action) {
-  switch (action.type) {
+    switch (action.type) {
     case 'USER_IS_LOADING':
-      return action.isLoading;
+        return action.isLoading;
     default:
-      return state;
-  }
+        return state;
+    }
 }
 export function userIsSignedIn(state = false, action) {
-  switch (action.type) {
+    switch (action.type) {
     case 'USER_IS_SIGNED_IN':
-      return action.isSignedIn;
+        return action.isSignedIn;
     default:
-      return state;
-  }
+        return state;
+    }
 }
 export function userId(state = '', action) {
-  switch (action.type) {
+    switch (action.type) {
     case 'SET_USER_ID':
-      return action.userId;
+        return action.userId;
     case 'REMOVE_USER_ID':
-      return action.userId;
+        return action.userId;
     default:
-      return state;
-  }
+        return state;
+    }
 }
 
 export function userTags(state = [], action) {
-  let i = 0;
-  switch (action.type) {
+    let i = 0;
+    switch (action.type) {
     case 'SET_USER_TAGS':
-      return action.userTags;
+        return action.userTags;
     case 'ADD_USER_TAG':
-      return [
-        ...state,
-        {
-          id: state.length + 1,
-          text: action.text,
-        },
-      ];
+        return [
+            ...state,
+            {
+                id: state.length + 1,
+                text: action.text,
+            },
+        ];
     case 'REMOVE_USER_TAG':
-      i = action.userTagIndex;
-      return [
-        ...state.slice(0, i),
-        ...state.slice(i + 1).map(
+        i = action.userTagIndex;
+        return [
+            ...state.slice(0, i),
+            ...state.slice(i + 1).map(
           (item, index) => { return { id: index + i + 1, text: item.text }; },
         ),
-      ];
+        ];
     default:
-      return state;
-  }
+        return state;
+    }
 }
 
 export function user(state = {}, action) {
-  switch (action.type) {
+    switch (action.type) {
     case 'USER_AJAX_SUCCESS':
-      return action.user;
+        return action.user;
     case 'REMOVE_USER':
-      return action.user;
+        return action.user;
     default:
-      return state;
-  }
+        return state;
+    }
 }

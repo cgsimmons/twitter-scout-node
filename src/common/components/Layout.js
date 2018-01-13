@@ -1,9 +1,7 @@
-// src/components/Layout.js
 import React from 'react';
 import NavBar from './NavBar';
 
-export default class Layout extends React.Component {
-  render() {
+export default function Layout(props) {
     return (
       <div className="app-container">
         <header>
@@ -11,7 +9,7 @@ export default class Layout extends React.Component {
         </header>
         <div className="app-body">
           <div className="app-content">
-            {this.props.children}
+            {props.children}
           </div>
         </div>
         <footer>
@@ -23,5 +21,4 @@ export default class Layout extends React.Component {
         </footer>
       </div>
     );
-  }
 }
