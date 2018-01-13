@@ -1,5 +1,5 @@
 import React from 'react';
-import TabPanel from 'react-tab-panel';
+import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import { connect } from 'react-redux';
 import CreateTweet from './CreateTweet';
 import CreateTweetList from './CreateTweetList';
@@ -9,15 +9,19 @@ class ScheduledTweets extends React.Component {
 
   render() {
     return (
-      <div className="ScheduledTweets">
+      <Tabs className="ScheduledTweets">
+        <TabList>
+          <Tab>WRITE TWEET</Tab>
+          <Tab>ADD LIST</Tab>
+        </TabList>
+
         <TabPanel>
-          <div tabTitle="WRITE TWEET">
-            <CreateTweet />
-          </div>
-          <div tabTitle="ADD LIST">
-            <CreateTweetList />
-          </div>
+          <CreateTweet />
         </TabPanel>
+        <TabPanel>
+          <CreateTweetList />
+        </TabPanel>
+
         {
           this.props.lists.map(
             (list) => {
@@ -27,7 +31,7 @@ class ScheduledTweets extends React.Component {
             },
           )
         }
-      </div>
+      </Tabs>
     );
   }
 }
