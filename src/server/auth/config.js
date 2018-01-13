@@ -1,4 +1,4 @@
-const ids = {
+const configSettings = {
   twitter: {
     consumerKey: process.env.CONSUMER_KEY,
     consumerSecret: process.env.CONSUMER_SECRET,
@@ -6,4 +6,4 @@ const ids = {
   },
 };
 
-export default ids;
+export default configSettings;

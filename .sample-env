@@ -2,4 +2,6 @@ CONSUMER_KEY=your_consumer_key
 CONSUMER_SECRET=your_consumer_secret
 ACCESS_TOKEN=your_access_token
 ACCESS_SECRET=your_access_secret
-MONGODB_URI=your_mongo_access_URI
+TWITTER_CALLBACK=http://127.0.0.1:3000/auth/twitter/callback
+MONGODB_URI=mongodb://localhost/twitter-scout
+BASE_URL=http://127.0.0.1:3000

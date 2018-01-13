@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { Nav, Navbar, NavItem } from 'react-bootstrap';
 import { IndexLinkContainer, LinkContainer } from 'react-router-bootstrap';
@@ -11,9 +10,9 @@ class NavBar extends React.Component {
     let dash;
     if (this.props.isSignedIn) {
       signInOrOut = <li><a href="/auth/logout">SIGN-OUT</a></li>;
-      dash = <LinkContainer to={`/user/${this.props.userId}`} activeClassName="active"><NavItem>DASHBOARD</NavItem></LinkContainer>;
+      dash = <LinkContainer to={`/user/${this.props.userId}`} activeHref="active"><NavItem>DASHBOARD</NavItem></LinkContainer>;
     } else {
-      signInOrOut = <LinkContainer to="/login" activeClassName="active"><NavItem>SIGN-IN</NavItem></LinkContainer>;
+      signInOrOut = <LinkContainer to="/login" activeHref="active"><NavItem>SIGN-IN</NavItem></LinkContainer>;
     }
     return (
       <Navbar collapseOnSelect fixedTop>
@@ -25,13 +24,13 @@ class NavBar extends React.Component {
         </Navbar.Header>
         <Navbar.Collapse>
           <Nav>
-            <IndexLinkContainer to="/" activeClassName="active">
+            <IndexLinkContainer to="/" activeHref="active">
               <NavItem>HOME</NavItem>
             </IndexLinkContainer>
-            <LinkContainer to="/about" activeClassName="active">
+            <LinkContainer to="/about" activeHref="active">
               <NavItem>ABOUT</NavItem>
             </LinkContainer>
-            <LinkContainer to="/contact" activeClassName="active">
+            <LinkContainer to="/contact" activeHref="active">
               <NavItem>CONTACT</NavItem>
             </LinkContainer>
           </Nav>
