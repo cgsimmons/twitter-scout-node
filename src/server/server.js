@@ -18,11 +18,17 @@ import auth from './auth';
 import routes from '../common/routes';
 import rootReducer from '../common/reducers';
 
+// Environment variables
+const port = process.env.PORT || 3000;
+const host = process.env.HOST || '127.0.0.1';
+const env = process.env.NODE_ENV || 'production';
+const mongoURI = process.env.MONGODB_URI;
+
 // initialize app, server and db
 const app = new Express();
 const server = new Server(app);
 Mongoose.connect(
-    process.env.MONGODB_URI,
+    mongoURI,
     {
         useMongoClient: true,
     }, (err) => {
@@ -89,12 +95,10 @@ app.get('*', (req, res) => {
 });
 
 // start the server
-const port = process.env.PORT || 3000;
-const env = process.env.NODE_ENV || 'production';
 server.listen(port, (err) => {
     if (err) {
         console.error(err);
     } else {
-        console.info(`Server running on http://127.0.0.1:${port} [${env}]`);
+        console.info(`Server running on http://${host}:${port} [${env}]`);
     }
 });
