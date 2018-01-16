@@ -4,6 +4,8 @@
   "rules": {
     "strict": 0,
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
     "react/prop-types": [2, { "skipUndeclared": true }],
     "arrow-body-style": ["error", "always"],
     "no-underscore-dangle": "off",

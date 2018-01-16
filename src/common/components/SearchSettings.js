@@ -23,25 +23,27 @@ class SearchSettings extends React.Component {
         const tags = this.props.userTags;
         const placeholder = 'Add a keyword...';
         return (
-          <div className="SearchSettings dashboard-panel main-panel">
-            <h1 className="section-header">Search Words</h1>
-            <br />
-            <p>Enter keywords to help Twitter Scout find relevent tweeters and tweets for you.</p>
-            <br />
-            <div>
-              <ReactTags
-                tags={tags}
-                handleDelete={this.props.removeTag}
-                handleAddition={this.props.addTag}
-                autofocus
-                placeholder={placeholder}
-              />
+            <div className="SearchSettings dashboard-panel main-panel">
+                <h1 className="section-header">Search Words</h1>
+                <br />
+                <p>Enter keywords to help Twitter Scout find
+                    relevent tweeters and tweets for you.
+                </p>
+                <br />
+                <div>
+                    <ReactTags
+                        tags={tags}
+                        handleDelete={this.props.removeTag}
+                        handleAddition={this.props.addTag}
+                        autofocus
+                        placeholder={placeholder}
+                    />
+                </div>
+                <div className="search-buttons">
+                    <button className="submit-button" onClick={this.updateTags}>Save</button>
+                    <button className="submit-button" onClick={this.cancelTags}>Cancel</button>
+                </div>
             </div>
-            <div className="search-buttons">
-              <button className="submit-button" onClick={this.updateTags}>Save</button>
-              <button className="submit-button" onClick={this.cancelTags}>Cancel</button>
-            </div>
-          </div>
         );
     }
 }

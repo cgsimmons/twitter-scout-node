@@ -90,9 +90,10 @@ export function saveScheduledTweet(tweet) {
                 dispatch(resetScheduledTweet());
                 dispatch(setScheduledListArray(newArray));
                 console.log('success saving new tweet');
-                dispatch(
-          setScheduledTweetPostDate(
-            updateScheduledListPostDate(newArray, tweet.selectedList)));
+                dispatch(setScheduledTweetPostDate(updateScheduledListPostDate(
+                    newArray,
+                    tweet.selectedList,
+                )));
             },
             error: (XMLHttpRequest, textStatus) => {
                 console.log(textStatus);

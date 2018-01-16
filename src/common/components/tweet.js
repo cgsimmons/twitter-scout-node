@@ -26,10 +26,10 @@ export default class Tweet extends React.Component {
     // }
     render() {
         return (
-          <div className="Tweet">
-            <h1>{this.props.tweetId}</h1>
-            {this.state.markup}
-          </div>
+            <div className="Tweet">
+                <h1>{this.props.tweetId}</h1>
+                {this.state.markup}
+            </div>
         );
     }
 }

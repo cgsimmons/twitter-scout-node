@@ -13,31 +13,31 @@ function NavBar(props) {
         signInOrOut = <LinkContainer to="/login" activeHref="active"><NavItem>SIGN-IN</NavItem></LinkContainer>;
     }
     return (
-      <Navbar collapseOnSelect fixedTop>
-        <Navbar.Header>
-          <Navbar.Brand>
-            <a href="/">Twitter-Scout</a>
-          </Navbar.Brand>
-          <Navbar.Toggle />
-        </Navbar.Header>
-        <Navbar.Collapse>
-          <Nav>
-            <IndexLinkContainer to="/" activeHref="active">
-              <NavItem>HOME</NavItem>
-            </IndexLinkContainer>
-            <LinkContainer to="/about" activeHref="active">
-              <NavItem>ABOUT</NavItem>
-            </LinkContainer>
-            <LinkContainer to="/contact" activeHref="active">
-              <NavItem>CONTACT</NavItem>
-            </LinkContainer>
-          </Nav>
-          <Nav pullRight>
-            {dash}
-            {signInOrOut}
-          </Nav>
-        </Navbar.Collapse>
-      </Navbar>
+        <Navbar collapseOnSelect fixedTop>
+            <Navbar.Header>
+                <Navbar.Brand>
+                    <a href="/">Twitter-Scout</a>
+                </Navbar.Brand>
+                <Navbar.Toggle />
+            </Navbar.Header>
+            <Navbar.Collapse>
+                <Nav>
+                    <IndexLinkContainer to="/" activeHref="active">
+                        <NavItem>HOME</NavItem>
+                    </IndexLinkContainer>
+                    <LinkContainer to="/about" activeHref="active">
+                        <NavItem>ABOUT</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to="/contact" activeHref="active">
+                        <NavItem>CONTACT</NavItem>
+                    </LinkContainer>
+                </Nav>
+                <Nav pullRight>
+                    {dash}
+                    {signInOrOut}
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar>
     );
 }
 

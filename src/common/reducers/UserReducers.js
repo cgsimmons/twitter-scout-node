@@ -52,8 +52,8 @@ export function userTags(state = [], action) {
         return [
             ...state.slice(0, i),
             ...state.slice(i + 1).map(
-          (item, index) => { return { id: index + i + 1, text: item.text }; },
-        ),
+                (item, index) => { return { id: index + i + 1, text: item.text }; },
+            ),
         ];
     default:
         return state;

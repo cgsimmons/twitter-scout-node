@@ -5,12 +5,14 @@ const router = express.Router();
 
 // route twitter authentication
 router.get('/twitter', PassportTwitter.authenticate('twitter'));
-router.get('/twitter/callback',
-  PassportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
-  (req, res) => {
+router.get(
+    '/twitter/callback',
+    PassportTwitter.authenticate('twitter', { failureRedirect: '/login' }),
+    (req, res) => {
     // Successful authentication
-      res.redirect(`/user/${req.user.id}`);
-  });
+        res.redirect(`/user/${req.user.id}`);
+    },
+);
 router.get('/logout', (req, res) => {
     req.session.destroy(() => {
         res.redirect('/');

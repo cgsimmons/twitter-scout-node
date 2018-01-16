@@ -7,25 +7,25 @@ import ScheduledList from './ScheduledList';
 
 function ScheduledTweets(props) {
     return (
-      <div className="ScheduledTweets">
-        <TabPanel>
-          <div tabTitle="WRITE TWEET">
-            <CreateTweet />
-          </div>
-          <div tabTitle="ADD LIST">
-            <CreateTweetList />
-          </div>
-        </TabPanel>
-        {
-      props.lists.map(
-        (list) => {
-            return (
-              <ScheduledList list={list} />
-            );
-        },
-      )
-    }
-      </div>
+        <div className="ScheduledTweets">
+            <TabPanel>
+                <div tabTitle="WRITE TWEET">
+                    <CreateTweet />
+                </div>
+                <div tabTitle="ADD LIST">
+                    <CreateTweetList />
+                </div>
+            </TabPanel>
+            {
+                props.lists.map(
+                    (list) => {
+                        return (
+                            <ScheduledList list={list} />
+                        );
+                    },
+                )
+            }
+        </div>
     );
 }
 

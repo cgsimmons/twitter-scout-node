@@ -22,7 +22,7 @@ class User extends React.Component {
         let profileDisplayName;
         let profileUsername;
 
-        const user = this.props.user;
+        const { user } = this.props;
         if (user.data) {
             bannerImg = <img src={user.data.profile_banner_url} alt="Banner" />;
             profileImg = <img src={user.data.profile_image_url.replace('_normal', '_bigger')} alt="Profile" />;
@@ -31,19 +31,19 @@ class User extends React.Component {
         }
 
         return (
-          <div className="User">
-            <div className="profile-banner">
-              { bannerImg }
+            <div className="User">
+                <div className="profile-banner">
+                    { bannerImg }
+                </div>
+                <div className="profile-content">
+                    { profileImg }
+                    <div className="profile-names">
+                        {profileDisplayName}
+                        {profileUsername}
+                    </div>
+                    <h1 className="profile-message">Welcome to your dashboard.</h1>
+                </div>
             </div>
-            <div className="profile-content">
-              { profileImg }
-              <div className="profile-names">
-                {profileDisplayName}
-                {profileUsername}
-              </div>
-              <h1 className="profile-message">Welcome to your dashboard.</h1>
-            </div>
-          </div>
         );
     }
 }

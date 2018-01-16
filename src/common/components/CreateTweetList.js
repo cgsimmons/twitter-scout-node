@@ -30,70 +30,78 @@ class CreateTweetList extends React.Component {
     handleCheck = () => {
         const newInterval = (this.props.list.interval === '' ? 'Day' : '');
         this.props.setInterval(newInterval);
-      // if (newInterval === '') {
-      //   this.props.setDate('');
-      // } else {
-      //   this.props.setDate(new Date());
-      // }
+        // if (newInterval === '') {
+        //   this.props.setDate('');
+        // } else {
+        //   this.props.setDate(new Date());
+        // }
     }
 
     render() {
         return (
-          <div className="CreateTweetList main-panel">
-            <h1 className="section-header">New List</h1>
-            <br />
-            <div className="tweet-box">
-              <p>Create a list to organize tweets that should be
+            <div className="CreateTweetList main-panel">
+                <h1 className="section-header">New List</h1>
+                <br />
+                <div className="tweet-box">
+                    <p>Create a list to organize tweets that should be
              automatically posted at a set interval.
-              </p>
-              <br />
-              <div className="input-container">
-                <label htmlFor="title">Title</label><br />
-                <input onChange={this.handleTitle} value={this.props.list.title} type="text" className="tweet-input" autoFocus />
-                <br />
-                <label htmlFor="startDate">Start date</label><br />
-                <DateField
-                  updateOnDateClick
-                  forceValidDate
-                  onChange={this.handleDate}
-                  defaultValue={this.props.list.startDate}
-                  dateFormat="YYYY-MM-DD hh:mm a"
-                  disabled={this.props.list.interval === ''}
-                >
-                  <TransitionView>
-                    <Calendar />
-                  </TransitionView>
-                </DateField>
-                <br /><br />
-                <label htmlFor="interval">Once every</label>
-                <Select
-                  onChange={this.handleInterval}
-                  value={this.props.list.interval}
-                  options={[{ value: 'Day', label: 'Day' },
-                              { value: 'Week', label: 'Week' },
-                              { value: 'Month', label: 'Month' }]}
-                  clearable={false}
-                  disabled={this.props.list.interval === ''}
-                  placeholder="Disabled"
-                />
-                <br />
-                <label htmlFor="check">
-                  <input
-                    className="checkbox-input"
-                    type="checkbox"
-                    name="interval"
-                    checked={this.props.list.interval === ''}
-                    onChange={this.handleCheck}
-                    value=""
-                  />
-                  <span className="checkbox-span">Set Each Tweet Manually</span>
-                </label>
-              </div>
-              <div className="tweet-btn-container">
-                <button className="submit-button" onClick={this.handleSubmit}>Add List</button>
-              </div>
+                    </p>
+                    <br />
+                    <div className="input-container">
+                        <label htmlFor="title">Title<br />
+                            <input
+                                className="tweet-input"
+                                onChange={this.handleTitle}
+                                value={this.props.list.title}
+                                type="text"
+                            />
+                        </label>
+                        <br />
+                        <label htmlFor="startDate">Start date<br />
+                            <DateField
+                                updateOnDateClick
+                                forceValidDate
+                                onChange={this.handleDate}
+                                defaultValue={this.props.list.startDate}
+                                dateFormat="YYYY-MM-DD hh:mm a"
+                                disabled={this.props.list.interval === ''}
+                            >
+                                <TransitionView>
+                                    <Calendar />
+                                </TransitionView>
+                            </DateField>
+                        </label>
+                        <br /><br />
+                        <label htmlFor="interval">Once every
+                            <Select
+                                onChange={this.handleInterval}
+                                value={this.props.list.interval}
+                                options={[{ value: 'Day', label: 'Day' },
+                                    { value: 'Week', label: 'Week' },
+                                    { value: 'Month', label: 'Month' }]}
+                                clearable={false}
+                                disabled={this.props.list.interval === ''}
+                                placeholder="Disabled"
+                            />
+                        </label>
+                        <br />
+                        <label htmlFor="check">
+                            <input
+                                className="checkbox-input"
+                                type="checkbox"
+                                name="interval"
+                                checked={this.props.list.interval === ''}
+                                onChange={this.handleCheck}
+                                value=""
+                            />
+                            <span className="checkbox-span">Set Each Tweet Manually</span>
+                        </label>
+                    </div>
+                    <div className="tweet-btn-container">
+                        <button className="submit-button" onClick={this.handleSubmit}>Add List</button>
+                    </div>
+                </div>
             </div>
-          </div>
         );
     }
 }

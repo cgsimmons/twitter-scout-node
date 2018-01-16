@@ -12,8 +12,8 @@
   outline: none;
   overflow: hidden;
   position: relative;
-  width: 50%;
-  padding: 10px;
+  width: 100%;
+  padding: 0px 10px;
 }
 
 .react-flex-v2 {

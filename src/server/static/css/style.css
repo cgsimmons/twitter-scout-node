@@ -116,5 +116,8 @@ footer p {
   background-color: rgb(3,169,244);
   box-shadow: 0.05rem 0.05rem 0.1rem #888888;
   color: #fff;
+}
 
+label {
+    width: 50%;
 }

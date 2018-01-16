@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
+const { Schema } = mongoose;
 
 // create User Schema
 const User = new Schema({
@@ -12,8 +12,8 @@ const User = new Schema({
     data: Object,
     tags: Array,
 },
-    {
-        timestamps: true,
-    });
+{
+    timestamps: true,
+});
 
 module.exports = mongoose.model('users', User);

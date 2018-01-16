@@ -12,10 +12,10 @@ function ScheduledTweet(props) {
     };
 
     return (
-      <li className="scheduledTweet" id={props.tweet._id}><hr /><h4>{props.tweet.body}</h4>
-        <button className="ReactTags__remove" onClick={handleTweetDelete}>×</button>
-        <p>Scheduled for {moment(props.tweet.postDate).format('MMM Do YYYY, h:mm a')}</p>
-      </li>
+        <li className="scheduledTweet" id={props.tweet._id}><hr /><h4>{props.tweet.body}</h4>
+            <button className="ReactTags__remove" onClick={handleTweetDelete}>×</button>
+            <p>Scheduled for {moment(props.tweet.postDate).format('MMM Do YYYY, h:mm a')}</p>
+        </li>
     );
 }
 

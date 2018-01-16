@@ -19,10 +19,10 @@ class CreateTweet extends React.Component {
 
     handleSelection = (selectObj) => {
         this.props.setSelection(selectObj.value);
-        const lists = this.props.lists;
-      // find currently selected list
+        const { lists } = this.props;
+        // find currently selected list
         for (let i = 0; i < lists.length; i += 1) {
-      // if list matches selected list and startDate is not null
+            // if list matches selected list and startDate is not null
             if ((lists[i]._id === selectObj.value) && (lists[i].startDate !== null)) {
                 const newDate = new Date(lists[i].startDate);
                 let lastPostDate = new Date();
@@ -53,8 +53,8 @@ class CreateTweet extends React.Component {
                 return;
             }
         }
-      // if startDate was not set at this point it must be a list
-      // for individually set tweet dates
+        // if startDate was not set at this point it must be a list
+        // for individually set tweet dates
         this.props.setDate(new Date());
     }
 
@@ -74,68 +74,70 @@ class CreateTweet extends React.Component {
             return ({ value: list._id, label: list.title, startDate: list.startDate });
         });
         let disableDate = false;
-      // check if initial list needs to be selected
+        // check if initial list needs to be selected
         if (this.props.lists.length > 0) {
-      // find selected list
+            // find selected list
             const result = this.props.lists.filter((list) => {
                 return list._id === this.props.selection;
             });
-          // if selected list exists
+            // if selected list exists
             if (result.length > 0) {
-              // disable date selection if list uses intervals
+                // disable date selection if list uses intervals
                 if (result[0].interval !== '') {
                     disableDate = true;
                 }
             } else {
-              // set initial selected list as the first list in the array
+                // set initial selected list as the first list in the array
                 // this.handleSelection({ value: this.props.lists[0]._id });
             }
         }
 
         return (
-          <div className="CreateTweet main-panel">
-            <h1 className="section-header">Write a Tweet</h1>
-            <br />
-            <p>Publish your tweet at a specific time or add it to a list of tweets
+            <div className="CreateTweet main-panel">
+                <h1 className="section-header">Write a Tweet</h1>
+                <br />
+                <p>Publish your tweet at a specific time or add it to a list of tweets
            to be published at a specified interval.
-              </p><br />
-            <div className="tweet-box">
-              <textarea
-                autoFocus="true"
-                placeholder="Enter a tweet..."
-                maxLength="140"
-                rows="3"
-                onChange={this.handleText} value={this.props.tweetBody}
-              />
-              <br /><br />
-              <label htmlFor="date">Date to post</label><br />
-              <DateField
-                updateOnDateClick
-                forceValidDate
-                value={this.props.tweetDate}
-                onChange={this.handleDate}
-                dateFormat="YYYY-MM-DD hh:mm a"
-                disabled={disableDate}
-              >
-                <TransitionView>
-                  <Calendar />
-                </TransitionView>
-              </DateField>
-              <br /><br />
-              <label htmlFor="list">Add to list</label><br />
-              <Select
-                placeholder="No lists available"
-                value={this.props.selection}
-                onChange={this.handleSelection}
-                options={selections}
-                clearable={false}
-              />
-              <div className="tweet-btn-container">
-                <span>{this.props.counter}</span>
-                <button className="submit-button" onClick={this.handleSave}>Save</button>
-              </div>
+                </p><br />
+                <div className="tweet-box">
+                    <textarea
+                        placeholder="Enter a tweet..."
+                        maxLength="140"
+                        rows="3"
+                        onChange={this.handleText}
+                        value={this.props.tweetBody}
+                    />
+                    <br /><br />
+                    <label htmlFor="date">Date to post<br />
+                        <DateField
+                            updateOnDateClick
+                            forceValidDate
+                            value={this.props.tweetDate}
+                            onChange={this.handleDate}
+                            dateFormat="YYYY-MM-DD hh:mm a"
+                            disabled={disableDate}
+                        >
+                            <TransitionView>
+                                <Calendar />
+                            </TransitionView>
+                        </DateField>
+                    </label>
+                    <br /><br />
+                    <label htmlFor="list">Add to list<br />
+                        <Select
+                            placeholder="No lists available"
+                            value={this.props.selection}
+                            onChange={this.handleSelection}
+                            options={selections}
+                            clearable={false}
+                        />
+                    </label>
+                    <div className="tweet-btn-container">
+                        <span>{this.props.counter}</span>
+                        <button className="submit-button" onClick={this.handleSave}>Save</button>
+                    </div>
+                </div>
             </div>
-          </div>
         );
     }
 }

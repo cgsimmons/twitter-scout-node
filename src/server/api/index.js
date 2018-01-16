@@ -31,7 +31,7 @@ router.get('/user/:userId', isLoggedIn, (req, res) => {
         if (err) {
             res.status(500).send(err.message);
         } else {
-      // console.log(user)
+            // console.log(user)
             res.status(200).send(user);
         }
     });
@@ -81,7 +81,7 @@ router.delete('/user/:userId/scheduled-list/:listId', isLoggedIn, (req, res) => 
 
 // new list
 router.post('/scheduled-list', isLoggedIn, (req, res) => {
-    const newList = req.body.newList;
+    const { newList } = req.body;
     const list = new ScheduledList({
         title: newList.title,
         userId: newList.userId,
@@ -113,7 +113,7 @@ router.delete('/tweet/:tweetId', (req, res) => {
         } else {
             list.tweets.id(req.params.tweetId).remove();
 
-      // TODO: Adjust tweet postDates after one is deleted
+            // TODO: Adjust tweet postDates after one is deleted
 
             list.save((tweetErr) => {
                 if (tweetErr) {
@@ -134,7 +134,7 @@ router.delete('/tweet/:tweetId', (req, res) => {
 
 // new tweet
 router.post('/scheduled-list/tweet', isLoggedIn, (req, res) => {
-    const newTweet = req.body.newTweet;
+    const { newTweet } = req.body;
 
     ScheduledList.findOne({ _id: newTweet.selectedList }, (err, list) => {
         if (err) {
@@ -151,7 +151,7 @@ router.post('/scheduled-list/tweet', isLoggedIn, (req, res) => {
                 if (saveErr) {
                     res.status(500).send(err.message);
                 } else {
-          // return res.status(200).send(newList);
+                    // return res.status(200).send(newList);
                     ScheduledList.find({ userId: newList.userId }).sort('-createdAt').exec((listErr, lists) => {
                         if (listErr) {
                             res.status(500).send(err.message);

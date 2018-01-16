@@ -9,18 +9,18 @@ export default function Sidebar(props) {
     const searchSettings = `${baseDashPath}/search-settings`;
 
     return (
-      <div className="Sidebar dashboard-panel">
-        <ul>
-          <li><Link onlyActiveOnIndex activeClassName="active-sidebar" to={baseDashPath}>Scheduled Tweets</Link></li>
-          <hr />
-          <li><Link activeClassName="active-sidebar" to={suggestedTweets}>Suggested Tweets</Link></li>
-          <hr />
-          <li><Link activeClassName="active-sidebar" to={suggestedTweeters}>Suggested Tweeters</Link></li>
-          <hr />
-          <li><Link activeClassName="active-sidebar" to={statistics}>Statistics</Link></li>
-          <hr />
-          <li><Link activeClassName="active-sidebar" to={searchSettings}>Search Settings</Link></li>
-        </ul>
-      </div>
+        <div className="Sidebar dashboard-panel">
+            <ul>
+                <li><Link onlyActiveOnIndex activeClassName="active-sidebar" to={baseDashPath}>Scheduled Tweets</Link></li>
+                <hr />
+                <li><Link activeClassName="active-sidebar" to={suggestedTweets}>Suggested Tweets</Link></li>
+                <hr />
+                <li><Link activeClassName="active-sidebar" to={suggestedTweeters}>Suggested Tweeters</Link></li>
+                <hr />
+                <li><Link activeClassName="active-sidebar" to={statistics}>Statistics</Link></li>
+                <hr />
+                <li><Link activeClassName="active-sidebar" to={searchSettings}>Search Settings</Link></li>
+            </ul>
+        </div>
     );
 }
